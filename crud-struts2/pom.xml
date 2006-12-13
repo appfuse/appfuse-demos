@@ -41,6 +41,24 @@
         </plugins>
     </build>
 
+    <repositories>
+        <repository>
+            <id>appfuse</id>
+            <url> http://static.appfuse.org/repository</url>
+        </repository>
+        <repository>
+            <id>java.net</id>
+            <url>https://maven2-repository.dev.java.net/nonav/repository</url>	  
+         </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>appfuse</id>
+            <url>http://static.appfuse.org/repository</url>
+        </pluginRepository>
+    </pluginRepositories>
+
     <dependencies>
         <dependency>
             <groupId>org.appfuse</groupId>
