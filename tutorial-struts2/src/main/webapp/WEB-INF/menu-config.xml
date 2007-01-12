@@ -15,5 +15,6 @@
             <Item name="Clickstream" title="menu.clickstream" page="/clickstreams.jsp"/>
         </Menu>
         <Menu name="Logout" title="user.logout" page="/logout.jsp" roles="admin,user"/>
+        <Menu name="PeopleMenu" title="menu.viewPeople" page="/persons.html"/>
     </Menus>
 </MenuConfig>
