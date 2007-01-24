@@ -1,0 +1,972 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module version="4" relativePaths="false" type="J2EE_WEB_MODULE">
+  <component name="AppServerSpecificValidatorsManager" />
+  <component name="ModuleRootManager" />
+  <component name="NewModuleRootManager" inherit-compiler-output="false">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <exclude-output />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library name="servlet-api">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/2.4/servlet-api-2.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/servlet-api/2.4/servlet-api-2.4-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-logging">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="sitemesh">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/opensymphony/sitemesh/2.2.1/sitemesh-2.2.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/opensymphony/sitemesh/2.2.1/sitemesh-2.2.1-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="appfuse-service">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/appfuse/appfuse-service/2.0-m3-SNAPSHOT/appfuse-service-2.0-m3-SNAPSHOT.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="mysql-connector-java">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.0.3/mysql-connector-java-5.0.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jstl">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/jstl/1.1.2/jstl-1.1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/jstl/1.1.2/jstl-1.1.2-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="myfaces-impl">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/myfaces/core/myfaces-impl/1.1.4/myfaces-impl-1.1.4.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/myfaces/core/myfaces-impl/1.1.4/myfaces-impl-1.1.4-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/myfaces/core/myfaces-impl/1.1.4/myfaces-impl-1.1.4-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="asm">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/asm/asm/1.5.3/asm-1.5.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-collections">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-collections/commons-collections/3.1/commons-collections-3.1.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-collections/commons-collections/3.1/commons-collections-3.1-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-collections/commons-collections/3.1/commons-collections-3.1-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="junit">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/junit/junit/3.8.2/junit-3.8.2.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/junit/junit/3.8.2/junit-3.8.2-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/junit/junit/3.8.2/junit-3.8.2-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-dbcp">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-dbcp/commons-dbcp/1.2.1/commons-dbcp-1.2.1.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-dbcp/commons-dbcp/1.2.1/commons-dbcp-1.2.1-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-dbcp/commons-dbcp/1.2.1/commons-dbcp-1.2.1-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="standard">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/taglibs/standard/1.1.2/standard-1.1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/taglibs/standard/1.1.2/standard-1.1.2-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="spring-mock">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring-mock/2.0.2/spring-mock-2.0.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="oscache">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/opensymphony/oscache/2.3/oscache-2.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/opensymphony/oscache/2.3/oscache-2.3-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="ajax4jsf">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/ajax4jsf/ajax4jsf/1.0.2/ajax4jsf-1.0.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="tomahawk">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/myfaces/tomahawk/tomahawk/1.1.3/tomahawk-1.1.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="urlrewrite">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/tuckey/urlrewrite/2.5.2/urlrewrite-2.5.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-validator">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-validator/commons-validator/1.3.0/commons-validator-1.3.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-validator/commons-validator/1.3.0/commons-validator-1.3.0-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-validator/commons-validator/1.3.0/commons-validator-1.3.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="el-api">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/javax/el/el-api/1.2/el-api-1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-codec">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.3/commons-codec-1.3.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.3/commons-codec-1.3-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-codec/commons-codec/1.3/commons-codec-1.3-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="acegi-security-tiger">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/acegisecurity/acegi-security-tiger/1.0.3/acegi-security-tiger-1.0.3.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/org/acegisecurity/acegi-security-tiger/1.0.3/acegi-security-tiger-1.0.3-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/acegisecurity/acegi-security-tiger/1.0.3/acegi-security-tiger-1.0.3-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="subethasmtp-smtp">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/subethamail/subethasmtp-smtp/1.0.3/subethasmtp-smtp-1.0.3.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/org/subethamail/subethasmtp-smtp/1.0.3/subethasmtp-smtp-1.0.3-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/subethamail/subethasmtp-smtp/1.0.3/subethasmtp-smtp-1.0.3-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="velocity-dep">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/velocity/velocity-dep/1.4/velocity-dep-1.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/velocity/velocity-dep/1.4/velocity-dep-1.4-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="velocity-tools-view">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/velocity-tools/velocity-tools-view/1.0/velocity-tools-view-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="log4j">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.9/log4j-1.2.9.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/log4j/log4j/1.2.9/log4j-1.2.9-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="el-ri">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/com/sun/el/el-ri/1.2/el-ri-1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="cglib">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib/2.1_3/cglib-2.1_3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/cglib/cglib/2.1_3/cglib-2.1_3-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="asm-attrs">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/asm/asm-attrs/1.5.3/asm-attrs-1.5.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="mail">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/javax/mail/mail/1.4/mail-1.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/javax/mail/mail/1.4/mail-1.4-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="velocity">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/velocity/velocity/1.4/velocity-1.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/velocity/velocity/1.4/velocity-1.4-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="subethasmtp-wiser">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/subethamail/subethasmtp-wiser/1.0.3/subethasmtp-wiser-1.0.3.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/org/subethamail/subethasmtp-wiser/1.0.3/subethasmtp-wiser-1.0.3-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/subethamail/subethasmtp-wiser/1.0.3/subethasmtp-wiser-1.0.3-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jsf-facelets">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/com/sun/facelets/jsf-facelets/1.1.11/jsf-facelets-1.1.11.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="ehcache">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache/1.2.4/ehcache-1.2.4.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache/1.2.4/ehcache-1.2.4-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/net/sf/ehcache/ehcache/1.2.4/ehcache-1.2.4-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-el">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-el/commons-el/1.0/commons-el-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-el/commons-el/1.0/commons-el-1.0-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-el/commons-el/1.0/commons-el-1.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-pool">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-pool/commons-pool/1.2/commons-pool-1.2.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-pool/commons-pool/1.2/commons-pool-1.2-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-pool/commons-pool/1.2/commons-pool-1.2-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jta">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/javax/transaction/jta/1.0.1B/jta-1.0.1B.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jsp-api">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/javax/servlet/jsp-api/2.0/jsp-api-2.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-lang">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-lang/commons-lang/2.1/commons-lang-2.1.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-lang/commons-lang/2.1/commons-lang-2.1-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-lang/commons-lang/2.1/commons-lang-2.1-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="aspectjweaver">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/aspectj/aspectjweaver/1.5.3/aspectjweaver-1.5.3.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/aspectj/aspectjweaver/1.5.3/aspectjweaver-1.5.3-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="antlr">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.6/antlr-2.7.6.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/antlr/antlr/2.7.6/antlr-2.7.6-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="appfuse-jsf">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/target/warpath/appfuse-jsf-2.0-m3-SNAPSHOT.warpath.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-beanutils">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-beanutils/commons-beanutils/1.7.0/commons-beanutils-1.7.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="myfaces-api">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/myfaces/core/myfaces-api/1.1.4/myfaces-api-1.1.4.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/myfaces/core/myfaces-api/1.1.4/myfaces-api-1.1.4-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/apache/myfaces/core/myfaces-api/1.1.4/myfaces-api-1.1.4-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="clickstream">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/opensymphony/clickstream/1.0.2/clickstream-1.0.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="hibernate">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate/3.2.1.ga/hibernate-3.2.1.ga.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate/3.2.1.ga/hibernate-3.2.1.ga-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate/3.2.1.ga/hibernate-3.2.1.ga-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="appfuse-hibernate">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/appfuse/appfuse-hibernate/2.0-m3-SNAPSHOT/appfuse-hibernate-2.0-m3-SNAPSHOT.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-digester">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-digester/commons-digester/1.6/commons-digester-1.6.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-digester/commons-digester/1.6/commons-digester-1.6-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-digester/commons-digester/1.6/commons-digester-1.6-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="commons-fileupload">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-fileupload/commons-fileupload/1.0/commons-fileupload-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-fileupload/commons-fileupload/1.0/commons-fileupload-1.0-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/commons-fileupload/commons-fileupload/1.0/commons-fileupload-1.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="oro">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/oro/oro/2.0.8/oro-2.0.8.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/oro/oro/2.0.8/oro-2.0.8-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="persistence-api">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/javax/persistence/persistence-api/1.0/persistence-api-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/javax/persistence/persistence-api/1.0/persistence-api-1.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="spring">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring/2.0.2/spring-2.0.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/springframework/spring/2.0.2/spring-2.0.2-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="dwr">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/directwebremoting/dwr/2.0.rc2/dwr-2.0.rc2.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/org/directwebremoting/dwr/2.0.rc2/dwr-2.0.rc2-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/directwebremoting/dwr/2.0.rc2/dwr-2.0.rc2-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="activation">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1/activation-1.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/javax/activation/activation/1.1/activation-1.1-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="hibernate-annotations">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-annotations/3.2.1.ga/hibernate-annotations-3.2.1.ga.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/hibernate/hibernate-annotations/3.2.1.ga/hibernate-annotations-3.2.1.ga-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="jmock">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/jmock/jmock/1.1.0/jmock-1.1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/jmock/jmock/1.1.0/jmock-1.1.0-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/jmock/jmock/1.1.0/jmock-1.1.0-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="corejsf-validator">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/com/corejsf/corejsf-validator/1.0/corejsf-validator-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="dom4j">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="struts-menu">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/struts-menu/struts-menu/2.4.2/struts-menu-2.4.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/struts-menu/struts-menu/2.4.2/struts-menu-2.4.2-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="appfuse-web-common">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/target/warpath/appfuse-web-common-2.0-m3-SNAPSHOT.warpath.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="xml-apis">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="appfuse-data-common">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/appfuse/appfuse-data-common/2.0-m3-SNAPSHOT/appfuse-data-common-2.0-m3-SNAPSHOT.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="acegi-security">
+        <CLASSES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/acegisecurity/acegi-security/1.0.3/acegi-security-1.0.3.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MAVEN_REPOSITORY$/org/acegisecurity/acegi-security/1.0.3/acegi-security-1.0.3-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES>
+          <root url="jar://$MAVEN_REPOSITORY$/org/acegisecurity/acegi-security/1.0.3/acegi-security-1.0.3-sources.jar!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntryProperties />
+  </component>
+  <component name="WebModuleBuildComponent">
+    <setting name="EXPLODED_URL" value="file://$MODULE_DIR$/target/tutorial-jsf" />
+    <setting name="EXPLODED_ENABLED" value="false" />
+    <setting name="JAR_URL" value="file://" />
+    <setting name="JAR_ENABLED" value="false" />
+    <setting name="SYNC_EXPLODED_DIR" value="false" />
+    <setting name="BUILD_MODULE_ON_FRAME_DEACTIVATION" value="false" />
+    <setting name="BUILD_EXTERNAL_DEPENDENCIES" value="false" />
+    <setting name="RUN_JASPER_VALIDATION" value="false" />
+  </component>
+  <component name="WebModuleProperties">
+    <containerElement type="library" name="servlet-api" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/servlet-api-2.4.jar" />
+    </containerElement>
+    <containerElement type="library" name="commons-logging" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-logging-1.0.4.jar" />
+    </containerElement>
+    <containerElement type="library" name="sitemesh" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/sitemesh-2.2.1.jar" />
+    </containerElement>
+    <containerElement type="library" name="appfuse-service" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/appfuse-service-2.0-m3-SNAPSHOT.jar" />
+    </containerElement>
+    <containerElement type="library" name="jstl" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/jstl-1.1.2.jar" />
+    </containerElement>
+    <containerElement type="library" name="mysql-connector-java" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/mysql-connector-java-5.0.3.jar" />
+    </containerElement>
+    <containerElement type="library" name="myfaces-impl" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/myfaces-impl-1.1.4.jar" />
+    </containerElement>
+    <containerElement type="library" name="asm" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/asm-1.5.3.jar" />
+    </containerElement>
+    <containerElement type="library" name="commons-collections" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-collections-3.1.jar" />
+    </containerElement>
+    <containerElement type="library" name="junit" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/junit-3.8.2.jar" />
+    </containerElement>
+    <containerElement type="library" name="commons-dbcp" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-dbcp-1.2.1.jar" />
+    </containerElement>
+    <containerElement type="library" name="standard" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/standard-1.1.2.jar" />
+    </containerElement>
+    <containerElement type="library" name="spring-mock" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/spring-mock-2.0.2.jar" />
+    </containerElement>
+    <containerElement type="library" name="oscache" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/oscache-2.3.jar" />
+    </containerElement>
+    <containerElement type="library" name="ajax4jsf" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/ajax4jsf-1.0.2.jar" />
+    </containerElement>
+    <containerElement type="library" name="tomahawk" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/tomahawk-1.1.3.jar" />
+    </containerElement>
+    <containerElement type="library" name="urlrewrite" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/urlrewrite-2.5.2.jar" />
+    </containerElement>
+    <containerElement type="library" name="commons-validator" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-validator-1.3.0.jar" />
+    </containerElement>
+    <containerElement type="library" name="el-api" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/el-api-1.2.jar" />
+    </containerElement>
+    <containerElement type="library" name="acegi-security-tiger" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/acegi-security-tiger-1.0.3.jar" />
+    </containerElement>
+    <containerElement type="library" name="commons-codec" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-codec-1.3.jar" />
+    </containerElement>
+    <containerElement type="library" name="subethasmtp-smtp" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/subethasmtp-smtp-1.0.3.jar" />
+    </containerElement>
+    <containerElement type="library" name="velocity-dep" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/velocity-dep-1.4.jar" />
+    </containerElement>
+    <containerElement type="library" name="velocity-tools-view" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/velocity-tools-view-1.0.jar" />
+    </containerElement>
+    <containerElement type="library" name="log4j" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/log4j-1.2.9.jar" />
+    </containerElement>
+    <containerElement type="library" name="el-ri" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/el-ri-1.2.jar" />
+    </containerElement>
+    <containerElement type="library" name="cglib" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/cglib-2.1_3.jar" />
+    </containerElement>
+    <containerElement type="library" name="asm-attrs" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/asm-attrs-1.5.3.jar" />
+    </containerElement>
+    <containerElement type="library" name="mail" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/mail-1.4.jar" />
+    </containerElement>
+    <containerElement type="library" name="velocity" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/velocity-1.4.jar" />
+    </containerElement>
+    <containerElement type="library" name="subethasmtp-wiser" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/subethasmtp-wiser-1.0.3.jar" />
+    </containerElement>
+    <containerElement type="library" name="jsf-facelets" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/jsf-facelets-1.1.11.jar" />
+    </containerElement>
+    <containerElement type="library" name="ehcache" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/ehcache-1.2.4.jar" />
+    </containerElement>
+    <containerElement type="library" name="commons-el" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-el-1.0.jar" />
+    </containerElement>
+    <containerElement type="library" name="commons-pool" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-pool-1.2.jar" />
+    </containerElement>
+    <containerElement type="library" name="jta" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/jta-1.0.1B.jar" />
+    </containerElement>
+    <containerElement type="library" name="jsp-api" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/jsp-api-2.0.jar" />
+    </containerElement>
+    <containerElement type="library" name="aspectjweaver" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/aspectjweaver-1.5.3.jar" />
+    </containerElement>
+    <containerElement type="library" name="commons-lang" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-lang-2.1.jar" />
+    </containerElement>
+    <containerElement type="library" name="antlr" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/antlr-2.7.6.jar" />
+    </containerElement>
+    <containerElement type="library" name="commons-beanutils" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-beanutils-1.7.0.jar" />
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/appfuse-jsf-2.0-m3-SNAPSHOT.warpath.jar" />
+      <url>jar://$MODULE_DIR$/target/warpath/appfuse-jsf-2.0-m3-SNAPSHOT.warpath.jar!/</url>
+    </containerElement>
+    <containerElement type="library" name="myfaces-api" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/myfaces-api-1.1.4.jar" />
+    </containerElement>
+    <containerElement type="library" name="clickstream" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/clickstream-1.0.2.jar" />
+    </containerElement>
+    <containerElement type="library" name="hibernate" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/hibernate-3.2.1.ga.jar" />
+    </containerElement>
+    <containerElement type="library" name="appfuse-hibernate" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/appfuse-hibernate-2.0-m3-SNAPSHOT.jar" />
+    </containerElement>
+    <containerElement type="library" name="oro" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/oro-2.0.8.jar" />
+    </containerElement>
+    <containerElement type="library" name="commons-digester" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-digester-1.6.jar" />
+    </containerElement>
+    <containerElement type="library" name="commons-fileupload" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/commons-fileupload-1.0.jar" />
+    </containerElement>
+    <containerElement type="library" name="persistence-api" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/persistence-api-1.0.jar" />
+    </containerElement>
+    <containerElement type="library" name="spring" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/spring-2.0.2.jar" />
+    </containerElement>
+    <containerElement type="library" name="dwr" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/dwr-2.0.rc2.jar" />
+    </containerElement>
+    <containerElement type="library" name="activation" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/activation-1.1.jar" />
+    </containerElement>
+    <containerElement type="library" name="hibernate-annotations" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/hibernate-annotations-3.2.1.ga.jar" />
+    </containerElement>
+    <containerElement type="library" name="jmock" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/jmock-1.1.0.jar" />
+    </containerElement>
+    <containerElement type="library" name="corejsf-validator" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/corejsf-validator-1.0.jar" />
+    </containerElement>
+    <containerElement type="library" name="dom4j" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/dom4j-1.6.1.jar" />
+    </containerElement>
+    <containerElement type="library" name="struts-menu" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/struts-menu-2.4.2.jar" />
+    </containerElement>
+    <containerElement type="library" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/appfuse-web-common-2.0-m3-SNAPSHOT.warpath.jar" />
+      <url>jar://$MODULE_DIR$/target/warpath/appfuse-web-common-2.0-m3-SNAPSHOT.warpath.jar!/</url>
+    </containerElement>
+    <containerElement type="library" name="xml-apis" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/xml-apis-1.0.b2.jar" />
+    </containerElement>
+    <containerElement type="library" name="appfuse-data-common" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/appfuse-data-common-2.0-m3-SNAPSHOT.jar" />
+    </containerElement>
+    <containerElement type="library" name="acegi-security" level="module">
+      <attribute name="method" value="1" />
+      <attribute name="URI" value="/WEB-INF/lib/acegi-security-1.0.3.jar" />
+    </containerElement>
+    <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" optional="false" version="2.3" />
+    <webroots>
+      <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
+    </webroots>
+  </component>
+  <component name="WeblogicWebModuleProperties" />
+</module>
+

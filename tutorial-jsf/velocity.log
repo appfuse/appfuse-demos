@@ -1,0 +1,51 @@
+Wed Jan 24 03:46:51 MST 2007  [debug] AvalonLogSystem initialized using logfile 'velocity.log'
+Wed Jan 24 03:46:51 MST 2007   [info] ************************************************************** 
+Wed Jan 24 03:46:51 MST 2007   [info] Starting Jakarta Velocity v1.4
+Wed Jan 24 03:46:51 MST 2007   [info] RuntimeInstance initializing.
+Wed Jan 24 03:46:51 MST 2007   [info] Default Properties File: org\apache\velocity\runtime\defaults\velocity.properties
+Wed Jan 24 03:46:51 MST 2007   [info] Trying to use logger class org.apache.velocity.runtime.log.AvalonLogSystem
+Wed Jan 24 03:46:51 MST 2007   [info] Using logger class org.apache.velocity.runtime.log.AvalonLogSystem
+Wed Jan 24 03:46:51 MST 2007   [info] Default ResourceManager initializing. (class org.apache.velocity.runtime.resource.ResourceManagerImpl)
+Wed Jan 24 03:46:51 MST 2007   [info] Resource Loader Instantiated: org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+Wed Jan 24 03:46:51 MST 2007   [info] ClasspathResourceLoader : initialization starting.
+Wed Jan 24 03:46:51 MST 2007   [info] ClasspathResourceLoader : initialization complete.
+Wed Jan 24 03:46:51 MST 2007   [info] Resource Loader Instantiated: org.apache.velocity.tools.view.servlet.WebappLoader
+Wed Jan 24 03:46:51 MST 2007   [info] WebappLoader : initialization starting.
+Wed Jan 24 03:46:52 MST 2007   [info] WebappLoader : initialization complete.
+Wed Jan 24 03:46:52 MST 2007   [info] ResourceCache : initialized. (class org.apache.velocity.runtime.resource.ResourceCacheImpl)
+Wed Jan 24 03:46:52 MST 2007   [info] Default ResourceManager initialization complete.
+Wed Jan 24 03:46:52 MST 2007   [info] Loaded System Directive: org.apache.velocity.runtime.directive.Literal
+Wed Jan 24 03:46:52 MST 2007   [info] Loaded System Directive: org.apache.velocity.runtime.directive.Macro
+Wed Jan 24 03:46:52 MST 2007   [info] Loaded System Directive: org.apache.velocity.runtime.directive.Parse
+Wed Jan 24 03:46:52 MST 2007   [info] Loaded System Directive: org.apache.velocity.runtime.directive.Include
+Wed Jan 24 03:46:52 MST 2007   [info] Loaded System Directive: org.apache.velocity.runtime.directive.Foreach
+Wed Jan 24 03:46:52 MST 2007   [info] Loaded User Directive: net.sf.navigator.displayer.LocalDirective
+Wed Jan 24 03:46:52 MST 2007   [info] Created: 20 parsers.
+Wed Jan 24 03:46:52 MST 2007   [info] Velocimacro : initialization starting.
+Wed Jan 24 03:46:52 MST 2007   [info] Velocimacro : adding VMs from VM library template : net/sf/navigator/displayer/globalMacros.vm
+Wed Jan 24 03:46:52 MST 2007   [info] Velocimacro : added new VM : #eval( _macro ) : source = net/sf/navigator/displayer/globalMacros.vm
+Wed Jan 24 03:46:52 MST 2007   [info] Velocimacro : added new VM : #displayMenu( menu level ) : source = net/sf/navigator/displayer/globalMacros.vm
+Wed Jan 24 03:46:52 MST 2007   [info] ResourceManager : found net/sf/navigator/displayer/globalMacros.vm with loader org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+Wed Jan 24 03:46:52 MST 2007   [info] Velocimacro :  VM library template macro registration complete.
+Wed Jan 24 03:46:52 MST 2007   [info] Velocimacro : adding VMs from VM library template : menuMacros.vm
+Wed Jan 24 03:46:52 MST 2007  [error] ResourceManager : unable to find resource 'menuMacros.vm' in any resource loader.
+Wed Jan 24 03:46:52 MST 2007   [info] Velocimacro : error using  VM library template menuMacros.vm : org.apache.velocity.exception.ResourceNotFoundException: Unable to find resource 'menuMacros.vm'
+Wed Jan 24 03:46:52 MST 2007   [info] Velocimacro :  VM library template macro registration complete.
+Wed Jan 24 03:46:52 MST 2007   [info] Velocimacro : allowInline = true : VMs can be defined inline in templates
+Wed Jan 24 03:46:52 MST 2007   [info] Velocimacro : allowInlineToOverride = true : VMs defined inline may replace previous VM definitions
+Wed Jan 24 03:46:52 MST 2007   [info] Velocimacro : allowInlineLocal = false : VMs defined inline will be  global in scope if allowed.
+Wed Jan 24 03:46:52 MST 2007   [info] Velocimacro : messages on  : VM system will output logging messages
+Wed Jan 24 03:46:52 MST 2007   [info] Velocimacro : autoload on  : VM system will automatically reload global library macros
+Wed Jan 24 03:46:52 MST 2007   [info] Velocimacro : initialization complete.
+Wed Jan 24 03:46:52 MST 2007   [info] Velocity successfully started.
+Wed Jan 24 03:47:01 MST 2007   [info] Velocimacro : added new VM : #displayCssMenu( menu ) : source = WEB-INF/classes/cssHorizontalMenu.vm
+Wed Jan 24 03:47:01 MST 2007  [error] VM #displayCssMenu: error : too few arguments to macro. Wanted 1 got 0
+Wed Jan 24 03:47:01 MST 2007   [info] ResourceManager : found WEB-INF/classes/cssHorizontalMenu.vm with loader org.apache.velocity.tools.view.servlet.WebappLoader
+Wed Jan 24 03:47:01 MST 2007  [error] Left side ($velocityCount) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. WEB-INF/classes/cssHorizontalMenu.vm [line 9, column 31]
+Wed Jan 24 03:47:01 MST 2007  [error] Left side ($velocityCount) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. WEB-INF/classes/cssHorizontalMenu.vm [line 42, column 29]
+Wed Jan 24 03:47:01 MST 2007  [error] Left side ($velocityCount) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. WEB-INF/classes/cssHorizontalMenu.vm [line 9, column 31]
+Wed Jan 24 03:47:01 MST 2007  [error] Left side ($velocityCount) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. WEB-INF/classes/cssHorizontalMenu.vm [line 42, column 29]
+Wed Jan 24 03:47:01 MST 2007  [error] Left side ($velocityCount) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. WEB-INF/classes/cssHorizontalMenu.vm [line 9, column 31]
+Wed Jan 24 03:47:01 MST 2007  [error] Left side ($velocityCount) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. WEB-INF/classes/cssHorizontalMenu.vm [line 42, column 29]
+Wed Jan 24 03:47:02 MST 2007  [error] Left side ($velocityCount) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. WEB-INF/classes/cssHorizontalMenu.vm [line 9, column 31]
+Wed Jan 24 03:47:02 MST 2007  [error] Left side ($velocityCount) of '==' operation has null value. If a reference, it may not be in the context. Operation not possible. WEB-INF/classes/cssHorizontalMenu.vm [line 42, column 29]
