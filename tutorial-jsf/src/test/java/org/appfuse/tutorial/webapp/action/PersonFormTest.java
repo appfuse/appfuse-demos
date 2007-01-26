@@ -9,6 +9,7 @@ public class PersonFormTest extends BasePageTestCase {
     protected void setUp() throws Exception {
         super.setUp();
         bean = (PersonForm) getManagedBean("personForm");
+        
     }
 
     protected void tearDown() throws Exception {
@@ -35,6 +36,15 @@ public class PersonFormTest extends BasePageTestCase {
         assertNotNull(bean.getPerson());
         assertFalse(bean.hasErrors());
     }
+
+    /*
+    public void testResourceBundle() {
+        ResourceBundle bundle = ResourceBundle.getBundle(Constants.BUNDLE_KEY, Locale.ENGLISH, this.getClass().getClassLoader());
+        log.debug("bundle: " + bundle.getString("person.added"));
+
+        assertNotNull(bean.getText("person.added"));
+        log.debug("bean.added: " + bean.getText("person.added"));
+    }*/
 
     public void testSave() {
         bean.setId(1L);
