@@ -26,6 +26,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
+            classpath*:/applicationContext-resources.xml
             classpath*:/applicationContext-dao.xml
             classpath*:/applicationContext-service.xml
             /WEB-INF/applicationContext*.xml
@@ -64,8 +65,7 @@
     <!-- Remove this filter if you're using iBATIS, use OpenEntityManagerInViewFilter if using JPA -->
     <filter>
         <filter-name>lazyLoadingFilter</filter-name>
-        <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
-        <!--<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>-->
+        <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
     </filter>
     <filter>
         <filter-name>localeFilter</filter-name>
