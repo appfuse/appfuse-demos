@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:t="http://myfaces.apache.org/tomahawk"
+      xmlns:v="http://corejsf.com/validator">
+
+<f:view>
+<f:loadBundle var="text" basename="#{personForm.bundleName}"/>
+    <head>
+        <title>#{text['personDetail.title']}</title>
+        <meta name="heading" content="#{text['personDetail.heading']}"/>
+        <meta name="menu" content="PersonMenu"/>
+    </head>
+<body id="personForm">
+
+<h:form id="personForm" onsubmit="return validatePersonForm(this)">
+<h:inputHidden value="#{personForm.person.id}" id="id"/>
+
+<h:panelGrid columns="3">
+    <h:outputLabel styleClass="desc" for="firstName" value="#{text['person.firstName']}"/>
+    <h:inputText styleClass="text medium" id="firstName" value="#{personForm.person.firstName}" required="true">
+        <v:commonsValidator type="required" arg="#{text['person.firstName']}"/>
+    </h:inputText>
+    <t:message for="firstName" styleClass="fieldError"/>
+
+    <h:outputLabel styleClass="desc" for="lastName" value="#{text['person.lastName']}"/>
+    <h:inputText styleClass="text medium" id="lastName" value="#{personForm.person.lastName}" required="true">
+        <v:commonsValidator type="required" arg="#{text['person.lastName']}"/>
+    </h:inputText>
+    <t:message for="lastName" styleClass="fieldError"/>
+
+    <h:panelGroup styleClass="buttonBar bottom">
+        <h:commandButton value="#{text['button.save']}" action="#{personForm.save}" id="save" styleClass="button"/>
+
+        <c:if test="${not empty personForm.person.id}">
+        <h:commandButton value="#{text['button.delete']}" action="#{personForm.delete}"
+            id="delete" styleClass="button" onclick="bCancel=true; return confirmDelete('Person')"/>
+        </c:if>
+
+        <h:commandButton value="#{text['button.cancel']}" action="cancel" immediate="true"
+            id="cancel" styleClass="button" onclick="bCancel=true"/>
+    </h:panelGroup>
+    <h:outputText/><h:outputText/>
+</h:panelGrid>
+</h:form>
+
+<v:validatorScript functionName="validatePersonForm"/>
+
+<script type="text/javascript">
+    //Form.focusFirstElement($('personForm'));
+    highlightFormElements();
+</script>
+
+</body>
+</f:view>
+</html>
