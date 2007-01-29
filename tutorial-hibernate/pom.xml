@@ -124,7 +124,7 @@
             <plugin>
                 <groupId>org.appfuse</groupId>
                 <artifactId>maven-warpath-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.0-m3-SNAPSHOT</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -133,6 +133,12 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <warpathExcludes>
+                        applicationContext-resources.xml,ApplicationResources*.properties,
+                        ehcache.xml,hibernate.cfg.xml,jdbc.properties,log4j.xml,mail.properties
+                    </warpathExcludes>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
