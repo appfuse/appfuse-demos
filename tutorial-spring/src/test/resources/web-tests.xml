@@ -9,7 +9,7 @@
 
     <!-- runs all targets -->
     <target name="run-all-tests" 
-        depends="Login,Logout,PasswordHint,Signup,UserTests,FlushCache,FileUpload"
+        depends="Login,Logout,PasswordHint,Signup,UserTests,FlushCache,FileUpload,PersonTests"
         description="Call and executes all test cases (targets)"/>
     
     <!-- runs user-related tests -->
@@ -207,6 +207,99 @@
                 <clickbutton label="${button.upload}" description="Click Upload"/>
                 <verifytitle description="show file data if upload OK" text=".*${display.title}.*" regex="true"/>
                 <verifytext description="verify original filename displayed on page" text="pom.xml"/>
+            </steps>
+        </webtest>
+    </target>
+    
+    <!-- runs person-related tests -->
+    <target name="PersonTests"
+        depends="SearchPersons,EditPerson,SavePerson,AddPerson,DeletePerson"
+        description="Call and executes all person test cases (targets)">
+        <echo>Successfully ran all Person UI tests!</echo>
+    </target>
+    
+    <!-- Verify the people list screen displays without errors -->
+    <target name="SearchPersons" description="Tests search for and displaying all persons">
+        <webtest name="searchPersons">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click View Persons link" url="/persons.html"/>
+                <verifytitle description="we should see the personList title"
+                    text=".*${personList.title}.*" regex="true"/>
+            </steps>
+        </webtest>
+    </target>
+    
+    <!-- Verify the edit person screen displays without errors -->
+    <target name="EditPerson" description="Tests editing an existing Person's information">
+        <webtest name="editPerson">
+            &config;
+            <steps>
+                &login;
+                <invoke description="View Persons List" url="/persons.html"/>
+                <clicklink label="1" description="Click edit link"/>
+                <verifytitle description="we should see the personDetail title"
+                    text=".*${personDetail.title}.*" regex="true"/>
+            </steps>
+        </webtest>
+    </target>
+    
+    <!-- Edit a person and then save -->
+    <target name="SavePerson" description="Tests editing and saving a person">
+        <webtest name="savePerson">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Edit Person link" url="/personform.html?id=1"/>
+                <verifytitle description="we should see the personDetail title"
+                    text=".*${personDetail.title}.*" regex="true"/>
+    
+                <!-- update some of the required fields -->
+                <setinputfield description="set firstName" name="firstName" value="firstName"/>
+                <setinputfield description="set lastName" name="lastName" value="lastName"/>
+                <clickbutton label="${button.save}" description="Click Save"/>
+    
+                <verifytitle description="Page re-appears if save successful"
+                    text=".*${personDetail.title}.*" regex="true"/>
+            </steps>
+        </webtest>
+    </target>
+    
+    <!-- Add a new Person -->
+    <target name="AddPerson" description="Adds a new Person">
+        <webtest name="addPerson">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Add Button" url="/personform.html"/>
+                <verifytitle description="we should see the personDetail title"
+                    text=".*${personDetail.title}.*" regex="true"/>
+    
+                <!-- enter required fields -->
+                <setinputfield description="set firstName" name="firstName" value="Canoo"/>
+                <setinputfield description="set lastName" name="lastName" value="Test"/>
+                <clickbutton label="${button.save}" description="Click button 'Save'"/>
+    
+                <verifytitle description="Person List appears if save successful"
+                    text=".*${personList.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${person.added}"/>
+            </steps>
+        </webtest>
+    </target>
+    
+    <!-- Delete existing person -->
+    <target name="DeletePerson" description="Deletes existing Person">
+        <webtest name="deletePerson">
+            &config;
+            <steps>
+                &login;
+                <invoke description="click Edit Person link" url="/personform.html?id=1"/>
+                <prepareDialogResponse description="Confirm delete" dialogType="confirm" response="true"/>
+                <clickbutton label="${button.delete}" description="Click button 'Delete'"/>
+                <verifyNoDialogResponses/>
+                <verifytitle description="display Person List" text=".*${personList.title}.*" regex="true"/>
+                <verifytext description="verify success message" text="${person.deleted}"/>
             </steps>
         </webtest>
     </target>

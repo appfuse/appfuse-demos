@@ -35,18 +35,6 @@ public class PersonFormController extends BaseFormController {
         return new Person();
     }
 
-    public ModelAndView processFormSubmission(HttpServletRequest request,
-                                              HttpServletResponse response,
-                                              Object command,
-                                              BindException errors)
-    throws Exception {
-        if (request.getParameter("cancel") != null) {
-            return new ModelAndView(new RedirectView(getSuccessView()));
-        }
-
-        return super.processFormSubmission(request, response, command, errors);
-    }
-
     public ModelAndView onSubmit(HttpServletRequest request,
                                  HttpServletResponse response, Object command,
                                  BindException errors)
