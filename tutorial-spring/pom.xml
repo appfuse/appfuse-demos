@@ -169,6 +169,12 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <warpathExcludes>
+                        applicationContext-resources.xml,ApplicationResources*.properties,
+                        ehcache.xml,hibernate.cfg.xml,jdbc.properties,log4j.xml,mail.properties
+                    </warpathExcludes>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.appfuse</groupId>
@@ -426,7 +432,7 @@
         <jdbc.artifactId>mysql-connector-java</jdbc.artifactId>
         <jdbc.version>5.0.3</jdbc.version>
         <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
-        <jdbc.url><![CDATA[jdbc:mysql://localhost/appfuse?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
+        <jdbc.url><![CDATA[jdbc:mysql://localhost/tutorial?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
         <jdbc.username>root</jdbc.username>
         <jdbc.password></jdbc.password>
 

@@ -90,4 +90,19 @@
       <value>1</value>
     </row>
   </table>
+  <table name='person'>
+    <column>id</column>
+    <column>first_name</column>
+    <column>last_name</column>
+    <row>
+        <value>1</value>
+        <value>Matt</value>
+        <value>Raible</value>
+    </row>
+    <row>
+        <value>2</value>
+        <value>Bob</value>
+        <value>Johnson</value>
+    </row>
+  </table>
 </dataset>

@@ -1,13 +1,10 @@
 package org.appfuse.tutorial.webapp.controller;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.appfuse.Constants;
 import org.appfuse.webapp.controller.BaseControllerTestCase;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 public class PersonControllerTest extends BaseControllerTestCase {
 	private PersonController c;
@@ -17,10 +14,9 @@ public class PersonControllerTest extends BaseControllerTestCase {
 	}
 
     public void testHandleRequest() throws Exception {
-        ModelAndView mav = c.handleRequest((HttpServletRequest) null,
-                                           (HttpServletResponse) null);
-        Map m = mav.getModel();
+        ModelAndView mav = c.handleRequest(null, null);
+        ModelMap m = mav.getModelMap();
         assertNotNull(m.get("personList"));
-        assertEquals(mav.getViewName(), "personList");
+        assertTrue(((List) m.get("personList")).size() > 0);
     }
 }
