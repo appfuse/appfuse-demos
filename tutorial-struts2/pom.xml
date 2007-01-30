@@ -206,6 +206,7 @@
             </testResource>
             <testResource>
                 <directory>src/main/webapp</directory>
+                <filtering>true</filtering>
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
@@ -247,6 +248,11 @@
             <artifactId>appfuse-${web.framework}</artifactId>
             <version>${appfuse.version}</version>
             <type>warpath</type>
+        </dependency>
+        <dependency>
+            <groupId>${jdbc.groupId}</groupId>
+            <artifactId>${jdbc.artifactId}</artifactId>
+            <version>${jdbc.version}</version>
         </dependency>
         <!-- Dependencies with scope=provided aren't picked up from dependent JARs -->
         <dependency>
@@ -325,6 +331,7 @@
                     <plugin>
                         <groupId>org.codehaus.cargo</groupId>
                         <artifactId>cargo-maven2-plugin</artifactId>
+                        <version>0.2</version>
                         <configuration>
                             <wait>${cargo.wait}</wait>
                             <container>
@@ -370,8 +377,8 @@
     <properties>
         <dao.framework>hibernate</dao.framework>
         <web.framework>struts</web.framework>
-        <appfuse.version>2.0-SNAPSHOT</appfuse.version>
-        
+        <appfuse.version>2.0-m3-SNAPSHOT</appfuse.version>
+
         <!-- Database settings -->
         <hibernate.dialect>org.hibernate.dialect.MySQLInnoDBDialect</hibernate.dialect>
         <jdbc.groupId>mysql</jdbc.groupId>
