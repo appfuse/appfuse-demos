@@ -1,0 +1,30 @@
+<head>
+	<title><span key="personList.title"/></title>
+	<content tag="heading"><span key="personList.heading"/></content>
+	<meta name="menu" content="PersonMenu"/>
+</head>
+
+<span jwcid="@ShowMessage"/>
+
+<p>
+    <input type="button" class="button" onclick="location.href='PersonForm.html'" jwcid="@Any" value="message:button.add"/>
+    <input type="button" class="button" onclick="location.href='mainMenu.html'" jwcid="@Any" value="message:button.done"/>
+</p>
+
+<table jwcid="table@contrib:Table" class="table contribTable personList" id="personList"
+    rowsClass="ognl:beans.evenOdd.next" row="ognl:row" source="ognl:persons"
+    columns="person.id:id,person.firstName:firstName,person.lastName:lastName"
+    arrowUpAsset="ognl:assets.upArrow" arrowDownAsset="ognl:assets.downArrow">
+    <tr jwcid="person_idColumnValue@Block">
+        <a jwcid="@DirectLink" listener="ognl:listeners.edit" parameters="ognl:row.id">
+            <span jwcid="@Insert" value="ognl:row.id"/>
+        </a>
+    </tr>
+</table>
+
+<input type="button" class="button" onclick="location.href='PersonForm.html'" jwcid="@Any" value="message:button.add"/>
+<input type="button" class="button" onclick="location.href='mainMenu.html'" jwcid="@Any" value="message:button.done"/>
+
+<script type="text/javascript">
+    highlightTableRows("personList");
+</script>
