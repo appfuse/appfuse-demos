@@ -2,8 +2,8 @@ package org.appfuse.tutorial.webapp.pages;
 
 import org.apache.tapestry.engine.ILink;
 import org.appfuse.tutorial.model.Person;
-import org.appfuse.webapp.page.MockRequestCycle;
-import org.appfuse.webapp.page.BasePageTestCase;
+import org.appfuse.webapp.pages.MockRequestCycle;
+import org.appfuse.webapp.pages.BasePageTestCase;
 import org.appfuse.service.GenericManager;
 
 import java.util.HashMap;

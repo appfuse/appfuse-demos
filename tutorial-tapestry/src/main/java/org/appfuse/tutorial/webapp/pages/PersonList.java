@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.appfuse.service.GenericManager;
 import org.appfuse.tutorial.model.Person;
-import org.appfuse.webapp.page.BasePage;
+import org.appfuse.webapp.pages.BasePage;
 import org.apache.tapestry.IRequestCycle;
 
 public abstract class PersonList extends BasePage {

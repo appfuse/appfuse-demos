@@ -6,9 +6,9 @@
 <application name="tapestry"> 
 
     <meta key="org.apache.tapestry.visit-class" value="org.appfuse.webapp.action.Visit"/>
-    <meta key="org.apache.tapestry.default-page-class" value="org.appfuse.webapp.page.BasePage"/>
+    <meta key="org.apache.tapestry.default-page-class" value="org.appfuse.webapp.pages.BasePage"/>
     <meta key="org.apache.tapestry.page-class-packages" 
-    	value="org.appfuse.webapp.page,org.appfuse.tutorial.webapp.pages"/>
+    	value="org.appfuse.webapp.pages,org.appfuse.tutorial.webapp.pages"/>
     
     <library id="contrib" specification-path="/org/apache/tapestry/contrib/Contrib.library"/> 
     

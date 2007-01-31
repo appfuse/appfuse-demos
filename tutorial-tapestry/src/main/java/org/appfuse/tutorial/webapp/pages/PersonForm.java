@@ -7,7 +7,7 @@ import org.apache.tapestry.event.PageEvent;
 
 import org.appfuse.service.GenericManager;
 import org.appfuse.tutorial.model.Person;
-import org.appfuse.webapp.page.BasePage;
+import org.appfuse.webapp.pages.BasePage;
 
 public abstract class PersonForm extends BasePage implements PageBeginRenderListener {
     public abstract GenericManager<Person, Long> getPersonManager();

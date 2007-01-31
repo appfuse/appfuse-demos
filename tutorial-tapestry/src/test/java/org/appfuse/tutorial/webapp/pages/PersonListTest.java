@@ -3,8 +3,8 @@ package org.appfuse.tutorial.webapp.pages;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.appfuse.webapp.page.BasePageTestCase;
-import org.appfuse.webapp.page.MockRequestCycle;
+import org.appfuse.webapp.pages.BasePageTestCase;
+import org.appfuse.webapp.pages.MockRequestCycle;
 import org.apache.tapestry.engine.RequestCycle;
 
 public class PersonListTest extends BasePageTestCase {
