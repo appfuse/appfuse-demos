@@ -96,7 +96,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>test-compile</phase>
+                        <phase>process-classes</phase>
                         <goals>
                             <goal>hbm2ddl</goal>
                         </goals>
