@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.appfuse.webapp.pages.BasePageTestCase;
-import org.appfuse.webapp.pages.MockRequestCycle;
-import org.apache.tapestry.engine.RequestCycle;
 
 public class PersonListTest extends BasePageTestCase {
     private PersonList page;
@@ -21,13 +19,6 @@ public class PersonListTest extends BasePageTestCase {
     protected void onTearDownAfterTransaction() throws Exception {
         super.onTearDownAfterTransaction();
         page = null;
-    }
-
-    public void testEdit() throws Exception {
-        RequestCycle cycle = new MockRequestCycle(this.getClass().getPackage().getName());
-        cycle.setServiceParameters(new Object[] {1L});
-        page.edit(cycle);
-        assertFalse(page.hasErrors());
     }
 
     public void testSearch() throws Exception {

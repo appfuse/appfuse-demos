@@ -15,9 +15,7 @@ public abstract class PersonForm extends BasePage implements PageBeginRenderList
     public abstract Person getPerson();
 
     public void pageBeginRender(PageEvent event) {
-        if ((getPerson() == null) && !event.getRequestCycle().isRewinding()) {
-            setPerson(new Person());
-        } else if (event.getRequestCycle().isRewinding()) { // add
+        if (getPerson() == null) {
             setPerson(new Person());
         }
     }
