@@ -7,7 +7,6 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.validation.BindException;
 import org.springframework.validation.Errors;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.context.i18n.LocaleContextHolder;
 
 public class PersonFormControllerTest extends BaseControllerTestCase {
     private PersonFormController c;

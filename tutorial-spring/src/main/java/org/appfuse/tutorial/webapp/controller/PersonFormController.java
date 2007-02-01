@@ -6,7 +6,6 @@ import org.appfuse.tutorial.model.Person;
 import org.appfuse.webapp.controller.BaseFormController;
 import org.springframework.validation.BindException;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
