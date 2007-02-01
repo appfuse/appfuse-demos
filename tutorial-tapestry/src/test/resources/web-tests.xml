@@ -41,8 +41,7 @@
     </target>
 
     <!-- Retrieve Password Hint -->
-    <target name="PasswordHint" 
-        description="Gets the user's password hint">
+    <target name="PasswordHint" description="Gets the user's password hint">
         <webtest name="passwordHint">
             &config;
             <steps>
@@ -68,8 +67,7 @@
     </target>
     
     <!-- Verify the user list screen displays without errors -->
-    <target name="SearchUser" 
-        description="Tests search for and displaying all users">
+    <target name="SearchUser" description="Tests search for and displaying all users">
         <webtest name="searchUser">
             &config;
             <steps>
@@ -210,9 +208,9 @@
             </steps>
         </webtest>
     </target>
-    
+
     <!-- runs person-related tests -->
-    <target name="PersonTests" depends="SearchPersons,EditPerson,SavePerson,AddPerson,DeletePerson"
+    <target name="PersonTests" depends="SearchPersons,EditPerson,SavePerson,AddPerson,DeletePerson" 
         description="Call and executes all person test cases (targets)">
         <echo>Successfully ran all Person UI tests!</echo>
     </target>
@@ -229,7 +227,7 @@
             </steps>
         </webtest>
     </target>
-    
+
     <!-- Verify the edit person screen displays without errors -->
     <target name="EditPerson" description="Tests editing an existing Person's information">
         <webtest name="editPerson">

@@ -1,0 +1,23 @@
+<head>
+    <title><span key="mainMenu.title"/></title>
+    <content tag="heading"><span key="mainMenu.heading"/></content>
+    <meta name="menu" content="MainMenu"/>
+</head>
+        
+<span jwcid="@ShowMessage"/>
+
+<p><span key="mainMenu.message"/></p>
+
+<div class="separator"></div>
+
+<ul class="glassList">
+    <li>
+        <a jwcid="@DirectLink" listener="listener:editProfile"><span key="menu.user">Edit Profile</span></a>
+    </li>
+    <li>
+        <a jwcid="@PageLink" page="FileUpload"><span key="menu.selectFile"/></a>
+    </li>
+    <li>
+        <a jwcid="@PageLink" page="PersonList"><span key="menu.viewPeople"/></a> 
+    </li>
+</ul>

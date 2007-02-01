@@ -9,7 +9,6 @@
     <inject property="response" object="service:tapestry.globals.HttpServletResponse"/>
     <inject property="personManager" type="spring" object="personManager"/>
 
-    <bean name="delegate" class="org.appfuse.webapp.components.ValidationDelegate"/>
     <property name="message" persist="flash"/>
 
     <component id="personForm" type="Form">
