@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.appfuse</groupId>
-    <artifactId>tutorial</artifactId>
+    <artifactId>tutorial-struts</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>AppFuse Struts 2 Application</name>

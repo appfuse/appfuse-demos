@@ -5,26 +5,22 @@
     <content tag="heading"><fmt:message key="personDetail.heading"/></content>
 </head>
 
-<s:form name="personForm" action="savePerson" method="post" validate="true">
+<s:form id="personForm" action="savePerson" method="post" validate="true">
 <s:hidden name="person.id" value="%{person.id}"/>
 
-    <s:textfield label="%{getText('person.firstName')}" name="person.firstName"
-        value="%{person.firstName}" required="true"/>
+    <s:textfield key="person.firstName" required="true" cssClass="text medium"/>
+    <s:textfield key="person.lastName" required="true" cssClass="text medium"/>
 
-    <s:textfield label="%{getText('person.lastName')}" name="person.lastName"
-        value="%{person.lastName}" required="true"/>
-
-    <tr>
-        <td></td>
-        <td class="buttonBar">
-            <s:submit cssClass="button" method="save" value="%{getText('button.save')}" theme="simple"/>
-            <s:submit cssClass="button" method="delete" value="%{getText('button.delete')}"
+    <li class="buttonBar bottom">
+        <s:submit cssClass="button" method="save" key="button.save" theme="simple"/>
+        <c:if test="${not empty person.id}"> 
+            <s:submit cssClass="button" method="delete" key="button.delete"
                 onclick="return confirmDelete('Person')" theme="simple"/>
-            <s:submit cssClass="button" name="cancel" value="%{getText('button.cancel')}" theme="simple"/>
-        </td>
-    </tr>
+        </c:if>
+        <s:submit cssClass="button" method="cancel" key="button.cancel" theme="simple"/>
+    </li>
 </s:form>
 
 <script type="text/javascript">
-    Form.focusFirstElement(document.forms["personForm"]);
+    Form.focusFirstElement($("personForm"));
 </script>
