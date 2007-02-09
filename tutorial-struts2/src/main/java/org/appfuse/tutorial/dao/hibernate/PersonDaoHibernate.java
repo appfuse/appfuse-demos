@@ -13,6 +13,6 @@ public class PersonDaoHibernate extends GenericDaoHibernate implements PersonDao
     }
 
     public List<Person> findByLastName(String lastName) {
-        return getHibernateTemplate().find("from org.appfuse.tutorial.model.Person where lastName=?", lastName);
+        return getHibernateTemplate().find("from Person where lastName=?", lastName);
     }
 }

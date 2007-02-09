@@ -20,17 +20,21 @@ public class PersonDaoTest extends BaseDaoTestCase {
 
     public void testAddAndRemovePerson() throws Exception {
         Person person = new Person();
-        person.setFirstName("John");
-        person.setLastName("Elway");
+        person.setFirstName("Country");
+        person.setLastName("Bry");
 
         personDao.save(person);
+        flush();
 
-        assertEquals("John", person.getFirstName());
+        person = (Person) personDao.get(person.getId());
+
+        assertEquals("Country", person.getFirstName());
         assertNotNull(person.getId());
 
         log.debug("removing person...");
 
         personDao.remove(person.getId());
+        flush();
 
         try {
             personDao.get(person.getId());

@@ -46,9 +46,35 @@
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.1</version>
                 <configuration>
                     <source>1.5</source>
                     <target>1.5</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <additionalProjectnatures>
+                        <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+                    </additionalProjectnatures>
+                    <additionalBuildcommands>
+                        <buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+                    </additionalBuildcommands>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                    <wtpversion>1.0</wtpversion>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-idea-plugin</artifactId>
+                <version>2.0</version>
+                <configuration>
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>true</downloadJavadocs>
+                    <dependenciesAsLibraries>true</dependenciesAsLibraries>
+                    <useFullNames>false</useFullNames>
                 </configuration>
             </plugin>
             <plugin>
@@ -65,6 +91,7 @@
                     <componentProperties>
                         <jdk5>true</jdk5>
                         <propertyfile>target/classes/jdbc.properties</propertyfile>
+                        <skip>${maven.test.skip}</skip>
                     </componentProperties>
                 </configuration>
                 <executions>
@@ -86,7 +113,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>dbunit-maven-plugin</artifactId>
-                <version>1.0-beta-1-SNAPSHOT</version>
+                <version>1.0-beta-1</version>
                 <configuration>
                     <driver>${jdbc.driverClassName}</driver>
                     <username>${jdbc.username}</username>
@@ -98,7 +125,16 @@
                 </configuration>
                 <executions>
                     <execution>
+                        <id>test-compile</id>
                         <phase>test-compile</phase>
+                        <goals>
+                            <goal>operation</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <!-- Runs before integration tests and jetty:run-war -->
+                        <id>test</id>
+                        <phase>test</phase>
                         <goals>
                             <goal>operation</goal>
                         </goals>
@@ -124,7 +160,7 @@
             <plugin>
                 <groupId>org.appfuse</groupId>
                 <artifactId>maven-warpath-plugin</artifactId>
-                <version>1.0-m3-SNAPSHOT</version>
+                <version>1.0-m4-SNAPSHOT</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -135,13 +171,19 @@
                 </executions>
                 <configuration>
                     <warpathExcludes>
-                        applicationContext-resources.xml,ApplicationResources*.properties,
-                        ehcache.xml,hibernate.cfg.xml,jdbc.properties,log4j.xml,mail.properties
+                        applicationContext-resources.xml,ApplicationResources*.properties,ehcache.xml,
+                        hibernate.cfg.xml,jdbc.properties,log4j.xml,mail.properties,persistence.xml
                     </warpathExcludes>
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.appfuse</groupId>
+                <artifactId>appfuse-maven-plugin</artifactId>
+                <version>2.0-m4-SNAPSHOT</version>
+            </plugin>
+            <plugin>
                 <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.1</version>
                 <configuration>
                     <tasks>
                         <taskdef resource="webtest_base_relaxed.taskdef">
@@ -212,6 +254,7 @@
             </testResource>
             <testResource>
                 <directory>src/main/webapp</directory>
+                <filtering>true</filtering>
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
@@ -253,6 +296,24 @@
             <artifactId>appfuse-${web.framework}</artifactId>
             <version>${appfuse.version}</version>
             <type>warpath</type>
+        </dependency>
+        <dependency>
+            <groupId>${jdbc.groupId}</groupId>
+            <artifactId>${jdbc.artifactId}</artifactId>
+            <version>${jdbc.version}</version>
+        </dependency>
+        <!-- Dependencies with scope=provided aren't picked up from dependent JARs -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>${jsp.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>${servlet.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>jmock</groupId>
@@ -318,6 +379,7 @@
                     <plugin>
                         <groupId>org.codehaus.cargo</groupId>
                         <artifactId>cargo-maven2-plugin</artifactId>
+                        <version>0.2</version>
                         <configuration>
                             <wait>${cargo.wait}</wait>
                             <container>
@@ -363,7 +425,7 @@
     <properties>
         <dao.framework>hibernate</dao.framework>
         <web.framework>struts</web.framework>
-        <appfuse.version>2.0-m3-SNAPSHOT</appfuse.version>
+        <appfuse.version>2.0-m4-SNAPSHOT</appfuse.version>
         
         <!-- Database settings -->
         <hibernate.dialect>org.hibernate.dialect.MySQLInnoDBDialect</hibernate.dialect>
@@ -371,11 +433,13 @@
         <jdbc.artifactId>mysql-connector-java</jdbc.artifactId>
         <jdbc.version>5.0.3</jdbc.version>
         <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
-        <jdbc.url><![CDATA[jdbc:mysql://localhost/appfuse?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
+        <jdbc.url><![CDATA[jdbc:mysql://localhost/tutorial?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
         <jdbc.username>root</jdbc.username>
         <jdbc.password></jdbc.password>
 
         <!-- Testing dependency versions -->
+        <jsp.version>2.0</jsp.version>
+        <servlet.version>2.4</servlet.version>
         <jmock.version>1.1.0</jmock.version>
         <junit.version>3.8.2</junit.version>
         <spring.version>2.0.2</spring.version>

@@ -12,14 +12,6 @@
         <constructor-arg ref="personDao"/>
     </bean>
 
-    <bean class="org.appfuse.dao.spring.HibernateExtensionPostProcessor">
-        <property name="annotatedClasses">
-            <list>
-                <value>org.appfuse.tutorial.model.Person</value>
-            </list>
-        </property>
-    </bean>
-
     <bean id="personAction" class="org.appfuse.tutorial.webapp.action.PersonAction" scope="prototype">
         <property name="personManager" ref="personManager"/> 
     </bean>
