@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.appfuse</groupId>
+    <groupId>org.appfuse.tutorial</groupId>
     <artifactId>tutorial-struts2</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
@@ -64,7 +64,7 @@
                     </additionalBuildcommands>
                     <downloadSources>true</downloadSources>
                     <downloadJavadocs>true</downloadJavadocs>
-                    <wtpversion>1.0</wtpversion>
+                    <wtpversion>1.5</wtpversion>
                 </configuration>
             </plugin>
             <plugin>
@@ -180,70 +180,61 @@
                 <groupId>org.appfuse</groupId>
                 <artifactId>appfuse-maven-plugin</artifactId>
                 <version>2.0-m4-SNAPSHOT</version>
+                <configuration>
+                    <properties>
+                    <jdk5>true</jdk5>
+                    <ejb3>true</ejb3>
+                    </properties>
+                </configuration>
+
             </plugin>
             <plugin>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.1</version>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>native2ascii-maven-plugin</artifactId>
+                <version>1.0-beta-1-SNAPSHOT</version>
                 <configuration>
-                    <tasks>
-                        <taskdef resource="webtest_base_relaxed.taskdef">
-                            <classpath refid="maven.test.classpath"/>
-                        </taskdef>
-                        <mkdir dir="target/webtest-data"/>
-                        <!-- Delete old results file if it exists -->
-                        <delete file="target/webtest-data/web-tests-result.xml"/>
-                        <!-- This is so the default will be used if no test case is specified -->
-                        <property name="test" value="run-all-tests"/>
-                        <echo level="info">Testing '${project.build.finalName}' with locale '${user.language}'</echo>
-                        <ant antfile="src/test/resources/web-tests.xml" target="${test}">
-                            <property name="user.language" value="${user.language}"/>
-                            <property name="webapp.name" value="${project.build.finalName}"/>
-                            <property name="host" value="${cargo.host}"/>
-                            <property name="port" value="${cargo.port}"/>
-                        </ant>
-                    </tasks>
+                    <dest>target/classes</dest>
+                    <src>src/main/resources</src>
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>integration-test</phase>
+                        <id>native2ascii-utf8</id>
                         <goals>
-                            <goal>run</goal>
+                            <goal>native2ascii</goal>
                         </goals>
+                        <configuration>
+                            <encoding>UTF8</encoding>
+                            <includes>ApplicationResources_zh*</includes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>native2ascii-8859_1</id>
+                        <goals>
+                            <goal>native2ascii</goal>
+                        </goals>
+                        <configuration>
+                            <encoding>8859_1</encoding>
+                            <includes>
+                                ApplicationResources_de.properties,
+                                ApplicationResources_fr.properties,
+                                ApplicationResources_nl.properties,
+                                ApplicationResources_pt*.properties
+                            </includes>
+                        </configuration>
                     </execution>
                 </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.canoo</groupId>
-                        <artifactId>webtest</artifactId>
-                        <version>${webtest.version}</version>
-                        <exclusions>
-                            <exclusion>
-                                <groupId>javax.xml</groupId>
-                                <artifactId>jsr173</artifactId>
-                            </exclusion>
-                        </exclusions>
-                    </dependency>
-                    <dependency>
-                        <groupId>javax.mail</groupId>
-                        <artifactId>mail</artifactId>
-                        <version>${javamail.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>log4j</groupId>
-                        <artifactId>log4j</artifactId>
-                        <version>${log4j.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>oro</groupId>
-                        <artifactId>oro</artifactId>
-                        <version>${oro.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>ApplicationResources_zh*.properties</exclude>
+                    <exclude>ApplicationResources_de.properties</exclude>
+                    <exclude>ApplicationResources_fr.properties</exclude>
+                    <exclude>ApplicationResources_nl.properties</exclude>
+                    <exclude>ApplicationResources_pt*.properties</exclude>
+                </excludes>
                 <filtering>true</filtering>
             </resource>
         </resources>
@@ -266,6 +257,11 @@
         <repository>
             <id>central</id>
             <url>http://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>struts-205-staging</id>
+            <name>Apache Struts 2.0.5 Staging Repository</name>
+            <url>http://people.apache.org/builds/struts/2.0.5/m2-staging-repository</url>
         </repository>
         <repository>
             <id>appfuse</id>
@@ -370,9 +366,11 @@
 
     <profiles>
         <profile>
-            <id>tomcat5x</id>
+            <id>${cargo.container}</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>!maven.test.skip</name>
+                </property>
             </activation>
             <build>
                 <plugins>
@@ -383,17 +381,15 @@
                         <configuration>
                             <wait>${cargo.wait}</wait>
                             <container>
-                                <containerId>tomcat5x</containerId>
-                                <!--home>${env.CATALINA_HOME}</home-->
+                                <containerId>${cargo.container}</containerId>
+                                <!--home>${cargo.container.home}</home-->
                                 <zipUrlInstaller>
-                                    <url>
-                                        http://apache.org/dist/tomcat/tomcat-5/v5.5.17/bin/apache-tomcat-5.5.17.zip
-                                    </url>
+                                    <url>${cargo.container.url}</url>
                                     <installDir>${installDir}</installDir>
                                 </zipUrlInstaller>
                             </container>
                             <configuration>
-                                <home>${project.build.directory}/tomcat5x/container</home>
+                                <home>${project.build.directory}/${cargo.container}/container</home>
                                 <properties>
                                     <cargo.hostname>${cargo.host}</cargo.hostname>
                                     <cargo.servlet.port>${cargo.port}</cargo.servlet.port>
@@ -417,8 +413,92 @@
                             </execution>
                         </executions>
                     </plugin>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <version>1.1</version>
+                        <configuration>
+                            <tasks>
+                                <taskdef resource="webtest_base_relaxed.taskdef">
+                                    <classpath refid="maven.test.classpath"/>
+                                </taskdef>
+                                <mkdir dir="target/webtest-data"/>
+                                <!-- Delete old results file if it exists -->
+                                <delete file="target/webtest-data/web-tests-result.xml"/>
+                                <!-- This is so the default will be used if no test case is specified -->
+                                <property name="test" value="run-all-tests"/>
+                                <echo level="info">Testing '${project.build.finalName}' with locale '${user.language}'</echo>
+                                <ant antfile="src/test/resources/web-tests.xml" target="${test}">
+                                    <property name="user.language" value="${user.language}"/>
+                                    <property name="webapp.name" value="${project.build.finalName}"/>
+                                    <property name="host" value="${cargo.host}"/>
+                                    <property name="port" value="${cargo.port}"/>
+                                </ant>
+                            </tasks>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>integration-test</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <dependencies>
+                            <dependency>
+                                <groupId>com.canoo</groupId>
+                                <artifactId>webtest</artifactId>
+                                <version>${webtest.version}</version>
+                                <exclusions>
+                                    <exclusion>
+                                        <groupId>javax.xml</groupId>
+                                        <artifactId>jsr173</artifactId>
+                                    </exclusion>
+                                </exclusions>
+                            </dependency>
+                            <dependency>
+                                <groupId>javax.mail</groupId>
+                                <artifactId>mail</artifactId>
+                                <version>${javamail.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>log4j</groupId>
+                                <artifactId>log4j</artifactId>
+                                <version>${log4j.version}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>oro</groupId>
+                                <artifactId>oro</artifactId>
+                                <version>${oro.version}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
                 </plugins>
             </build>
+        </profile>
+
+        <!-- ================= Database Profiles ================= -->
+        <profile>
+            <id>postgresql</id>
+            <properties>
+                <hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</hibernate.dialect>
+                <jdbc.groupId>postgresql</jdbc.groupId>
+                <jdbc.artifactId>postgresql</jdbc.artifactId>
+                <jdbc.version>8.1-407.jdbc3</jdbc.version>
+                <jdbc.driverClassName>org.postgresql.Driver</jdbc.driverClassName>
+                <jdbc.url><![CDATA[jdbc:postgresql://localhost/tutorial]]></jdbc.url>
+                <jdbc.username>postgres</jdbc.username>
+                <jdbc.password>postgres</jdbc.password>
+            </properties>
+        </profile>
+
+        <!-- ================= Container Profiles ================= -->
+        <profile>
+            <id>jboss</id>
+            <properties>
+                <cargo.container>jboss4x</cargo.container>
+                <cargo.container.home>${env.JBOSS_HOME}</cargo.container.home>
+                <cargo.container.url>http://easynews.dl.sourceforge.net/sourceforge/jboss/jboss-4.0.5.GA.zip</cargo.container.url>
+            </properties>
         </profile>
     </profiles>
 
@@ -426,7 +506,7 @@
         <dao.framework>hibernate</dao.framework>
         <web.framework>struts</web.framework>
         <appfuse.version>2.0-m4-SNAPSHOT</appfuse.version>
-
+        
         <!-- Database settings -->
         <hibernate.dialect>org.hibernate.dialect.MySQLInnoDBDialect</hibernate.dialect>
         <jdbc.groupId>mysql</jdbc.groupId>
@@ -452,6 +532,9 @@
         <webtest.version>1454</webtest.version>
 
         <!-- Cargo settings -->
+        <cargo.container>tomcat5x</cargo.container>
+        <cargo.container.home>${env.CATALINA_HOME}</cargo.container.home>
+        <cargo.container.url>http://apache.org/dist/tomcat/tomcat-5/v5.5.17/bin/apache-tomcat-5.5.17.zip</cargo.container.url>
         <cargo.host>localhost</cargo.host>
         <cargo.port>8081</cargo.port>
         <cargo.wait>false</cargo.wait>
