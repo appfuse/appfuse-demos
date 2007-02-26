@@ -22,9 +22,9 @@
     </licenses>
 
     <scm>
-        <connection></connection>
-        <developerConnection></developerConnection>
-        <url></url>
+        <connection>scm:svn:http://appfuse-demos.googlecode.com/svn/trunk/tutorial-struts2</connection>
+        <developerConnection>scm:svn:https://appfuse-demos.googlecode.com/svn/trunk/tutorial-struts2</developerConnection>
+        <url>http://code.google.com/p/appfuse-demos/source</url>
     </scm>
 
     <issueManagement>
@@ -90,6 +90,7 @@
                     </components>
                     <componentProperties>
                         <jdk5>true</jdk5>
+                        <ejb3>true</ejb3>
                         <propertyfile>target/classes/jdbc.properties</propertyfile>
                         <skip>${maven.test.skip}</skip>
                     </componentProperties>
@@ -107,6 +108,11 @@
                         <groupId>${jdbc.groupId}</groupId>
                         <artifactId>${jdbc.artifactId}</artifactId>
                         <version>${jdbc.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                        <version>${log4j.version}</version>
                     </dependency>
                 </dependencies>
             </plugin>
