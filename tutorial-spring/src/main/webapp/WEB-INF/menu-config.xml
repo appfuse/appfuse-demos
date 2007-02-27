@@ -6,7 +6,7 @@
     <Menus>
         <Menu name="MainMenu" title="mainMenu.title" page="/mainMenu.html"/>
         <Menu name="UserMenu" title="menu.user" description="User Menu" page="/userform.html" roles="admin,user"/>
-        <Menu name="FileUpload" title="menu.selectFile" description="File Upload" width="100" page="/fileupload.html" roles="admin,user"/>
+        <!--Menu name="FileUpload" title="menu.selectFile" description="File Upload" width="100" page="/fileupload.html" roles="admin,user"/-->
         <Menu name="PeopleMenu" title="menu.viewPeople" page="/persons.html"/>
         <Menu name="AdminMenu" title="menu.admin" description="Admin Menu" roles="admin" width="120" page="/users.html">
             <Item name="ViewUsers" title="menu.admin.users" page="/users.html"/>
