@@ -42,7 +42,7 @@
     </developers>
 	
     <build>
-        <defaultGoal>package</defaultGoal>
+        <defaultGoal>install</defaultGoal>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -358,7 +358,7 @@
                     <plugin>
                         <groupId>org.codehaus.cargo</groupId>
                         <artifactId>cargo-maven2-plugin</artifactId>
-                        <version>0.2</version>
+                        <version>0.3-SNAPSHOT</version>
                         <configuration>
                             <wait>${cargo.wait}</wait>
                             <container>
