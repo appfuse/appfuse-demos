@@ -8,6 +8,6 @@ import java.util.List;
 /**
  * @author mraible
  */
-public interface PersonDao<T, PK extends java.io.Serializable> extends GenericDao {
+public interface PersonDao extends GenericDao<Person, Long> {
     public List<Person> findByLastName(String lastName);
 }

@@ -7,9 +7,9 @@ import org.springframework.dao.DataAccessException;
 import java.util.List;
 
 public class PersonDaoTest extends BaseDaoTestCase {
-    private PersonDao<Person, Long> personDao = null;
+    private PersonDao personDao = null;
 
-    public void setPersonDao(PersonDao<Person, Long> personDao) {
+    public void setPersonDao(PersonDao personDao) {
         this.personDao = personDao;
     }
 
