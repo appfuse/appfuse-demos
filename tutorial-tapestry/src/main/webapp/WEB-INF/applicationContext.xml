@@ -11,12 +11,4 @@
 	        </bean>
 	    </constructor-arg>
 	</bean>
-
-    <bean class="org.appfuse.dao.spring.HibernateExtensionPostProcessor">
-        <property name="annotatedClasses">
-            <list>
-                <value>org.appfuse.tutorial.model.Person</value>
-            </list>
-        </property>
-    </bean>
 </beans>

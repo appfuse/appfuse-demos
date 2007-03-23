@@ -7,5 +7,4 @@
     <bean id="personDao" class="org.appfuse.tutorial.dao.hibernate.PersonDaoHibernate">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-
 </beans>

@@ -4,6 +4,7 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
     <display-name>appfuse</display-name>
+    <distributable/>
 
     <!-- precompiled jsp mappings -->
 
@@ -30,6 +31,7 @@
             classpath*:/applicationContext-resources.xml
             classpath*:/applicationContext-dao.xml
             classpath*:/applicationContext-service.xml
+            classpath*:/applicationContext.xml
             /WEB-INF/applicationContext*.xml
             /WEB-INF/security.xml
         </param-value>
@@ -169,10 +171,10 @@
         <filter-name>localeFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    <!--filter-mapping>
+    <filter-mapping>
         <filter-name>gzipFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping-->
+    </filter-mapping>
     <filter-mapping>
         <filter-name>rewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -245,6 +247,14 @@
     <session-config>
         <session-timeout>10</session-timeout>
     </session-config>
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Protect XHTML Templates</web-resource-name>
+            <url-pattern>*.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint/>
+   </security-constraint>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
