@@ -1,16 +1,16 @@
 package org.appfuse.tutorial.webapp.action;
 
-import org.appfuse.service.GenericManager;
 import org.appfuse.tutorial.model.Person;
+import org.appfuse.tutorial.service.PersonManager;
 import org.appfuse.webapp.action.BaseAction;
 
 import java.util.List;
 
 public class PersonAction extends BaseAction {
-    private GenericManager<Person, Long> personManager;
+    private PersonManager personManager;
     private List persons;
 
-    public void setPersonManager(GenericManager<Person, Long> personManager) {
+    public void setPersonManager(PersonManager personManager) {
         this.personManager = personManager;
     }
 

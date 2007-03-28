@@ -8,7 +8,7 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="personManager" class="org.appfuse.service.impl.GenericManagerImpl">
+    <bean id="personManager" class="org.appfuse.tutorial.service.impl.PersonManagerImpl">
         <constructor-arg ref="personDao"/>
     </bean>
 
