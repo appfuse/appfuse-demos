@@ -42,9 +42,11 @@
 
     <!-- All modules aren't listed because they all haven't been tested with M4 -->
     <modules>
+        <module>tutorial-hibernate</module>
         <module>tutorial-jsf</module>
         <module>tutorial-spring</module>
         <module>tutorial-struts2</module>
         <module>tutorial-tapestry</module>
+        <module>tutorial-service</module>
     </modules>
 </project>
