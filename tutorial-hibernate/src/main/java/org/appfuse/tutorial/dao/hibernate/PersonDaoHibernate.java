@@ -6,7 +6,7 @@ import org.appfuse.dao.hibernate.GenericDaoHibernate;
 
 import java.util.List;
 
-public class PersonDaoHibernate extends GenericDaoHibernate implements PersonDao {
+public class PersonDaoHibernate extends GenericDaoHibernate<Person, Long> implements PersonDao {
 
     public PersonDaoHibernate() {
         super(Person.class);
