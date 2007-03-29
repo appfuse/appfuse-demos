@@ -5,7 +5,6 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <class>org.appfuse.model.User</class>
         <class>org.appfuse.model.Role</class>
-        <class>org.appfuse.tutorial.model.Person</class>
     </persistence-unit>
 
 </persistence>

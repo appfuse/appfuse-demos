@@ -184,8 +184,7 @@
                 </executions>
                 <configuration>
                     <warpathExcludes>
-                        applicationContext-resources.xml,ApplicationResources*.properties,ehcache.xml,
-                        hibernate.cfg.xml,jdbc.properties,log4j.xml,mail.properties,persistence.xml
+                        applicationContext-resources.xml,ApplicationResources*.properties,ehcache.xml,hibernate.cfg.xml,jdbc.properties,log4j.xml,mail.properties,persistence.xml
                     </warpathExcludes>
                 </configuration>
             </plugin>
@@ -295,6 +294,17 @@
             <artifactId>appfuse-${web.framework}</artifactId>
             <version>${appfuse.version}</version>
             <type>warpath</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.appfuse</groupId>
+                    <artifactId>appfuse-hibernate</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.appfuse</groupId>
+            <artifactId>appfuse-${dao.framework}</artifactId>
+            <version>${appfuse.version}</version>
         </dependency>
         <dependency>
             <groupId>${jdbc.groupId}</groupId>
@@ -584,7 +594,7 @@
         <web.framework>struts</web.framework>
         
 		<!-- Framework dependency versions -->
-		<appfuse.version>2.0-m4</appfuse.version>
+		<appfuse.version>2.0-m5-SNAPSHOT</appfuse.version>
 		<spring.version>2.0.3</spring.version>
 
 		<!-- Testing dependency versions -->

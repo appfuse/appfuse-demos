@@ -1,10 +1,11 @@
 package org.appfuse.tutorial.dao;
 
+import java.util.List;
+
+import javax.persistence.EntityNotFoundException;
+
 import org.appfuse.dao.BaseDaoTestCase;
 import org.appfuse.tutorial.model.Person;
-import org.springframework.dao.DataAccessException;
-
-import java.util.List;
 
 public class PersonDaoTest extends BaseDaoTestCase {
     private PersonDao personDao = null;
@@ -23,7 +24,7 @@ public class PersonDaoTest extends BaseDaoTestCase {
         person.setFirstName("John");
         person.setLastName("Elway");
 
-        personDao.save(person);
+        person = personDao.save(person);
 
         assertEquals("John", person.getFirstName());
         assertNotNull(person.getId());
@@ -35,9 +36,9 @@ public class PersonDaoTest extends BaseDaoTestCase {
         try {
             personDao.get(person.getId());
             fail("Person found in database");
-        } catch (DataAccessException dae) {
-            log.debug("Expected exception: " + dae.getMessage());
-            assertNotNull(dae);
+        } catch (EntityNotFoundException enf) {
+            log.debug("Expected exception: " + enf.getMessage());
+            assertNotNull(enf);
         }
     }
 }
