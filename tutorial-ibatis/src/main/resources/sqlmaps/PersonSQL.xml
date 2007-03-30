@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PersonSQL">
+    <typeAlias alias="person" type="org.appfuse.tutorial.model.Person"/>
+
+    <parameterMap id="addParam" class="person">
+        <parameter property="firstName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <parameter property="lastName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </parameterMap>
+
+    <parameterMap id="updateParam" class="person">
+        <parameter property="id" jdbcType="INTEGER" javaType="java.lang.Long"/>
+        <parameter property="firstName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <parameter property="lastName" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </parameterMap>
+
+    <resultMap id="personResult" class="person">
+        <result property="id" column="id"/>
+        <result property="firstName" column="first_name"/>
+        <result property="lastName" column="last_name"/>
+    </resultMap>
+
+    <select id="getPersons" resultMap="personResult">
+    <![CDATA[
+        select * from person
+    ]]>
+    </select>
+
+    <select id="getPerson" resultMap="personResult">
+    <![CDATA[
+        select * from person where id = #value#
+    ]]>
+    </select>
+
+    <insert id="addPerson" parameterMap="addParam">
+        <![CDATA[
+            insert into person (first_name,last_name) values ( ?,? )
+        ]]>
+        <selectKey resultClass="java.lang.Long" keyProperty="id" type="post">
+            SELECT LAST_INSERT_ID() AS id
+        </selectKey>
+    </insert>
+
+    <update id="updatePerson" parameterMap="updateParam">
+    <![CDATA[
+        update person set first_name = ?, last_name = ? where id = ?
+    ]]>
+    </update>
+
+    <delete id="deletePerson">
+    <![CDATA[
+        delete from person where id = #value#
+    ]]>
+    </delete>
+
+    <select id="findByLastName" resultMap="personResult">
+        select * from person where last_name = #value#
+    </select>
+</sqlMap>
