@@ -9,7 +9,7 @@
 
     <!-- runs all targets -->
     <target name="run-all-tests" 
-        depends="Login,Logout,PasswordHint,UserTests,FlushCache,FileUpload"
+        depends="Login,Logout,PasswordHint,Signup,UserTests,FlushCache,FileUpload"
         description="Call and executes all test cases (targets)"/>
     
     <!-- runs user-related tests -->
