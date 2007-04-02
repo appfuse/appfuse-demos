@@ -2,13 +2,9 @@ package org.appfuse.tutorial.model;
 
 import org.appfuse.model.BaseObject;
 
-import javax.persistence.Entity;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Column;
+import javax.persistence.*;
 
-@Entity
+@Entity @Table(name="person")
 public class Person extends BaseObject {
     private Long id;
     private String firstName;
