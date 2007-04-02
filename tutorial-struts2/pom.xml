@@ -40,7 +40,7 @@
             <timezone></timezone>
         </developer>
     </developers>
-	
+    
     <build>
         <defaultGoal>install</defaultGoal>
         <plugins>
@@ -80,7 +80,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>hibernate3-maven-plugin</artifactId>
-                <version>2.0-alpha-1</version>
+                <version>2.0-alpha-2-SNAPSHOT</version>
                 <configuration>
                     <components>
                         <component>
@@ -175,7 +175,7 @@
             <plugin>
                 <groupId>org.appfuse</groupId>
                 <artifactId>maven-warpath-plugin</artifactId>
-                <version>1.0-m4</version>
+                <version>1.0-m5-SNAPSHOT</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -283,6 +283,16 @@
             <id>appfuse</id>
             <url>http://static.appfuse.org/repository</url>
         </pluginRepository>
+            <pluginRepository>
+      <id>Codehaus Snapshots</id>
+      <url>http://snapshots.repository.codehaus.org/</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+    </pluginRepository>
     </pluginRepositories>
 
     <dependencies>
@@ -585,16 +595,16 @@
         <dao.framework>hibernate</dao.framework>
         <web.framework>struts</web.framework>
         
-		<!-- Framework dependency versions -->
-		<appfuse.version>2.0-m4</appfuse.version>
-		<spring.version>2.0.3</spring.version>
+        <!-- Framework dependency versions -->
+        <appfuse.version>2.0-m5-SNAPSHOT</appfuse.version>
+        <spring.version>2.0.3</spring.version>
 
-		<!-- Testing dependency versions -->
-		<jmock.version>1.1.0</jmock.version>
-		<jsp.version>2.0</jsp.version>
-		<junit.version>3.8.2</junit.version>
-		<servlet.version>2.4</servlet.version>
-		<wiser.version>1.0.3</wiser.version>
+        <!-- Testing dependency versions -->
+        <jmock.version>1.1.0</jmock.version>
+        <jsp.version>2.0</jsp.version>
+        <junit.version>3.8.2</junit.version>
+        <servlet.version>2.4</servlet.version>
+        <wiser.version>1.0.3</wiser.version>
 
         <!-- WebTest dependency versions  -->
         <javamail.version>1.4</javamail.version>

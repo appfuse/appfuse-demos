@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- See http://www.hibernate.org/hib_docs/tools/reference/en/html/reverseengineering.html for more information -->
+<!DOCTYPE hibernate-reverse-engineering SYSTEM "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+    <schema-selection match-table="person"/>
+    <type-mapping>
+        <sql-type jdbc-type="BIGINT" hibernate-type="java.lang.Long"/>
+        <sql-type jdbc-type="NUMERIC" hibernate-type="java.lang.Long"/>
+    </type-mapping>
+</hibernate-reverse-engineering>
