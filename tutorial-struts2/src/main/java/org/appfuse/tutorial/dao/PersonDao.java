@@ -5,9 +5,6 @@ import org.appfuse.tutorial.model.Person;
 
 import java.util.List;
 
-/**
- * @author mraible
- */
 public interface PersonDao extends GenericDao<Person, Long> {
     public List<Person> findByLastName(String lastName);
 }

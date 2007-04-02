@@ -9,6 +9,8 @@ import java.util.List;
 public class PersonAction extends BaseAction {
     private GenericManager<Person, Long> personManager;
     private List persons;
+    private Person person;
+    private Long id;
 
     public void setPersonManager(GenericManager<Person, Long> personManager) {
         this.personManager = personManager;
@@ -22,9 +24,6 @@ public class PersonAction extends BaseAction {
         persons = personManager.getAll();
         return SUCCESS;
     }
-
-    private Person person;
-    private Long id;
 
     public void setId(Long id) {
         this.id = id;
