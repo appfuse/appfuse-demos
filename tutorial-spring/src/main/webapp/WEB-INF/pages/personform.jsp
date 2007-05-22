@@ -4,7 +4,7 @@
 <content tag="heading"><fmt:message key="personDetail.heading"/></content>
 
 <form:form commandName="person" method="post" action="personform.html" id="personForm" onsubmit="return validatePerson(this)">
-<form:errors path="*" cssClass="error"/>
+<form:errors path="*" cssClass="error" element="div"/>
 <form:hidden path="id"/>
 <ul>
     <li>
