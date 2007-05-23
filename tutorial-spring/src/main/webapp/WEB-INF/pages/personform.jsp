@@ -1,7 +1,9 @@
 <%@ include file="/common/taglibs.jsp"%>
 
-<title><fmt:message key="personDetail.title"/></title>
-<content tag="heading"><fmt:message key="personDetail.heading"/></content>
+<head>
+    <title><fmt:message key="personDetail.title"/></title>
+    <meta name="heading" content="<fmt:message key='personDetail.heading'/>"/>
+</head>
 
 <form:form commandName="person" method="post" action="personform.html" id="personForm" onsubmit="return validatePerson(this)">
 <form:errors path="*" cssClass="error" element="div"/>

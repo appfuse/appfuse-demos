@@ -3,6 +3,7 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
     
     <display-name>appfuse</display-name>
+    <distributable/>
 
     <!-- precompiled jsp mappings -->
 
@@ -29,7 +30,9 @@
             classpath*:/applicationContext-resources.xml
             classpath*:/applicationContext-dao.xml
             classpath*:/applicationContext-service.xml
+            classpath*:/applicationContext.xml
             /WEB-INF/applicationContext*.xml
+            /WEB-INF/xfire-servlet.xml
             /WEB-INF/security.xml
         </param-value>
     </context-param>
@@ -92,12 +95,24 @@
         <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
     </filter>
     <filter>
+        <filter-name>staticFilter</filter-name>
+        <filter-class>org.appfuse.webapp.filter.StaticFilter</filter-class>
+        <init-param>
+            <param-name>includes</param-name>
+            <param-value>/scripts/dojo/*</param-value>
+        </init-param>
+    </filter>
+    <filter>
         <filter-name>struts-cleanup</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ActionContextCleanUp</filter-class>
     </filter>
     <filter>
         <filter-name>struts</filter-name>
         <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+        <init-param>
+            <param-name>actionPackages</param-name>
+            <param-value>org.appfuse.tutorial.webapp.action</param-value>
+        </init-param>
     </filter>
 
     <filter-mapping>
@@ -127,12 +142,12 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
-        <filter-name>exportFilter</filter-name>
-        <url-pattern>*.html</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
         <filter-name>gzipFilter</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>exportFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>rewriteFilter</filter-name>
@@ -143,14 +158,27 @@
     <filter-mapping>
         <filter-name>struts-cleanup</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     <filter-mapping>
         <filter-name>sitemesh</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>staticFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     <filter-mapping>
         <filter-name>struts</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     
     <listener>
@@ -177,16 +205,26 @@
 
     <servlet>
         <servlet-name>dwr-invoker</servlet-name>
-        <servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
+        <servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
         <init-param>
             <param-name>debug</param-name>
             <param-value>true</param-value>
         </init-param>
     </servlet>
+    
+    <servlet>
+        <servlet-name>xfire</servlet-name>
+        <servlet-class>org.codehaus.xfire.spring.XFireSpringServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>dwr-invoker</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>xfire</servlet-name>
+        <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
 
     <session-config>

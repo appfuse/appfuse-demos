@@ -15,7 +15,7 @@
         <a href="<c:url value="/editProfile.html"/>"><fmt:message key="menu.user"/></a>
     </li>
     <li>
-        <a href="<c:url value="/uploadFile!default.html"/>"><fmt:message key="menu.selectFile"/></a>
+        <a href="<c:url value="/uploadFile!start.html"/>"><fmt:message key="menu.selectFile"/></a>
     </li>
     <li>
         <a href="<c:url value="/persons.html"/>"><fmt:message key="menu.viewPeople"/></a>

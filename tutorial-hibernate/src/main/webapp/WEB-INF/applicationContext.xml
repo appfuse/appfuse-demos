@@ -7,4 +7,9 @@
     <bean id="personDao" class="org.appfuse.tutorial.dao.hibernate.PersonDaoHibernate">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    <!-- Add new DAOs here -->
+
+    <!-- Add new Managers here -->
+
+    <!-- Add new Actions here -->
 </beans>

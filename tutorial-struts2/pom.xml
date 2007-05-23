@@ -80,7 +80,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>hibernate3-maven-plugin</artifactId>
-                <version>2.0-alpha-2-SNAPSHOT</version>
+                <version>2.0-alpha-1</version>
                 <configuration>
                     <components>
                         <component>
@@ -169,7 +169,9 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.0.2</version>
                 <configuration>
-                    <dependentWarExcludes>**/hibernate.cfg.xml,WEB-INF/classes/META-INF/**</dependentWarExcludes>
+                    <dependentWarExcludes>
+                        **/hibernate.cfg.xml,**/sql-map-config.xml,**/web.xml,WEB-INF/classes/META-INF/**
+                    </dependentWarExcludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -187,14 +189,19 @@
                 <configuration>
                     <warpathExcludes>
                         applicationContext-resources.xml,ApplicationResources*.properties,ehcache.xml,
-                        hibernate.cfg.xml,jdbc.properties,log4j.xml,mail.properties,persistence.xml
+                        hibernate.cfg.xml,jdbc.properties,log4j.xml,mail.properties,**/persistence.xml,
+                        sql-map-config.xml
                     </warpathExcludes>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.appfuse</groupId>
+                <groupId>org.codehaus.mojo</groupId>
                 <artifactId>appfuse-maven-plugin</artifactId>
                 <version>${appfuse.version}</version>
+                <configuration>
+                    <genericCore>${amp.genericCore}</genericCore>
+                    <fullSource>${amp.fullSource}</fullSource>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -283,16 +290,6 @@
             <id>appfuse</id>
             <url>http://static.appfuse.org/repository</url>
         </pluginRepository>
-            <pluginRepository>
-      <id>Codehaus Snapshots</id>
-      <url>http://snapshots.repository.codehaus.org/</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-    </pluginRepository>
     </pluginRepositories>
 
     <dependencies>
@@ -307,6 +304,20 @@
             <artifactId>appfuse-${web.framework}</artifactId>
             <version>${appfuse.version}</version>
             <type>warpath</type>
+            <!-- This exclusion and the dependency following this one allow DAO framework switching. -->
+            <!-- You only need these if you want to use JPA or iBATIS. See APF-565 for more information. -->
+            <!-- It does no harm to leave it in for Hibernate, but it's not needed. -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.appfuse</groupId>
+                    <artifactId>appfuse-hibernate</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.appfuse</groupId>
+            <artifactId>appfuse-${dao.framework}</artifactId>
+            <version>${appfuse.version}</version>
         </dependency>
         <dependency>
             <groupId>${jdbc.groupId}</groupId>
@@ -363,6 +374,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.0</version>
             </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -372,6 +384,10 @@
             </plugin>
             <plugin>
                 <artifactId>maven-pmd-plugin</artifactId>
+                <configuration>
+                    <linkXref>true</linkXref>
+                    <targetJdk>1.5</targetJdk>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-report-plugin</artifactId>
@@ -591,13 +607,16 @@
     </profiles>
 
     <properties>
+        <!-- Application settings -->
         <copyright.year>2007</copyright.year>
         <dao.framework>hibernate</dao.framework>
         <web.framework>struts</web.framework>
+        <amp.genericCore>true</amp.genericCore>
+        <amp.fullSource>false</amp.fullSource>
         
         <!-- Framework dependency versions -->
         <appfuse.version>2.0-m5-SNAPSHOT</appfuse.version>
-        <spring.version>2.0.3</spring.version>
+        <spring.version>2.0.5</spring.version>
 
         <!-- Testing dependency versions -->
         <jmock.version>1.1.0</jmock.version>

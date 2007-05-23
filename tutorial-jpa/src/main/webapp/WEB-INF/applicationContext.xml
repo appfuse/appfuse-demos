@@ -5,4 +5,9 @@
       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
     <bean id="personDao" class="org.appfuse.tutorial.dao.jpa.PersonDaoJpa"/>
+    <!-- Add new DAOs here -->
+
+    <!-- Add new Managers here -->
+
+    <!-- Add new Actions here -->
 </beans>

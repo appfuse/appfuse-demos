@@ -23,10 +23,10 @@ public class PersonDaoTest extends BaseDaoTestCase {
         person.setFirstName("Country");
         person.setLastName("Bry");
 
-        personDao.save(person);
+        person = personDao.save(person);
         flush();
 
-        person = (Person) personDao.get(person.getId());
+        person = personDao.get(person.getId());
 
         assertEquals("Country", person.getFirstName());
         assertNotNull(person.getId());

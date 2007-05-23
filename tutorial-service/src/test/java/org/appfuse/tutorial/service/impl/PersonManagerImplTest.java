@@ -1,12 +1,12 @@
 package org.appfuse.tutorial.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.appfuse.service.impl.BaseManagerMockTestCase;
 import org.appfuse.tutorial.dao.PersonDao;
 import org.appfuse.tutorial.model.Person;
-import org.appfuse.service.impl.BaseManagerMockTestCase;
 import org.jmock.Mock;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PersonManagerImplTest extends BaseManagerMockTestCase {
     private PersonManagerImpl manager = null;
@@ -76,7 +76,7 @@ public class PersonManagerImplTest extends BaseManagerMockTestCase {
         // set expected behavior on dao
         dao.expects(once()).method("save")
                 .with(same(person))
-                .isVoid();
+                .will(returnValue(person));
 
         manager.save(person);
         dao.verify();

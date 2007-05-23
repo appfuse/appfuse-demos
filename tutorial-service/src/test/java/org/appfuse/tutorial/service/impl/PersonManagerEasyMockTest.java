@@ -1,14 +1,14 @@
 package org.appfuse.tutorial.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import junit.framework.TestCase;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.appfuse.tutorial.dao.PersonDao;
 import org.appfuse.tutorial.model.Person;
-
 import static org.easymock.EasyMock.*;
-import org.apache.commons.logging.LogFactory;
-import org.apache.commons.logging.Log;
-import junit.framework.TestCase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PersonManagerEasyMockTest extends TestCase {
     private final Log log = LogFactory.getLog(PersonManagerEasyMockTest.class);
@@ -72,7 +72,7 @@ public class PersonManagerEasyMockTest extends TestCase {
         person = new Person();
 
         // set expected behavior on dao
-        dao.save(person);
+        expect(dao.save(person)).andReturn(person);
         replay(dao);
 
         manager.save(person);
@@ -92,5 +92,4 @@ public class PersonManagerEasyMockTest extends TestCase {
         manager.remove(id);
         verify(dao);
     }
-
 }

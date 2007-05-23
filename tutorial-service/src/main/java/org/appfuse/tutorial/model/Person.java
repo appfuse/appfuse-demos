@@ -24,7 +24,7 @@ public class Person extends BaseObject {
         this.id = id;
     }
 
-    @Column(name="first_name", length=50)
+    @Column(name=("first_name"), length=50)
     public String getFirstName() {
         return firstName;
     }
@@ -33,7 +33,7 @@ public class Person extends BaseObject {
         this.firstName = firstName;
     }
 
-    @Column(name="last_name", length=50) 
+    @Column(name=("last_name"), length=50)
     public String getLastName() {
         return lastName;
     }

@@ -2,7 +2,7 @@
 
 <head>
     <title><fmt:message key="personDetail.title"/></title>
-    <content tag="heading"><fmt:message key="personDetail.heading"/></content>
+    <meta name="heading" content="<fmt:message key='personDetail.heading'/>"/>
 </head>
 
 <s:form id="personForm" action="savePerson" method="post" validate="true">

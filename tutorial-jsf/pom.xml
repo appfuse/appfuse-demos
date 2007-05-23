@@ -42,13 +42,8 @@
     </developers>
 	
     <build>
-        <defaultGoal>package</defaultGoal>
+        <defaultGoal>install</defaultGoal>
         <plugins>
-            <plugin>
-                <groupId>org.appfuse</groupId>
-                <artifactId>appfuse-maven-plugin</artifactId>
-                <version>${appfuse.version}</version>
-            </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.0.2</version>
@@ -80,6 +75,15 @@
                     <downloadJavadocs>true</downloadJavadocs>
                     <dependenciesAsLibraries>true</dependenciesAsLibraries>
                     <useFullNames>false</useFullNames>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appfuse-maven-plugin</artifactId>
+                <version>${appfuse.version}</version>
+                <configuration>
+                    <genericCore>${amp.genericCore}</genericCore>
+                    <fullSource>${amp.fullSource}</fullSource>
                 </configuration>
             </plugin>
             <plugin>
@@ -173,7 +177,7 @@
                     <dependency>
                         <groupId>org.apache.myfaces.core</groupId>
                         <artifactId>myfaces-impl</artifactId>
-                        <version>1.1.4</version>
+                        <version>1.1.5</version>
                     </dependency>
                     <dependency>
                         <groupId>log4j</groupId>
@@ -186,13 +190,15 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.0.2</version>
                 <configuration>
-                    <dependentWarExcludes>**/hibernate.cfg.xml,WEB-INF/classes/META-INF/**</dependentWarExcludes>
+                    <dependentWarExcludes>
+                        **/hibernate.cfg.xml,**/sql-map-config.xml,**/web.xml,WEB-INF/classes/META-INF/**
+                    </dependentWarExcludes>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.appfuse</groupId>
                 <artifactId>maven-warpath-plugin</artifactId>
-                <version>1.0-m4</version>
+                <version>1.0-m5-SNAPSHOT</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -204,7 +210,8 @@
                 <configuration>
                     <warpathExcludes>
                         applicationContext-resources.xml,ApplicationResources*.properties,ehcache.xml,
-                        hibernate.cfg.xml,jdbc.properties,log4j.xml,mail.properties,persistence.xml
+                        hibernate.cfg.xml,jdbc.properties,log4j.xml,mail.properties,**/persistence.xml,
+                        sql-map-config.xml
                     </warpathExcludes>
                 </configuration>
             </plugin>
@@ -309,6 +316,20 @@
             <artifactId>appfuse-${web.framework}</artifactId>
             <version>${appfuse.version}</version>
             <type>warpath</type>
+            <!-- This exclusion and the dependency following this one allow DAO framework switching. -->
+            <!-- You only need these if you want to use JPA or iBATIS. See APF-565 for more information. -->
+            <!-- It does no harm to leave it in for Hibernate, but it's not needed. -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.appfuse</groupId>
+                    <artifactId>appfuse-hibernate</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.appfuse</groupId>
+            <artifactId>appfuse-${dao.framework}</artifactId>
+            <version>${appfuse.version}</version>
         </dependency>
         <dependency>
             <groupId>${jdbc.groupId}</groupId>
@@ -365,6 +386,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>cobertura-maven-plugin</artifactId>
+                <version>2.0</version>
             </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -374,6 +396,10 @@
             </plugin>
             <plugin>
                 <artifactId>maven-pmd-plugin</artifactId>
+                <configuration>
+                    <linkXref>true</linkXref>
+                    <targetJdk>1.5</targetJdk>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-report-plugin</artifactId>
@@ -596,17 +622,19 @@
         <copyright.year>2007</copyright.year>
         <dao.framework>hibernate</dao.framework>
         <web.framework>jsf</web.framework>
+        <amp.genericCore>true</amp.genericCore>
+        <amp.fullSource>false</amp.fullSource>
         
 		<!-- Framework dependency versions -->
-		<appfuse.version>2.0-m4</appfuse.version>
-		<spring.version>2.0.3</spring.version>
+        <appfuse.version>2.0-m5-SNAPSHOT</appfuse.version>
+        <spring.version>2.0.5</spring.version>
 
-		<!-- Testing dependency versions -->
-		<jmock.version>1.1.0</jmock.version>
-		<jsp.version>2.0</jsp.version>
-		<junit.version>3.8.2</junit.version>
-		<servlet.version>2.4</servlet.version>
-		<wiser.version>1.0.3</wiser.version>
+        <!-- Testing dependency versions -->
+        <jmock.version>1.1.0</jmock.version>
+        <jsp.version>2.0</jsp.version>
+        <junit.version>3.8.2</junit.version>
+        <servlet.version>2.4</servlet.version>
+        <wiser.version>1.0.3</wiser.version>
 
         <!-- WebTest dependency versions  -->
         <javamail.version>1.4</javamail.version>

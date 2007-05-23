@@ -57,6 +57,7 @@
         <property name="templateName" value="accountCreated.vm"/>
     </bean>
 
+    <!-- Add additional controller beans here -->
     <bean id="personController" class="org.appfuse.tutorial.webapp.controller.PersonController">
         <property name="personManager" ref="personManager"/>
     </bean>
@@ -82,6 +83,7 @@
                 /activeUsers.html=filenameController
                 /flushCache.html=filenameController
                 /mainMenu.html=filenameController
+                /passwordHint.html=passwordHintController
             </value>
         </property>
         <property name="order" value="1"/>

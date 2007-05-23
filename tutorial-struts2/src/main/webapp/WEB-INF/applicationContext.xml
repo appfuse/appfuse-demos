@@ -7,12 +7,15 @@
     <bean id="personDao" class="org.appfuse.tutorial.dao.hibernate.PersonDaoHibernate">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    <!-- Add new DAOs here -->
 
     <bean id="personManager" class="org.appfuse.service.impl.GenericManagerImpl">
         <constructor-arg ref="personDao"/>
     </bean>
+    <!-- Add new Managers here -->
 
     <bean id="personAction" class="org.appfuse.tutorial.webapp.action.PersonAction" scope="prototype">
         <property name="personManager" ref="personManager"/> 
     </bean>
+    <!-- Add new Actions here -->
 </beans>

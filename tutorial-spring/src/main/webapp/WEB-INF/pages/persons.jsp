@@ -1,8 +1,10 @@
 <%@ include file="/common/taglibs.jsp"%>
 
-<title><fmt:message key="personList.title"/></title>
-<content tag="heading"><fmt:message key="personList.heading"/></content>
-<meta name="menu" content="PersonMenu"/>
+<head>
+    <title><fmt:message key="personList.title"/></title>
+    <meta name="heading" content="<fmt:message key='personList.heading'/>"/>
+    <meta name="menu" content="PersonMenu"/>
+</head>
 
 <c:set var="buttons">
     <input type="button" style="margin-right: 5px"

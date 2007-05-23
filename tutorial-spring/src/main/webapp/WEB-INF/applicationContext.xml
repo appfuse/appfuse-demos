@@ -4,6 +4,9 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
+    <!-- Add new DAOs here -->
+
+    <!-- Add new Managers here -->
 	<bean id="personManager" class="org.appfuse.service.impl.GenericManagerImpl">
 	    <constructor-arg>
 	        <bean class="org.appfuse.dao.hibernate.GenericDaoHibernate" autowire="byType">

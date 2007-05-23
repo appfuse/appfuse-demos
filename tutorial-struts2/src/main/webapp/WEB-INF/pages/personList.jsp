@@ -2,7 +2,7 @@
 
 <head>
     <title><fmt:message key="personList.title"/></title>
-    <content tag="heading"><fmt:message key="personList.heading"/></content>
+    <meta name="heading" content="<fmt:message key='personList.heading'/>"/>
 </head>
 
 <c:set var="buttons">

@@ -32,6 +32,7 @@
             classpath*:/applicationContext-service.xml
             classpath*:/applicationContext.xml
             /WEB-INF/applicationContext*.xml
+            /WEB-INF/xfire-servlet.xml
             /WEB-INF/security.xml
         </param-value>
     </context-param>
@@ -64,12 +65,11 @@
         <filter-name>gzipFilter</filter-name>
         <filter-class>net.sf.ehcache.constructs.web.filter.GzipFilter</filter-class>
     </filter>
-    <!-- Remove this filter if you're using iBATIS, use OpenEntityManagerInViewFilter if using JPA -->
-    <filter>
+    <!--<filter>
         <filter-name>lazyLoadingFilter</filter-name>
         <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
-        <!--<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>-->
-    </filter>
+    </filter>-->
+    <!-- Use "org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter" if you're using JPA -->
     <filter>
         <filter-name>localeFilter</filter-name>
         <filter-class>org.appfuse.webapp.filter.LocaleFilter</filter-class>
@@ -129,10 +129,10 @@
         <filter-name>cacheFilter</filter-name>
         <url-pattern>*.jsp</url-pattern>
     </filter-mapping-->
-    <filter-mapping>
+    <!--<filter-mapping>
         <filter-name>lazyLoadingFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
+    </filter-mapping>-->
     <filter-mapping>
         <filter-name>clickstreamFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -158,10 +158,15 @@
     <filter-mapping>
         <filter-name>struts-cleanup</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     <filter-mapping>
         <filter-name>sitemesh</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
     </filter-mapping>
     <filter-mapping>
         <filter-name>staticFilter</filter-name>
@@ -172,6 +177,8 @@
     <filter-mapping>
         <filter-name>struts</filter-name>
         <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     
     <listener>
@@ -204,10 +211,20 @@
             <param-value>true</param-value>
         </init-param>
     </servlet>
+    
+    <servlet>
+        <servlet-name>xfire</servlet-name>
+        <servlet-class>org.codehaus.xfire.spring.XFireSpringServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>dwr-invoker</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>xfire</servlet-name>
+        <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
 
     <session-config>

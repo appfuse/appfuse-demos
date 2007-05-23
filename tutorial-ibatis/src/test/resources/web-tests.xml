@@ -47,7 +47,7 @@
             <steps>
                 <invoke description="get Login Page" url="/"/>
                 <verifytitle description="we should see the login title" text=".*${login.title}.*" regex="true"/>
-                <invoke description="click password hint link" url="/passwordHint.html?username=mraible"/>
+                <invoke description="click password hint link" url="/passwordHint.html?username=admin"/>
                 <verifytitle description="we should see the login title again"
                     text=".*${login.title}.*" regex="true"/>
             </steps>
@@ -131,7 +131,7 @@
                 <setinputfield description="set email" name="email" value="newuser@raibledesigns.com"/>
                 <setinputfield description="set website" name="website" value="http://raibledesigns.com"/>
                 <setinputfield description="set passwordHint" name="passwordHint" value="test"/>
-                <setselectfield description="select roles" name="userRoles" value="user"/>
+                <setselectfield description="select roles" name="userRoles" value="ROLE_USER"/>
                 <clickbutton label="${button.save}" description="Click button 'Save'"/>
 
                 <verifytitle description="view user list screen" text=".*${userList.title}.*" regex="true"/>
