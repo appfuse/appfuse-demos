@@ -131,7 +131,7 @@
         
         <!-- Add additional actions here -->
         <action name="persons" class="personAction" method="list">
-            <result>/WEB-INF/pages/personList.jsp</result> 
+            <result>/WEB-INF/pages/personList.jsp</result>
         </action>
 
         <action name="editPerson" class="personAction" method="edit">
@@ -145,5 +145,5 @@
             <result name="delete" type="redirect">persons.html</result>
             <result name="success" type="redirect">persons.html</result>
         </action>
-      </package>
+    </package>
 </struts>

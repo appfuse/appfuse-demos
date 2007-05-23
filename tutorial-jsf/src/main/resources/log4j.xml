@@ -36,7 +36,7 @@
     </logger>
    
     <logger name="org.appfuse">
-        <level value="INFO"/>
+        <level value="DEBUG"/>
     </logger>
     
     <logger name="org.appfuse.tutorial">
