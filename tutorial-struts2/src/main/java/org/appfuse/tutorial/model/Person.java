@@ -4,7 +4,7 @@ import org.appfuse.model.BaseObject;
 
 import javax.persistence.*;
 
-@Entity
+@Entity @Table(name="person")
 public class Person extends BaseObject {
     private Long id;
     private String firstName;

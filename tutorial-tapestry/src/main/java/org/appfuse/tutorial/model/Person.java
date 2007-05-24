@@ -7,8 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
+import javax.persistence.Table;
 
-@Entity
+@Entity @Table(name="person")
 public class Person extends BaseObject {
 	private static final long serialVersionUID = 4497150553356125515L;
 	private Long id;

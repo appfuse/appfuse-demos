@@ -7,8 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
+import javax.persistence.Table;
 
-@Entity
+@Entity @Table(name="person")
 public class Person extends BaseObject {
     private Long id;
     private String firstName;

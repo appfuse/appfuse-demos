@@ -1,14 +1,11 @@
 package com.mycompany.app.model;
 
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  * @author mraible
  */
-@Entity
+@Entity @Table(name="person")
 public class Person {
     Long id;
     String firstName;
