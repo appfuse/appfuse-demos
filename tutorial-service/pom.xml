@@ -6,7 +6,7 @@
     <groupId>org.appfuse.tutorial</groupId>
     <artifactId>tutorial-service</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-m5</version>
     <name>AppFuse Service Application</name>
     <url>http://www.mycompany.com</url>
 
@@ -176,7 +176,7 @@
             <plugin>
                 <groupId>org.appfuse</groupId>
                 <artifactId>maven-warpath-plugin</artifactId>
-                <version>1.0-m5-SNAPSHOT</version>
+                <version>1.0-m5</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -606,7 +606,7 @@
         <amp.fullSource>false</amp.fullSource>
         
         <!-- Framework dependency versions -->
-        <appfuse.version>2.0-m5-SNAPSHOT</appfuse.version>
+        <appfuse.version>2.0-m5</appfuse.version>
         <spring.version>2.0.5</spring.version>
 
         <!-- Testing dependency versions -->

@@ -6,7 +6,7 @@
     <groupId>com.mycompany.app</groupId>
     <artifactId>struts2-crud</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-m5</version>
     <name>AppFuse Struts 2 Application</name>
     <url>http://www.mycompany.com</url>
 

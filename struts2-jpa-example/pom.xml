@@ -6,7 +6,7 @@
     <groupId>com.company</groupId>
     <artifactId>struts2-jpa-example</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-m5</version>
     <name>AppFuse Quickstart Web Application</name>
     <url>http://www.mycompany.com</url>
 
@@ -59,7 +59,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>dbunit-maven-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.0-beta-1</version>
                 <configuration>
                     <driver>${jdbc.driverClassName}</driver>
                     <username>${jdbc.username}</username>
@@ -167,7 +167,7 @@
             <plugin>
                 <groupId>org.appfuse</groupId>
                 <artifactId>maven-warpath-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <version>1.0-m5</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
