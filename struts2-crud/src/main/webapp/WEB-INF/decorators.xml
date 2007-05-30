@@ -1,0 +1,10 @@
+<decorators defaultdir="/decorators">
+    <excludes>
+        <pattern>/*ajax=true*</pattern>
+        <pattern>/struts/dojo/*</pattern> <!-- OK to remove if you're not using Struts -->
+        <pattern>/resources/*</pattern>
+    </excludes> 
+    <decorator name="default" page="default.jsp">
+        <pattern>/*</pattern>
+    </decorator>
+</decorators>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <!-- Add new DAOs here -->
+
+    <!--PersonManager-START-->
+    <bean id="personManager" class="org.appfuse.service.impl.GenericManagerImpl">
+        <constructor-arg>
+            <bean class="org.appfuse.dao.hibernate.GenericDaoHibernate">
+                <constructor-arg value="com.mycompany.app.model.Person"/>
+                <property name="sessionFactory" ref="sessionFactory"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+    <!--PersonManager-END-->
+
+    <!-- Add new Managers here -->
+
+    <!--PersonAction-START-->
+    <bean id="personAction" class="com.mycompany.app.webapp.action.PersonAction" scope="prototype">
+        <property name="personManager" ref="personManager"/>
+    </bean>
+    <!--PersonAction-END-->
+
+    <!-- Add new Actions here -->
+</beans>
