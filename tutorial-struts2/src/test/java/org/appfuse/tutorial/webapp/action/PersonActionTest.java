@@ -10,14 +10,12 @@ import org.springframework.mock.web.MockHttpServletRequest;
 public class PersonActionTest extends BaseActionTestCase {
     private PersonAction action;
 
-    public void setPersonAction(PersonAction action) {
-        this.action = action;
-    }
-
     @Override
     protected void onSetUpBeforeTransaction() throws Exception {
         super.onSetUpBeforeTransaction();
+        action = new PersonAction();
         GenericManager personManager = (GenericManager) applicationContext.getBean("personManager");
+        action.setPersonManager(personManager);
 
         // add a test person to the database
         Person person = new Person();

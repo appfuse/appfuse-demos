@@ -130,16 +130,16 @@
         </action>
         
         <!-- Add additional actions here -->
-        <action name="persons" class="personAction" method="list">
+        <action name="persons" class="org.appfuse.tutorial.webapp.action.PersonAction" method="list">
             <result>/WEB-INF/pages/personList.jsp</result>
         </action>
 
-        <action name="editPerson" class="personAction" method="edit">
+        <action name="editPerson" class="org.appfuse.tutorial.webapp.action.PersonAction" method="edit">
             <result>/WEB-INF/pages/personForm.jsp</result>
             <result name="error">/WEB-INF/pages/personList.jsp</result>
         </action>
 
-        <action name="savePerson" class="personAction" method="save">
+        <action name="savePerson" class="org.appfuse.tutorial.webapp.action.PersonAction" method="save">
             <result name="input">/WEB-INF/pages/personForm.jsp</result>
             <result name="cancel" type="redirect">persons.html</result>
             <result name="delete" type="redirect">persons.html</result>
