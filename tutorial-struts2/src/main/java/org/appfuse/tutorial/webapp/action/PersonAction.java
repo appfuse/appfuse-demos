@@ -65,7 +65,7 @@ public class PersonAction extends BaseAction {
 
         boolean isNew = (person.getId() == null);
 
-        personManager.save(person);
+        person = personManager.save(person);
 
         String key = (isNew) ? "person.added" : "person.updated";
         saveMessage(getText(key));
