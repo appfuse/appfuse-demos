@@ -35,7 +35,6 @@ public class PersonManagerImplTest extends BaseManagerMockTestCase {
 
         Person result = manager.get(id);
         assertSame(person, result);
-        dao.verify();
     }
 
     public void testGetPersons() {
@@ -49,7 +48,6 @@ public class PersonManagerImplTest extends BaseManagerMockTestCase {
 
         List result = manager.getAll();
         assertSame(people, result);
-        dao.verify();
     }
 
     public void testFindByLastName() {
@@ -65,7 +63,6 @@ public class PersonManagerImplTest extends BaseManagerMockTestCase {
 
         List result = manager.findByLastName(lastName);
         assertSame(people, result);
-        dao.verify();
     }
 
     public void testSavePerson() {
@@ -79,7 +76,6 @@ public class PersonManagerImplTest extends BaseManagerMockTestCase {
                 .will(returnValue(person));
 
         manager.save(person);
-        dao.verify();
     }
 
     public void testRemovePerson() {
@@ -94,6 +90,5 @@ public class PersonManagerImplTest extends BaseManagerMockTestCase {
                 .isVoid();
 
         manager.remove(id);
-        dao.verify();
     }
 } 
