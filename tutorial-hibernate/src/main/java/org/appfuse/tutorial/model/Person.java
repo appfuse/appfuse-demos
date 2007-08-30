@@ -10,11 +10,12 @@ public class Person extends BaseObject {
     private String firstName;
     private String lastName;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    // START SNIPPET: id
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }
+    // END SNIPET: id
 
     public void setId(Long id) {
         this.id = id;

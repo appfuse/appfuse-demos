@@ -1,3 +1,4 @@
+// START SNIPPET: test
 package org.appfuse.tutorial.dao;
 
 import org.appfuse.dao.BaseDaoTestCase;
@@ -12,12 +13,15 @@ public class PersonDaoTest extends BaseDaoTestCase {
     public void setPersonDao(PersonDao personDao) {
         this.personDao = personDao;
     }
-
+    // END SNIPPET: test
+    // START SNIPPET: testFindPersonByLastName
     public void testFindPersonByLastName() throws Exception {
         List<Person> people = personDao.findByLastName("Raible");
         assertTrue(people.size() > 0);
     }
+    // END SNIPPET: testFindPersonByLastName
 
+    // START SNIPPET: testAddAndRemovePerson
     public void testAddAndRemovePerson() throws Exception {
         Person person = new Person();
         person.setFirstName("Country");
@@ -44,4 +48,5 @@ public class PersonDaoTest extends BaseDaoTestCase {
             assertNotNull(dae);
         }
     }
+    // END SNIPPET: testAddAndRemovePerson
 }

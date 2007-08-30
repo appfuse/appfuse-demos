@@ -1,3 +1,4 @@
+// START SNIPPET: PersonDaoHibernate
 package org.appfuse.tutorial.dao.hibernate;
 
 import org.appfuse.tutorial.model.Person;
@@ -12,7 +13,9 @@ public class PersonDaoHibernate extends GenericDaoHibernate<Person, Long> implem
         super(Person.class);
     }
 
+    @SuppressWarnings("unchecked")
     public List<Person> findByLastName(String lastName) {
         return getHibernateTemplate().find("from Person where lastName=?", lastName);
     }
 }
+// START SNIPPET: PersonDaoHibernate

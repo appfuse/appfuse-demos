@@ -4,9 +4,18 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans
       http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
+    <!-- START SNIPPET: genericPersonDao --><!--
+    <bean id="personDao" class="org.appfuse.dao.hibernate.GenericDaoHibernate">
+        <constructor-arg value="org.appfuse.tutorial.model.Person"/>
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    --><!-- END SNIPPET: genericPersonDao -->
+
+    <!-- START SNIPPET: personDao -->
     <bean id="personDao" class="org.appfuse.tutorial.dao.hibernate.PersonDaoHibernate">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    <!-- END SNIPPET: personDao -->
     <!-- Add new DAOs here -->
 
     <!-- Add new Managers here -->

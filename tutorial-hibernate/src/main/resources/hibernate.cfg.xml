@@ -5,6 +5,8 @@
     <session-factory>
         <mapping class="org.appfuse.model.User"/>
         <mapping class="org.appfuse.model.Role"/>
+        <!-- START SNIPPET: person -->
         <mapping class="org.appfuse.tutorial.model.Person"/>
+        <!-- END SNIPPET: person -->
     </session-factory>
 </hibernate-configuration>
