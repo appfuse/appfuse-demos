@@ -27,11 +27,10 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath*:/applicationContext-resources.xml
-            classpath*:/applicationContext-dao.xml
-            classpath*:/applicationContext-service.xml
+            classpath:/applicationContext-dao.xml
+            classpath:/applicationContext-service.xml
             classpath*:/applicationContext.xml
-            /WEB-INF/applicationContext*.xml
+            /WEB-INF/**/applicationContext*.xml
             /WEB-INF/xfire-servlet.xml
             /WEB-INF/security.xml
         </param-value>
@@ -99,7 +98,7 @@
         <filter-class>org.appfuse.webapp.filter.StaticFilter</filter-class>
         <init-param>
             <param-name>includes</param-name>
-            <param-value>/scripts/dojo/*</param-value>
+            <param-value>/scripts/dojo/*,/dwr/*</param-value>
         </init-param>
     </filter>
     <filter>

@@ -84,7 +84,7 @@
             &config;
             <steps>
                 &login;
-                <invoke description="click View Users link" url="/users.html"/>
+                <invoke description="click View Users link" url="/admin/users.html"/>
                 <verifytitle description="we should see the user list title" 
                     text=".*${userList.title}.*" regex="true"/>
             </steps>
@@ -114,7 +114,7 @@
             &config;
             <steps>
                 &login;
-                <invoke description="click Add Button" url="/editUser.html?method=Add&amp;from=list"/>
+                <invoke description="click Add Button" url="/editUser.html?from=list"/>
                 <verifytitle description="we should see the user profile title"
                     text=".*${userProfile.title}.*" regex="true"/>
                     
@@ -135,7 +135,7 @@
                 
                 <verifytitle description="view user list screen" text=".*${userList.title}.*" regex="true"/>
                 <verifytext description="verify success message" regex="true"
-                    text='&lt;div class="message.*&gt;.*&lt;strong&gt;Test Name&lt;/strong&gt;.*&lt;/div&gt;'/>
+                    text='&lt;div class="message.*&gt;.*Test Name.*&lt;/div&gt;'/>
                     
                 <!-- Delete user -->
                 <clicklink description="Click edit user link" label="newuser"/>
@@ -144,7 +144,7 @@
                 <clickbutton label="${button.delete}" description="Click button 'Delete'"/>
                 <!--verifyNoDialogResponses/-->
                 <verifytext description="verify success message" regex="true"
-                    text='&lt;div class="message.*&gt;.*&lt;strong&gt;Test Name&lt;/strong&gt;.*&lt;/div&gt;'/>
+                    text='&lt;div class="message.*&gt;.*Test Name.*&lt;/div&gt;'/>
                 <verifytitle description="display user list" text=".*${userList.title}.*" regex="true"/>
             </steps>
         </webtest>
@@ -172,7 +172,7 @@
                 <setinputfield description="set passwordHint" name="user.passwordHint" value="test"/>
                 
                 <enableJavaScript enable="false"/> <!-- HtmlUnit doesn't understand table.rows.length -->
-                <clickbutton label="${button.register}" description="Click button 'Signup'"/>
+                <clickbutton name="button.register"  description="Click button 'Signup'"/>
                 
                 <verifytitle description="view main menu" text=".*${mainMenu.title}.*" regex="true"/>
                 <verifytext description="verify success message" text="${user.registered}"/>
@@ -186,7 +186,7 @@
             &config;
             <steps>
                 &login;
-                <invoke description="get activeUsers URL" url="/activeUsers.html"/>
+                <invoke description="get activeUsers URL" url="/admin/activeUsers.html"/>
                 <verifytitle description="we should see the activeUsers title" 
                     text=".*${activeUsers.title}.*" regex="true"/>
             </steps>
@@ -199,7 +199,7 @@
             &config;
             <steps>
                 &login;
-                <invoke description="get flushCache URL" url="/flushCache.html"/>
+                <invoke description="get flushCache URL" url="/admin/flushCache.html"/>
                 <verifytitle description="we should see the flush cache title"
                     text=".*${flushCache.title}.*" regex="true"/>
             </steps>
@@ -212,7 +212,7 @@
             &config;
             <steps>
                 &login;
-                <invoke description="click Upload a File link" url="/uploadFile!start.html"/>
+                <invoke description="click Upload a File link" url="/uploadFile.html"/>
                 <verifytitle description="we should see file upload form" text=".*${upload.title}.*" regex="true"/>
                 <setinputfield description="set name" name="name" value="Canoo Test File"/>
                 <setFileField description="set file" name="file" fileName="pom.xml"/>

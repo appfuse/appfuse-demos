@@ -6,8 +6,8 @@
     <groupId>com.mycompany.app</groupId>
     <artifactId>struts2-crud</artifactId>
     <packaging>war</packaging>
-    <version>1.0-m5</version>
-    <name>AppFuse Struts 2 Application</name>
+    <version>1.0</version>
+    <name>AppFuse Struts 2 CRUD Example</name>
     <url>http://www.mycompany.com</url>
 
     <prerequisites>
@@ -770,9 +770,9 @@
         <amp.fullSource>false</amp.fullSource>
         
         <!-- Framework dependency versions -->
-        <appfuse.version>2.0-m5</appfuse.version>
+        <appfuse.version>2.0-SNAPSHOT</appfuse.version>
         <!-- Sorry about the ordering of the properties below, we hope to fix this in a future release -->
-        <spring.version>2.0.5</spring.version>
+        <spring.version>2.0.6</spring.version>
         <velocity.version>1.4</velocity.version>
         <dwr.version>2.0.1</dwr.version>
         <commons.lang.version>2.3</commons.lang.version>
