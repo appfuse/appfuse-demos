@@ -2,18 +2,26 @@ package org.appfuse.tutorial.webapp.action;
 
 import org.appfuse.tutorial.model.Person;
 import org.appfuse.webapp.action.BasePageTestCase;
+import org.appfuse.service.GenericManager;
 
 public class PersonFormTest extends BasePageTestCase {
     private PersonForm bean;
+    private GenericManager<Person, Long> personManager;
 
-    protected void setUp() throws Exception {
-        super.setUp();
-        bean = (PersonForm) getManagedBean("personForm");
-        
+    public void setPersonManager(GenericManager<Person, Long> personManager) {
+        this.personManager = personManager;
     }
 
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @Override
+    protected void onSetUp() throws Exception {
+        super.onSetUp();
+        bean = new PersonForm();
+        bean.setPersonManager(personManager);
+    }
+
+    @Override
+    protected void onTearDown() throws Exception {
+        super.onTearDown();
         bean = null;
     }
 

@@ -34,7 +34,17 @@
     <logger name="org.springframework">
         <level value="WARN"/>
     </logger>
-   
+
+    <!-- Suppress warnings from Commons Validator -->
+    <logger name="org.apache.commons.validator.ValidatorResources">
+        <level value="ERROR"/>
+    </logger>
+
+    <!-- Suppress invalid warning messages from JSF -->
+    <logger name="org.apache.myfaces.shared_impl.renderkit.html">
+        <level value="ERROR"/>
+    </logger>
+
     <logger name="org.appfuse">
         <level value="INFO"/>
     </logger>

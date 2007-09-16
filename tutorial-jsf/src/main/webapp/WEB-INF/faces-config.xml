@@ -11,6 +11,8 @@
             <supported-locale>es</supported-locale>
             <supported-locale>de</supported-locale>
             <supported-locale>fr</supported-locale>
+            <supported-locale>it</supported-locale>
+            <supported-locale>ko</supported-locale>
             <supported-locale>nl</supported-locale>
             <supported-locale>no</supported-locale>
             <supported-locale>pt</supported-locale>
@@ -54,12 +56,12 @@
         <from-view-id>/userForm.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>cancel</from-outcome>
-            <to-view-id>/users.xhtml</to-view-id>
+            <to-view-id>/admin/users.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
         <navigation-case>
             <from-outcome>list</from-outcome>
-            <to-view-id>/users.xhtml</to-view-id>
+            <to-view-id>/admin/users.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
     </navigation-rule>

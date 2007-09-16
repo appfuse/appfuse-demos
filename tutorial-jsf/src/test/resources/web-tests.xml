@@ -73,7 +73,7 @@
             &config;
             <steps>
                 &login;
-                <invoke description="click View Users link" url="/users.html"/>
+                <invoke description="click View Users link" url="/admin/users.html"/>
                 <verifytitle description="we should see the user list title" 
                     text=".*${userList.title}.*" regex="true"/>
             </steps>
@@ -104,7 +104,7 @@
             &config;
             <steps>
                 &login;
-                <invoke description="View User List" url="/users.html"/>
+                <invoke description="View User List" url="/admin/users.html"/>
                 <clickbutton description="Click 'Add' button'" label="${button.add}"/>
                 
                 <verifytitle description="view user profile title" text=".*${userProfile.title}.*" regex="true"/>
@@ -125,15 +125,16 @@
                 
                 <verifytitle description="view user list screen" text=".*${userList.title}.*" regex="true"/>
                 <verifytext description="verify success message" regex="true"
-                    text='&lt;div class="message.*&gt;.*&lt;strong&gt;Test Name&lt;/strong&gt;.*&lt;/div&gt;'/>
+                    text='&lt;div class="message.*&gt;.*Test Name.*&lt;/div&gt;'/>
                     
                 <!-- Delete user -->
                 <clicklink description="Click edit user link" label="newuser"/>
+                <verifytitle text=".*${userProfile.title}.*" regex="true"/>
                 <prepareDialogResponse description="Confirm delete" dialogType="confirm" response="true"/>
                 <clickbutton label="${button.delete}" description="Click button 'Delete'"/>
                 <verifyNoDialogResponses/>
                 <verifytext description="verify success message" regex="true"
-                    text='&lt;div class="message.*&gt;.*&lt;strong&gt;Test Name&lt;/strong&gt;.*&lt;/div&gt;'/>
+                    text='&lt;div class="message.*&gt;.*Test Name.*&lt;/div&gt;'/>
                 <verifytitle description="display user list" text=".*${userList.title}.*" regex="true"/>
             </steps>
         </webtest>
@@ -173,7 +174,7 @@
             &config;
             <steps>
                 &login;
-                <invoke description="get activeUsers URL" url="/activeUsers.html"/>
+                <invoke description="get activeUsers URL" url="/admin/activeUsers.html"/>
                 <verifytitle description="we should see the activeUsers title" 
                     text=".*${activeUsers.title}.*" regex="true"/>
             </steps>
@@ -186,7 +187,7 @@
             &config;
             <steps>
                 &login;
-                <invoke description="get flushCache URL" url="/flushCache.html"/>
+                <invoke description="get flushCache URL" url="/admin/flushCache.html"/>
                 <verifytitle description="we should see the flush cache title" 
                     text=".*${flushCache.title}.*" regex="true"/>
             </steps>

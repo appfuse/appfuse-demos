@@ -6,12 +6,17 @@ import org.appfuse.tutorial.model.Person;
 
 public class PersonListTest extends BasePageTestCase {
     private PersonList bean;
+    private GenericManager<Person, Long> personManager;
 
-    protected void setUp() throws Exception {
-        super.setUp();
-        bean = (PersonList) getManagedBean("personList");
-        GenericManager<Person, Long> personManager =
-                (GenericManager<Person, Long>) applicationContext.getBean("personManager");
+    public void setPersonManager(GenericManager<Person, Long> personManager) {
+        this.personManager = personManager;
+    }
+
+    @Override @SuppressWarnings("unchecked")
+    protected void onSetUp() throws Exception {
+        super.onSetUp();
+        bean = new PersonList();
+        bean.setPersonManager(personManager);
 
         // add a test person to the database
         Person person = new Person();
@@ -20,8 +25,9 @@ public class PersonListTest extends BasePageTestCase {
         personManager.save(person);
     }
 
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @Override
+    protected void onTearDown() throws Exception {
+        super.onTearDown();
         bean = null;
     }
 

@@ -28,11 +28,10 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath*:/applicationContext-resources.xml
-            classpath*:/applicationContext-dao.xml
-            classpath*:/applicationContext-service.xml
+            classpath:/applicationContext-dao.xml
+            classpath:/applicationContext-service.xml
             classpath*:/applicationContext.xml
-            /WEB-INF/applicationContext*.xml
+            /WEB-INF/**/applicationContext*.xml
             /WEB-INF/xfire-servlet.xml
             /WEB-INF/security.xml
         </param-value>
@@ -56,6 +55,7 @@
     <context-param>
         <param-name>facelets.LIBRARIES</param-name>
         <param-value>
+            /WEB-INF/taglibs/acegijsf.taglib.xml;
             /WEB-INF/taglibs/corejsf-validator.taglib.xml;
             /WEB-INF/taglibs/tomahawk.taglib.xml
         </param-value>
