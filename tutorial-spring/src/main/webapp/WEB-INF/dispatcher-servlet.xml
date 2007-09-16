@@ -80,17 +80,19 @@
     <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
         <property name="mappings">
             <value>
-                /activeUsers.html=filenameController
-                /flushCache.html=filenameController
+                /admin/activeUsers.html=filenameController
+                /admin/flushCache.html=filenameController
+                /admin/reload.html=reloadController
+                /admin/users.html=userController
                 /mainMenu.html=filenameController
                 /passwordHint.html=passwordHintController
             </value>
         </property>
-        <property name="order" value="1"/>
+        <property name="order" value="0"/>
     </bean>
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
-        <property name="order" value="0"/>
+        <property name="order" value="1"/>
     </bean>
 
     <!-- View Resolver for JSPs -->
