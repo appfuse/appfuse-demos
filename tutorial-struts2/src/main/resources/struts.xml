@@ -12,7 +12,7 @@
     <constant name="struts.multipart.maxSize" value="2097152"/>
     <constant name="struts.ui.theme" value="css_xhtml"/>
     <constant name="struts.codebehind.pathPrefix" value="/WEB-INF/pages/"/>
-    <!--constant name="struts.enable.SlashesInActionNames" value="true"/-->
+    <constant name="struts.enable.SlashesInActionNames" value="true"/>
 
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">

@@ -6,12 +6,12 @@
     <groupId>org.appfuse.tutorial</groupId>
     <artifactId>tutorial-service</artifactId>
     <packaging>war</packaging>
-    <version>1.0</version>
+    <version>2.0.1</version>
     <name>AppFuse Service Application</name>
     <url>http://www.mycompany.com</url>
 
     <prerequisites>
-        <maven>2.0.4</maven>
+        <maven>2.0.6</maven>
     </prerequisites>
 
     <licenses>
@@ -46,6 +46,48 @@
         <defaultGoal>install</defaultGoal>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appfuse-maven-plugin</artifactId>
+                <version>${appfuse.version}</version>
+                <configuration>
+                    <genericCore>${amp.genericCore}</genericCore>
+                    <fullSource>${amp.fullSource}</fullSource>
+                </configuration>
+                <!-- Dependency needed by appfuse:gen-model to connect to database. -->
+                <!-- See http://issues.appfuse.org/browse/APF-868 to learn more.    -->
+                <dependencies>
+                    <dependency>
+                        <groupId>${jdbc.groupId}</groupId>
+                        <artifactId>${jdbc.artifactId}</artifactId>
+                        <version>${jdbc.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>1.0-beta-2</version>
+                <configuration>
+                    <source>1.5</source>
+                    <verbose>true</verbose>
+                    <complianceLevel>1.5</complianceLevel>
+                    <showWeaveInfo>true</showWeaveInfo>
+                    <aspectLibraries>
+                        <aspectLibrary>
+                            <groupId>org.springframework</groupId>
+                            <artifactId>spring-aspects</artifactId>
+                        </aspectLibrary>
+                    </aspectLibraries>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.0.2</version>
                 <configuration>
@@ -55,7 +97,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.3</version>
+                <version>2.4</version>
                 <configuration>
                     <additionalProjectnatures>
                         <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
@@ -70,7 +112,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-idea-plugin</artifactId>
-                <version>2.0</version>
+                <version>2.1</version>
                 <configuration>
                     <downloadSources>true</downloadSources>
                     <downloadJavadocs>true</downloadJavadocs>
@@ -81,13 +123,13 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>hibernate3-maven-plugin</artifactId>
-                <version>2.0-alpha-1</version>
+                <version>2.0-alpha-2</version>
                 <configuration>
                     <components>
                         <component>
                             <name>hbm2ddl</name>
                             <implementation>annotationconfiguration</implementation>
-                            <!-- Use 'jpaconfiguration' if your going the -Ddao.framework=jpa-hibernate route. -->
+                            <!-- Use 'jpaconfiguration' if you're using JPA. -->
                             <!--<implementation>jpaconfiguration</implementation>-->
                         </component>
                     </components>
@@ -157,20 +199,31 @@
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.0.0</version>
+                <version>6.1.6</version>
                 <configuration>
                     <contextPath>/</contextPath>
                     <scanIntervalSeconds>3</scanIntervalSeconds>
-                    <scanTargets>
-                        <scanTarget>src/main/webapp/WEB-INF</scanTarget>
-                    </scanTargets>
+                    <scanTargetPatterns>
+                        <scanTargetPattern>
+                            <directory>src/main/webapp/WEB-INF</directory>
+                            <excludes>
+                                <exclude>**/*.jsp</exclude>
+                            </excludes>
+                            <includes>
+                                <include>**/*.properties</include>
+                                <include>**/*.xml</include>
+                            </includes>
+                        </scanTargetPattern>
+                    </scanTargetPatterns>
                 </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.0.2</version>
                 <configuration>
-                    <dependentWarExcludes>**/hibernate.cfg.xml,WEB-INF/classes/META-INF/**</dependentWarExcludes>
+                    <dependentWarExcludes>
+                        **/jdbc.properties,**/hibernate.cfg.xml,**/sql-map-config.xml,**/web.xml,WEB-INF/classes/META-INF/**
+                    </dependentWarExcludes>
                 </configuration>
             </plugin>
             <plugin>
@@ -188,17 +241,9 @@
                 <configuration>
                     <warpathExcludes>
                         applicationContext-resources.xml,ApplicationResources*.properties,ehcache.xml,
-                        hibernate.cfg.xml,jdbc.properties,log4j.xml,mail.properties,persistence.xml
+                        hibernate.cfg.xml,jdbc.properties,log4j.xml,mail.properties,**/persistence.xml,
+                        sql-map-config.xml,struts.xml
                     </warpathExcludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>appfuse-maven-plugin</artifactId>
-                <version>${appfuse.version}</version>
-                <configuration>
-                    <genericCore>${amp.genericCore}</genericCore>
-                    <fullSource>${amp.fullSource}</fullSource>
                 </configuration>
             </plugin>
             <plugin>
@@ -218,6 +263,7 @@
                         <configuration>
                             <encoding>UTF8</encoding>
                             <includes>
+                                ApplicationResources_ko.properties,
                                 ApplicationResources_no.properties,
                                 ApplicationResources_tr.properties,
                                 ApplicationResources_zh*.properties
@@ -246,15 +292,26 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
-                    <exclude>ApplicationResources_zh*.properties</exclude>
                     <exclude>ApplicationResources_de.properties</exclude>
                     <exclude>ApplicationResources_fr.properties</exclude>
+                    <exclude>ApplicationResources_ko.properties</exclude>
                     <exclude>ApplicationResources_nl.properties</exclude>
                     <exclude>ApplicationResources_no.properties</exclude>
                     <exclude>ApplicationResources_pt*.properties</exclude>
                     <exclude>ApplicationResources_tr.properties</exclude>
+                    <exclude>ApplicationResources_zh*.properties</exclude>
+                    <exclude>applicationContext-resources.xml</exclude>
+                    <exclude>struts.xml</exclude>
                 </excludes>
                 <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>applicationContext-resources.xml</include>
+                    <include>struts.xml</include>
+                </includes>
+                <filtering>false</filtering>
             </resource>
         </resources>
         <testResources>
@@ -341,7 +398,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-mock</artifactId>
+            <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
@@ -466,32 +523,38 @@
                         </executions>
                         <dependencies>
                             <dependency>
-                                <groupId>com.canoo</groupId>
+                                <groupId>com.canoo.webtest</groupId>
                                 <artifactId>webtest</artifactId>
                                 <version>${webtest.version}</version>
+                                <!-- groovy-all doesn't have a pom in central repo -->
+                                <!-- exclude groovy to prevent trying to fetch pom -->
                                 <exclusions>
                                     <exclusion>
-                                        <groupId>javax.xml</groupId>
-                                        <artifactId>jsr173</artifactId>
+                                        <groupId>groovy</groupId>
+                                        <artifactId>groovy-all</artifactId>
                                     </exclusion>
                                 </exclusions>
                             </dependency>
-                            <dependency>
-                                <groupId>javax.mail</groupId>
-                                <artifactId>mail</artifactId>
-                                <version>${javamail.version}</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>log4j</groupId>
-                                <artifactId>log4j</artifactId>
-                                <version>${log4j.version}</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>oro</groupId>
-                                <artifactId>oro</artifactId>
-                                <version>${oro.version}</version>
-                            </dependency>
                         </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- ================= Production Settings Profile ================= -->
+        <!-- Use "-P prod" when you want to use the settings in this profile -->
+        <!-- =============================================================== -->
+        <profile>
+            <id>prod</id>
+            <build>
+                <plugins>
+                    <!-- Override location of data file for DbUnit to load (doesn't have negative keys) -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>dbunit-maven-plugin</artifactId>
+                        <configuration>
+                            <src>src/main/resources/default-data.xml</src>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
@@ -543,8 +606,7 @@
             <id>oracle</id>
             <properties>
                 <dbunit.dataTypeFactoryName>org.dbunit.ext.oracle.OracleDataTypeFactory</dbunit.dataTypeFactoryName>
-                <dbunit.schema>SYSTEM</dbunit.schema>
-                <!-- Make sure to capitalize the schema name -->
+                <dbunit.schema>SYSTEM</dbunit.schema> <!-- Make sure to capitalize the schema name -->
                 <hibernate.dialect>org.hibernate.dialect.Oracle9Dialect</hibernate.dialect>
                 <jdbc.groupId>com.oracle</jdbc.groupId>
                 <jdbc.artifactId>ojdbc14</jdbc.artifactId>
@@ -606,26 +668,23 @@
         <amp.fullSource>false</amp.fullSource>
         
         <!-- Framework dependency versions -->
-        <appfuse.version>2.0</appfuse.version>
-        <spring.version>2.0.6</spring.version>
+        <appfuse.version>2.0.1</appfuse.version>
+        <spring.version>2.5</spring.version>
 
         <!-- Testing dependency versions -->
         <jmock.version>1.1.0</jmock.version>
         <jsp.version>2.0</jsp.version>
         <junit.version>4.4</junit.version>
         <servlet.version>2.4</servlet.version>
-        <wiser.version>1.0.3</wiser.version>
+        <wiser.version>1.2</wiser.version>
 
         <!-- WebTest dependency versions  -->
-        <javamail.version>1.4</javamail.version>
-        <log4j.version>1.2.13</log4j.version>
-        <oro.version>2.0.8</oro.version>
-        <webtest.version>1454</webtest.version>
+        <webtest.version>R_1600</webtest.version>
 
         <!-- Cargo settings -->
         <cargo.container>tomcat5x</cargo.container>
         <cargo.container.home>${env.CATALINA_HOME}</cargo.container.home>
-        <cargo.container.url>http://archive.apache.org/dist/tomcat/tomcat-5/v5.5.23/bin/apache-tomcat-5.5.23.zip</cargo.container.url>
+        <cargo.container.url>http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.14/bin/apache-tomcat-6.0.14.zip</cargo.container.url>
         <cargo.host>localhost</cargo.host>
         <cargo.port>8081</cargo.port>
         <cargo.wait>false</cargo.wait>
@@ -633,7 +692,7 @@
         <!-- Database settings -->
         <dbunit.dataTypeFactoryName>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dbunit.dataTypeFactoryName>
         <dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>
-        <hibernate.dialect>org.hibernate.dialect.MySQLInnoDBDialect</hibernate.dialect>
+        <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
         <jdbc.groupId>mysql</jdbc.groupId>
         <jdbc.artifactId>mysql-connector-java</jdbc.artifactId>
         <jdbc.version>5.0.5</jdbc.version>

@@ -6,10 +6,10 @@
     <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
-                value="[tutorial] %p [%t] %c{1}.%M(%L) | %m%n"/>
+                value="[tutorial-struts2] %p [%t] %c{1}.%M(%L) | %m%n"/>
         </layout>
     </appender>
-
+    
     <logger name="net.sf.ehcache">
         <level value="ERROR"/>
     </logger>
@@ -35,20 +35,27 @@
         <level value="WARN"/>
     </logger>
    
-    <logger name="org.appfuse">
-        <level value="DEBUG"/>
+    <!-- http://issues.appfuse.org/browse/APF-736#action_11786 -->
+    <logger name="com.opensymphony.xwork2.util.XWorkConverter">
+        <level value="FATAL"/>
     </logger>
 
-    <logger name="org.appfuse.util">
-        <level value="WARN"/>
-    </logger>
-    
-    <logger name="org.appfuse.webapp.filter">
+    <!-- http://issues.appfuse.org/browse/APF-852 -->
+    <logger name="com.opensymphony.xwork2.util.OgnlUtil">
         <level value="ERROR"/>
     </logger>
+
+    <!-- Turn off warnings from messages.jsp -->
+    <logger name="com.opensymphony.xwork2.util.OgnlValueStack">
+        <level value="ERROR"/>
+    </logger>
+   
+    <logger name="org.appfuse">
+        <level value="INFO"/>
+    </logger>
     
-    <logger name="org.appfuse.webapp.listener.UserCounterListener">
-        <level value="WARN"/>
+    <logger name="org.appfuse.tutorial">
+        <level value="DEBUG"/>
     </logger>
 
     <root>

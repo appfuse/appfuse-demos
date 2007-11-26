@@ -10,6 +10,10 @@
         </layout>
     </appender>
 
+    <logger name="com.opensymphony.xwork2.util.OgnlValueStack">
+        <level value="ERROR"/>
+    </logger>
+    
     <logger name="net.sf.ehcache">
         <level value="ERROR"/>
     </logger>

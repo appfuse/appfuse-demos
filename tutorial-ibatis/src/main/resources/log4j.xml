@@ -34,9 +34,14 @@
     <logger name="org.springframework">
         <level value="WARN"/>
     </logger>
-   
+
+    <!-- Suppress warnings from Commons Validator -->
+    <logger name="org.apache.commons.validator.ValidatorResources">
+        <level value="ERROR"/>
+    </logger>
+
     <logger name="org.appfuse">
-        <level value="DEBUG"/>
+        <level value="INFO"/>
     </logger>
     
     <logger name="org.appfuse.tutorial">

@@ -6,12 +6,12 @@
     <groupId>com.mycompany.app</groupId>
     <artifactId>struts2-crud</artifactId>
     <packaging>war</packaging>
-    <version>1.0</version>
+    <version>2.0.1</version>
     <name>AppFuse Struts 2 CRUD Example</name>
     <url>http://www.mycompany.com</url>
 
     <prerequisites>
-        <maven>2.0.4</maven>
+        <maven>2.0.6</maven>
     </prerequisites>
 
     <licenses>
@@ -45,6 +45,48 @@
         <defaultGoal>install</defaultGoal>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appfuse-maven-plugin</artifactId>
+                <version>${appfuse.version}</version>
+                <configuration>
+                    <genericCore>${amp.genericCore}</genericCore>
+                    <fullSource>${amp.fullSource}</fullSource>
+                </configuration>
+                <!-- Dependency needed by appfuse:gen-model to connect to database. -->
+                <!-- See http://issues.appfuse.org/browse/APF-868 to learn more.    -->
+                <dependencies>
+                    <dependency>
+                        <groupId>${jdbc.groupId}</groupId>
+                        <artifactId>${jdbc.artifactId}</artifactId>
+                        <version>${jdbc.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>1.0-beta-2</version>
+                <configuration>
+                    <source>1.5</source>
+                    <verbose>true</verbose>
+                    <complianceLevel>1.5</complianceLevel>
+                    <showWeaveInfo>true</showWeaveInfo>
+                    <aspectLibraries>
+                        <aspectLibrary>
+                            <groupId>org.springframework</groupId>
+                            <artifactId>spring-aspects</artifactId>
+                        </aspectLibrary>
+                    </aspectLibraries>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.0.2</version>
                 <configuration>
@@ -54,7 +96,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.3</version>
+                <version>2.4</version>
                 <configuration>
                     <additionalProjectnatures>
                         <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
@@ -69,7 +111,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-idea-plugin</artifactId>
-                <version>2.0</version>
+                <version>2.1</version>
                 <configuration>
                     <downloadSources>true</downloadSources>
                     <downloadJavadocs>true</downloadJavadocs>
@@ -80,13 +122,13 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>hibernate3-maven-plugin</artifactId>
-                <version>2.0-alpha-1</version>
+                <version>2.0-alpha-2</version>
                 <configuration>
                     <components>
                         <component>
                             <name>hbm2ddl</name>
                             <implementation>annotationconfiguration</implementation>
-                            <!-- Use 'jpaconfiguration' if your going the -Ddao.framework=jpa-hibernate route. -->
+                            <!-- Use 'jpaconfiguration' if you're using JPA. -->
                             <!--<implementation>jpaconfiguration</implementation>-->
                         </component>
                     </components>
@@ -156,17 +198,22 @@
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.0.0</version>
+                <version>6.1.6</version>
                 <configuration>
                     <contextPath>/</contextPath>
                     <scanIntervalSeconds>3</scanIntervalSeconds>
-                    <scanTargets>
-                        <scanTarget>src/main/resources/struts.xml</scanTarget>
-                        <scanTarget>src/main/webapp/WEB-INF/applicationContext.xml</scanTarget>
-                        <scanTarget>src/main/webapp/WEB-INF/menu-config.xml</scanTarget>
-                        <scanTarget>src/main/webapp/WEB-INF/urlrewrite.xml</scanTarget>
-                        <scanTarget>src/main/webapp/WEB-INF/web.xml</scanTarget>
-                    </scanTargets>
+                    <scanTargetPatterns>
+                        <scanTargetPattern>
+                            <directory>src/main/webapp/WEB-INF</directory>
+                            <excludes>
+                                <exclude>**/*.jsp</exclude>
+                            </excludes>
+                            <includes>
+                                <include>**/*.properties</include>
+                                <include>**/*.xml</include>
+                            </includes>
+                        </scanTargetPattern>
+                    </scanTargetPatterns>
                 </configuration>
             </plugin>
             <plugin>
@@ -174,17 +221,8 @@
                 <version>2.0.2</version>
                 <configuration>
                     <dependentWarExcludes>
-                        **/hibernate.cfg.xml,**/sql-map-config.xml,**/web.xml,WEB-INF/classes/META-INF/**
+                        **/jdbc.properties,**/hibernate.cfg.xml,**/sql-map-config.xml,**/web.xml,WEB-INF/classes/META-INF/**
                     </dependentWarExcludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>appfuse-maven-plugin</artifactId>
-                <version>${appfuse.version}</version>
-                <configuration>
-                    <genericCore>${amp.genericCore}</genericCore>
-                    <fullSource>${amp.fullSource}</fullSource>
                 </configuration>
             </plugin>
             <plugin>
@@ -204,6 +242,7 @@
                         <configuration>
                             <encoding>UTF8</encoding>
                             <includes>
+                                ApplicationResources_ko.properties,
                                 ApplicationResources_no.properties,
                                 ApplicationResources_tr.properties,
                                 ApplicationResources_zh*.properties
@@ -232,15 +271,26 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
-                    <exclude>ApplicationResources_zh*.properties</exclude>
                     <exclude>ApplicationResources_de.properties</exclude>
                     <exclude>ApplicationResources_fr.properties</exclude>
+                    <exclude>ApplicationResources_ko.properties</exclude>
                     <exclude>ApplicationResources_nl.properties</exclude>
                     <exclude>ApplicationResources_no.properties</exclude>
                     <exclude>ApplicationResources_pt*.properties</exclude>
                     <exclude>ApplicationResources_tr.properties</exclude>
+                    <exclude>ApplicationResources_zh*.properties</exclude>
+                    <exclude>applicationContext-resources.xml</exclude>
+                    <exclude>struts.xml</exclude>
                 </excludes>
                 <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>applicationContext-resources.xml</include>
+                    <include>struts.xml</include>
+                </includes>
+                <filtering>false</filtering>
             </resource>
         </resources>
         <testResources>
@@ -275,6 +325,7 @@
             <url>http://static.appfuse.org/repository</url>
         </pluginRepository>
     </pluginRepositories>
+
     <!-- Dependencies calculated by AppFuse when running full-source plugin -->
     <dependencies>
         <dependency>
@@ -285,6 +336,11 @@
         <dependency>
             <groupId>aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
             <version>${aspectj.version}</version>
         </dependency>
         <dependency>
@@ -306,11 +362,17 @@
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
             <version>${commons.fileupload.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${commons.io.version}</version>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons.lang.version}</version>
         </dependency>
         <dependency>
             <groupId>displaytag</groupId>
@@ -321,6 +383,11 @@
             <groupId>javax.mail</groupId>
             <artifactId>mail</artifactId>
             <version>${javamail.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>${jpa.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -382,10 +449,6 @@
             <version>${acegi.version}</version>
             <exclusions>
                 <exclusion>
-                    <artifactId>spring-aop</artifactId>
-                    <groupId>org.springframework</groupId>
-                </exclusion>
-                <exclusion>
                     <artifactId>spring-dao</artifactId>
                     <groupId>org.springframework</groupId>
                 </exclusion>
@@ -404,6 +467,11 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons.io.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-core</artifactId>
             <version>${struts.version}</version>
@@ -417,29 +485,48 @@
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-spring-plugin</artifactId>
             <version>${struts.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.xfire</groupId>
+            <artifactId>xfire-java5</artifactId>
+            <version>${xfire.version}</version>
             <exclusions>
                 <exclusion>
-                    <artifactId>spring-beans</artifactId>
-                    <groupId>org.springframework</groupId>
+                    <artifactId>commons-attributes-api</artifactId>
+                    <groupId>commons-attributes</groupId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>spring-context</artifactId>
-                    <groupId>org.springframework</groupId>
+                    <artifactId>jaxen</artifactId>
+                    <groupId>jaxen</groupId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>spring-core</artifactId>
-                    <groupId>org.springframework</groupId>
+                    <artifactId>xmlParserAPIs</artifactId>
+                    <groupId>xerces</groupId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>spring-web</artifactId>
-                    <groupId>org.springframework</groupId>
+                    <artifactId>xercesImpl</artifactId>
+                    <groupId>xerces</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>XmlSchema</artifactId>
+                    <groupId>org.apache.ws.commons</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
         <dependency>
             <groupId>org.codehaus.xfire</groupId>
-            <artifactId>xfire-all</artifactId>
+            <artifactId>xfire-spring</artifactId>
             <version>${xfire.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>spring</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>spring-remoting</artifactId>
+                    <groupId>org.springframework</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.directwebremoting</groupId>
@@ -448,41 +535,64 @@
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-annotations</artifactId>
+            <artifactId>hibernate</artifactId>
             <version>${hibernate.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>ehcache</artifactId>
+                    <groupId>net.sf.ehcache</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-collections</artifactId>
+                    <groupId>commons-collections</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-annotations</artifactId>
+            <version>${hibernate.annotations.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-commons-annotations</artifactId>
+            <version>${hibernate.annotations.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-mock</artifactId>
+            <artifactId>spring-test</artifactId>
             <version>${spring.version}</version>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring</artifactId>
+            <artifactId>spring-jdbc</artifactId>
             <version>${spring.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>avalon-framework</artifactId>
-                    <groupId>avalon-framework</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>log4j</artifactId>
-                    <groupId>log4j</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>logkit</artifactId>
-                    <groupId>logkit</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>servlet-api</artifactId>
-                    <groupId>javax.servlet</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>junit</artifactId>
-                    <groupId>junit</groupId>
-                </exclusion>
-            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aop</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.subethamail</groupId>
@@ -492,8 +602,14 @@
         </dependency>
         <dependency>
             <groupId>org.tuckey</groupId>
-            <artifactId>urlrewrite</artifactId>
+            <artifactId>urlrewritefilter</artifactId>
             <version>${urlrewrite.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>ant</artifactId>
+                    <groupId>ant</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>struts-menu</groupId>
@@ -631,32 +747,38 @@
                         </executions>
                         <dependencies>
                             <dependency>
-                                <groupId>com.canoo</groupId>
+                                <groupId>com.canoo.webtest</groupId>
                                 <artifactId>webtest</artifactId>
                                 <version>${webtest.version}</version>
+                                <!-- groovy-all doesn't have a pom in central repo -->
+                                <!-- exclude groovy to prevent trying to fetch pom -->
                                 <exclusions>
                                     <exclusion>
-                                        <groupId>javax.xml</groupId>
-                                        <artifactId>jsr173</artifactId>
+                                        <groupId>groovy</groupId>
+                                        <artifactId>groovy-all</artifactId>
                                     </exclusion>
                                 </exclusions>
                             </dependency>
-                            <dependency>
-                                <groupId>javax.mail</groupId>
-                                <artifactId>mail</artifactId>
-                                <version>${javamail.version}</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>log4j</groupId>
-                                <artifactId>log4j</artifactId>
-                                <version>${log4j.version}</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>oro</groupId>
-                                <artifactId>oro</artifactId>
-                                <version>${oro.version}</version>
-                            </dependency>
                         </dependencies>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- ================= Production Settings Profile ================= -->
+        <!-- Use "-P prod" when you want to use the settings in this profile -->
+        <!-- =============================================================== -->
+        <profile>
+            <id>prod</id>
+            <build>
+                <plugins>
+                    <!-- Override location of data file for DbUnit to load (doesn't have negative keys) -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>dbunit-maven-plugin</artifactId>
+                        <configuration>
+                            <src>src/main/resources/default-data.xml</src>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
@@ -671,7 +793,7 @@
                 <jdbc.artifactId>derbyclient</jdbc.artifactId>
                 <jdbc.version>10.2.2.0</jdbc.version>
                 <jdbc.driverClassName>org.apache.derby.jdbc.ClientDriver</jdbc.driverClassName>
-                <jdbc.url><![CDATA[jdbc:derby://localhost/appfuse;create=true]]></jdbc.url>
+                <jdbc.url><![CDATA[jdbc:derby://localhost/struts2_crud;create=true]]></jdbc.url>
                 <jdbc.username>any</jdbc.username>
                 <jdbc.password>value</jdbc.password>
             </properties>
@@ -685,7 +807,7 @@
                 <jdbc.artifactId>h2</jdbc.artifactId>
                 <jdbc.version>1.0.20061217</jdbc.version>
                 <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
-                <jdbc.url><![CDATA[jdbc:h2:struts2-crud]]></jdbc.url>
+                <jdbc.url><![CDATA[jdbc:h2:struts2_crud]]></jdbc.url>
                 <jdbc.username>sa</jdbc.username>
                 <jdbc.password></jdbc.password>
             </properties>
@@ -699,7 +821,7 @@
                 <jdbc.artifactId>hsqldb</jdbc.artifactId>
                 <jdbc.version>1.8.0.7</jdbc.version>
                 <jdbc.driverClassName>org.hsqldb.jdbcDriver</jdbc.driverClassName>
-                <jdbc.url><![CDATA[jdbc:hsqldb:struts2-crud;shutdown=true]]></jdbc.url>
+                <jdbc.url><![CDATA[jdbc:hsqldb:struts2_crud;shutdown=true]]></jdbc.url>
                 <jdbc.username>sa</jdbc.username>
                 <jdbc.password></jdbc.password>
             </properties>
@@ -727,7 +849,7 @@
                 <jdbc.artifactId>postgresql</jdbc.artifactId>
                 <jdbc.version>8.1-407.jdbc3</jdbc.version>
                 <jdbc.driverClassName>org.postgresql.Driver</jdbc.driverClassName>
-                <jdbc.url><![CDATA[jdbc:postgresql://localhost/struts2-crud]]></jdbc.url>
+                <jdbc.url><![CDATA[jdbc:postgresql://localhost/struts2_crud]]></jdbc.url>
                 <jdbc.username>postgres</jdbc.username>
                 <jdbc.password>postgres</jdbc.password>
             </properties>
@@ -744,7 +866,7 @@
                 <jdbc.artifactId>jtds</jdbc.artifactId>
                 <jdbc.version>1.2</jdbc.version>
                 <jdbc.driverClassName>net.sourceforge.jtds.jdbc.Driver</jdbc.driverClassName>
-                <jdbc.url><![CDATA[jdbc:jtds:sqlserver://localhost:3683/struts2-crud]]></jdbc.url>
+                <jdbc.url><![CDATA[jdbc:jtds:sqlserver://localhost:3683/struts2_crud]]></jdbc.url>
                 <jdbc.username>sa</jdbc.username>
                 <jdbc.password>appfuse</jdbc.password>
             </properties>
@@ -767,51 +889,26 @@
         <dao.framework>hibernate</dao.framework>
         <web.framework>struts</web.framework>
         <amp.genericCore>true</amp.genericCore>
-        <amp.fullSource>false</amp.fullSource>
+        <amp.fullSource>true</amp.fullSource>
         
         <!-- Framework dependency versions -->
-        <appfuse.version>2.0</appfuse.version>
-        <!-- Sorry about the ordering of the properties below, we hope to fix this in a future release -->
-        <spring.version>2.0.6</spring.version>
-        <velocity.version>1.4</velocity.version>
-        <dwr.version>2.0.1</dwr.version>
-        <commons.lang.version>2.3</commons.lang.version>
-        <commons.beanutils.version>1.7.0</commons.beanutils.version>
-        <struts.menu.version>2.4.2</struts.menu.version>
-        <hibernate.version>3.2.1.ga</hibernate.version>
-        <commons.collections.version>3.2</commons.collections.version>
-        <commons.fileupload.version>1.1.1</commons.fileupload.version>
-        <oscache.version>2.3</oscache.version>
-        <commons.io.version>1.1</commons.io.version>
-        <xfire.version>1.2.6</xfire.version>
-        <displaytag.version>1.1</displaytag.version>
-        <urlrewrite.version>2.5.2</urlrewrite.version>
-        <clickstream.version>1.0.2</clickstream.version>
-        <acegi.version>1.0.3</acegi.version>
-        <struts.version>2.0.6</struts.version>
-        <commons.dbcp.version>1.2.2</commons.dbcp.version>
-        <jstl.version>1.1.2</jstl.version>
-        <ehcache.version>1.3.0-beta2</ehcache.version>
-        <aspectj.version>1.5.3</aspectj.version>
-        <sitemesh.version>2.2.1</sitemesh.version>
+        <appfuse.version>2.0.1</appfuse.version>
+        <spring.version>2.5</spring.version>
 
         <!-- Testing dependency versions -->
         <jmock.version>1.1.0</jmock.version>
         <jsp.version>2.0</jsp.version>
         <junit.version>4.4</junit.version>
         <servlet.version>2.4</servlet.version>
-        <wiser.version>1.0.3</wiser.version>
+        <wiser.version>1.2</wiser.version>
 
         <!-- WebTest dependency versions  -->
-        <javamail.version>1.4</javamail.version>
-        <log4j.version>1.2.13</log4j.version>
-        <oro.version>2.0.8</oro.version>
-        <webtest.version>1454</webtest.version>
+        <webtest.version>R_1600</webtest.version>
 
         <!-- Cargo settings -->
         <cargo.container>tomcat5x</cargo.container>
         <cargo.container.home>${env.CATALINA_HOME}</cargo.container.home>
-        <cargo.container.url>http://archive.apache.org/dist/tomcat/tomcat-5/v5.5.23/bin/apache-tomcat-5.5.23.zip</cargo.container.url>
+        <cargo.container.url>http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.14/bin/apache-tomcat-6.0.14.zip</cargo.container.url>
         <cargo.host>localhost</cargo.host>
         <cargo.port>8081</cargo.port>
         <cargo.wait>false</cargo.wait>
@@ -819,7 +916,7 @@
         <!-- Database settings -->
         <dbunit.dataTypeFactoryName>org.dbunit.dataset.datatype.DefaultDataTypeFactory</dbunit.dataTypeFactoryName>
         <dbunit.operation.type>CLEAN_INSERT</dbunit.operation.type>
-        <hibernate.dialect>org.hibernate.dialect.MySQLInnoDBDialect</hibernate.dialect>
+        <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
         <jdbc.groupId>mysql</jdbc.groupId>
         <jdbc.artifactId>mysql-connector-java</jdbc.artifactId>
         <jdbc.version>5.0.5</jdbc.version>
@@ -827,5 +924,32 @@
         <jdbc.url><![CDATA[jdbc:mysql://localhost/struts2_crud?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
         <jdbc.username>root</jdbc.username>
         <jdbc.password></jdbc.password>
+    
+        <!-- Properties calculated by AppFuse when running full-source plugin -->
+        <acegi.version>1.0.5</acegi.version>
+        <aspectj.version>1.5.2a</aspectj.version>
+        <clickstream.version>1.0.2</clickstream.version>
+        <commons.beanutils.version>1.7.0</commons.beanutils.version>
+        <commons.collections.version>3.2</commons.collections.version>
+        <commons.dbcp.version>1.2.2</commons.dbcp.version>
+        <commons.fileupload.version>1.1.1</commons.fileupload.version>
+        <commons.io.version>1.3.2</commons.io.version>
+        <commons.lang.version>2.3</commons.lang.version>
+        <displaytag.version>1.1.1</displaytag.version>
+        <dwr.version>2.0.1</dwr.version>
+        <ehcache.version>1.3.0</ehcache.version>
+        <hibernate.annotations.version>3.3.0.ga</hibernate.annotations.version>
+        <hibernate.version>3.2.5.ga</hibernate.version>
+        <javamail.version>1.4</javamail.version>
+        <jpa.version>1.0</jpa.version>
+        <jstl.version>1.1.2</jstl.version>
+        <log4j.version>1.2.13</log4j.version>
+        <oscache.version>2.3</oscache.version>
+        <sitemesh.version>2.2.1</sitemesh.version>
+        <struts.menu.version>2.4.3</struts.menu.version>
+        <struts.version>2.0.11</struts.version>
+        <urlrewrite.version>3.0.4</urlrewrite.version>
+        <velocity.version>1.4</velocity.version>
+        <xfire.version>1.2.6</xfire.version>
     </properties>
 </project>
