@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+    <!-- AOP Advisor -->
+    <bean id="userSecurityInterceptor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="userSecurityAdvice"/>
+        <property name="patterns">
+            <list>
+                <value>.*saveUser</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Advice Class -->
+    <bean id="userSecurityAdvice" class="com.mycompany.app.service.UserSecurityAdvice"/>
+
+    <bean id="userManager" class="com.mycompany.app.service.impl.UserManagerImpl">
+        <property name="authenticationProvider" ref="daoAuthenticationProvider"/>
+    </bean>
+
+    <bean id="target" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces" value="com.mycompany.app.service.UserManager"/>
+        <property name="interceptorNames">
+            <list>
+                <idref local="userSecurityInterceptor"/>
+                <idref local="userManager"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="daoAuthenticationProvider" class="org.acegisecurity.providers.dao.DaoAuthenticationProvider">
+        <property name="userDetailsService">
+            <bean class="com.mycompany.app.service.MockUserDetailsService"/>
+        </property>
+        <property name="passwordEncoder">
+            <bean class="org.acegisecurity.providers.encoding.ShaPasswordEncoder"/>
+        </property>
+    </bean>
+</beans>    
