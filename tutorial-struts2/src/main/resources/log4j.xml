@@ -9,22 +9,22 @@
                 value="[tutorial-struts2] %p [%t] %c{1}.%M(%L) | %m%n"/>
         </layout>
     </appender>
-
-    <logger name="com.opensymphony.xwork2.util.OgnlValueStack">
-        <level value="ERROR"/>
-    </logger>
     
     <logger name="net.sf.ehcache">
         <level value="ERROR"/>
     </logger>
 
     <!-- Suppress success logging from InteractiveAuthenticationSuccessEvent -->
-    <logger name="org.acegisecurity">
+    <logger name="org.springframework.security">
         <level value="ERROR"/>
     </logger>
 
     <logger name="org.apache">
         <level value="WARN"/>
+    </logger>
+
+    <logger name="org.apache.velocity">
+        <level value="FATAL"/>
     </logger>
 
     <logger name="org.hibernate">
@@ -46,6 +46,11 @@
 
     <!-- http://issues.appfuse.org/browse/APF-852 -->
     <logger name="com.opensymphony.xwork2.util.OgnlUtil">
+        <level value="ERROR"/>
+    </logger>
+
+    <!-- Turn off warnings from messages.jsp -->
+    <logger name="com.opensymphony.xwork2.util.OgnlValueStack">
         <level value="ERROR"/>
     </logger>
    
