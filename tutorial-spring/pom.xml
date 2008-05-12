@@ -6,7 +6,7 @@
     <groupId>org.appfuse.tutorial</groupId>
     <artifactId>tutorial-spring</artifactId>
     <packaging>war</packaging>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <name>AppFuse Spring MVC Application</name>
     <url>http://www.mycompany.com</url>
 
@@ -65,7 +65,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>aspectj-maven-plugin</artifactId>
-                <version>1.0-beta-2</version>
+                <version>1.0</version>
                 <configuration>
                     <source>1.5</source>
                     <verbose>true</verbose>
@@ -85,6 +85,18 @@
                         </goals>
                     </execution>
                 </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjrt</artifactId>
+                        <version>1.6.0</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjtools</artifactId>
+                        <version>1.6.0</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -96,7 +108,7 @@
             </plugin>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.4</version>
+                <version>2.5.1</version>
                 <configuration>
                     <additionalProjectnatures>
                         <projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
@@ -122,7 +134,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>hibernate3-maven-plugin</artifactId>
-                <version>2.0-alpha-2</version>
+                <version>2.1</version>
                 <configuration>
                     <components>
                         <component>
@@ -196,7 +208,7 @@
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.6</version>
+                <version>6.1.9</version>
                 <configuration>
                     <contextPath>/</contextPath>
                     <scanIntervalSeconds>3</scanIntervalSeconds>
@@ -388,8 +400,14 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>jmock</groupId>
+            <groupId>org.jmock</groupId>
             <artifactId>jmock</artifactId>
+            <version>${jmock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jmock</groupId>
+            <artifactId>jmock-junit4</artifactId>
             <version>${jmock.version}</version>
             <scope>test</scope>
         </dependency>
@@ -586,7 +604,7 @@
                 <jdbc.artifactId>h2</jdbc.artifactId>
                 <jdbc.version>1.0.20061217</jdbc.version>
                 <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
-                <jdbc.url><![CDATA[jdbc:h2:tutorial_spring]]></jdbc.url>
+                <jdbc.url><![CDATA[jdbc:h2:${java.io.tmpdir}/tutorial_spring]]></jdbc.url>
                 <jdbc.username>sa</jdbc.username>
                 <jdbc.password></jdbc.password>
             </properties>
@@ -600,7 +618,7 @@
                 <jdbc.artifactId>hsqldb</jdbc.artifactId>
                 <jdbc.version>1.8.0.7</jdbc.version>
                 <jdbc.driverClassName>org.hsqldb.jdbcDriver</jdbc.driverClassName>
-                <jdbc.url><![CDATA[jdbc:hsqldb:tutorial_spring;shutdown=true]]></jdbc.url>
+                <jdbc.url><![CDATA[jdbc:hsqldb:${java.io.tmpdir}/tutorial_spring;shutdown=true]]></jdbc.url>
                 <jdbc.username>sa</jdbc.username>
                 <jdbc.password></jdbc.password>
             </properties>
@@ -664,25 +682,25 @@
 
     <properties>
         <!-- Application settings -->
-        <copyright.year>2007</copyright.year>
+        <copyright.year>2008</copyright.year>
         <dao.framework>hibernate</dao.framework>
         <web.framework>spring</web.framework>
         <amp.genericCore>true</amp.genericCore>
         <amp.fullSource>false</amp.fullSource>
         
         <!-- Framework dependency versions -->
-        <appfuse.version>2.0.1</appfuse.version>
-        <spring.version>2.5</spring.version>
+        <appfuse.version>2.0.2</appfuse.version>
+        <spring.version>2.5.4</spring.version>
 
         <!-- Testing dependency versions -->
-        <jmock.version>1.1.0</jmock.version>
+        <jmock.version>2.4.0</jmock.version>
         <jsp.version>2.0</jsp.version>
         <junit.version>4.4</junit.version>
         <servlet.version>2.4</servlet.version>
         <wiser.version>1.2</wiser.version>
 
         <!-- WebTest dependency versions  -->
-        <webtest.version>R_1600</webtest.version>
+        <webtest.version>R_1702</webtest.version>
 
         <!-- Cargo settings -->
         <cargo.container>tomcat5x</cargo.container>
