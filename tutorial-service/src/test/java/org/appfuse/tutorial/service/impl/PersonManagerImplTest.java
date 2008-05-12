@@ -1,94 +1,92 @@
 package org.appfuse.tutorial.service.impl;
 
-import org.appfuse.service.impl.BaseManagerMockTestCase;
-import org.appfuse.tutorial.dao.PersonDao;
-import org.appfuse.tutorial.model.Person;
-import org.jmock.Mock;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import org.appfuse.tutorial.dao.PersonDao;
+import org.appfuse.tutorial.model.Person;
+import org.appfuse.service.impl.BaseManagerMockTestCase;
+
+import org.jmock.Expectations;
+import org.junit.Before;
+import org.junit.After;
+import org.junit.Test;
+import static org.junit.Assert.*;
+
 public class PersonManagerImplTest extends BaseManagerMockTestCase {
     private PersonManagerImpl manager = null;
-    private Mock dao = null;
-    private Person person = null;
+    private PersonDao dao = null;
 
-    protected void setUp() throws Exception {
-        dao = new Mock(PersonDao.class);
-        manager = new PersonManagerImpl((PersonDao) dao.proxy());
+    @Before
+    public void setUp() {
+        dao = context.mock(PersonDao.class);
+        manager = new PersonManagerImpl(dao);
     }
 
-    protected void tearDown() throws Exception {
+    @After
+    public void tearDown() {
         manager = null;
     }
 
+    @Test
     public void testGetPerson() {
-        log.debug("testing getPerson");
+        log.debug("testing get...");
 
-        Long id = 7L;
-        person = new Person();
+        final Long id = 7L;
+        final Person person = new Person();
 
         // set expected behavior on dao
-        dao.expects(once()).method("get")
-                .with(eq(id))
-                .will(returnValue(person));
+        context.checking(new Expectations() {{
+            one(dao).get(with(equal(id)));
+            will(returnValue(person));
+        }});
 
         Person result = manager.get(id);
         assertSame(person, result);
     }
 
+    @Test
     public void testGetPersons() {
-        log.debug("testing getPersons");
+        log.debug("testing getAll...");
 
-        List people = new ArrayList();
+        final List persons = new ArrayList();
 
         // set expected behavior on dao
-        dao.expects(once()).method("getAll")
-                .will(returnValue(people));
+        context.checking(new Expectations() {{
+            one(dao).getAll();
+            will(returnValue(persons));
+        }});
 
         List result = manager.getAll();
-        assertSame(people, result);
+        assertSame(persons, result);
     }
 
-    public void testFindByLastName() {
-        log.debug("testing findByLastName");
-
-        List people = new ArrayList();
-        String lastName = "Smith";
-
-        // set expected behavior on dao
-        dao.expects(once()).method("findByLastName")
-                .with(eq(lastName))
-                .will(returnValue(people));
-
-        List result = manager.findByLastName(lastName);
-        assertSame(people, result);
-    }
-
+    @Test
     public void testSavePerson() {
-        log.debug("testing savePerson");
+        log.debug("testing save...");
 
-        person = new Person();
-
+        final Person person = new Person();
+        // enter all required fields
+        
         // set expected behavior on dao
-        dao.expects(once()).method("save")
-                .with(same(person))
-                .will(returnValue(person));
+        context.checking(new Expectations() {{
+            one(dao).save(with(same(person)));
+        }});
 
         manager.save(person);
     }
 
+    @Test
     public void testRemovePerson() {
-        log.debug("testing removePerson");
+        log.debug("testing remove...");
 
-        Long id = 11L;
-        person = new Person();
+        final Long id = -11L;
 
         // set expected behavior on dao
-        dao.expects(once()).method("remove")
-                .with(eq(id))
-                .isVoid();
+        context.checking(new Expectations() {{
+            one(dao).remove(with(equal(id)));
+        }});
 
         manager.remove(id);
     }
-} 
+}
