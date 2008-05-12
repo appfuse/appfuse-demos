@@ -6,7 +6,7 @@
     <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern"
-                value="[tutorial-struts2] %p [%t] %c{1}.%M(%L) | %m%n"/>
+                value="[tutorial-hibernate] %p [%t] %c{1}.%M(%L) | %m%n"/>
         </layout>
     </appender>
     
@@ -15,12 +15,16 @@
     </logger>
 
     <!-- Suppress success logging from InteractiveAuthenticationSuccessEvent -->
-    <logger name="org.acegisecurity">
+    <logger name="org.springframework.security">
         <level value="ERROR"/>
     </logger>
 
     <logger name="org.apache">
         <level value="WARN"/>
+    </logger>
+
+    <logger name="org.apache.velocity">
+        <level value="FATAL"/>
     </logger>
 
     <logger name="org.hibernate">
