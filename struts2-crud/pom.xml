@@ -6,7 +6,7 @@
     <groupId>com.mycompany.app</groupId>
     <artifactId>struts2-crud</artifactId>
     <packaging>war</packaging>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <name>AppFuse Struts 2 CRUD Example</name>
     <url>http://www.mycompany.com</url>
 
@@ -925,8 +925,8 @@
         <amp.fullSource>true</amp.fullSource>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>2.0.1</appfuse.version>
-        <spring.version>2.5</spring.version>
+        <appfuse.version>2.0.2</appfuse.version>
+        <spring.version>2.5.4</spring.version>
 
         <!-- Testing dependency versions -->
         <jmock.version>1.1.0</jmock.version>
