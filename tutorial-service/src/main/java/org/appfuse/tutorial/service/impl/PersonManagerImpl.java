@@ -6,11 +6,15 @@ import org.appfuse.tutorial.model.Person;
 import org.appfuse.tutorial.service.PersonManager;
 import org.springframework.stereotype.Service;
 
+import javax.jws.WebService;
 import java.util.List;
 
 @Service("personManager")
+@WebService(serviceName = "PersonService", endpointInterface = "org.appfuse.tutorial.service.PersonManager")
 public class PersonManagerImpl extends GenericManagerImpl<Person, Long> implements PersonManager {
     PersonDao personDao;
+
+    public PersonManagerImpl() {};
 
     public PersonManagerImpl(PersonDao personDao) {
         super(personDao);
@@ -19,5 +23,9 @@ public class PersonManagerImpl extends GenericManagerImpl<Person, Long> implemen
 
     public List<Person> findByLastName(String lastName) {
         return personDao.findByLastName(lastName);
+    }
+
+    public List<Person> getPeople() {
+        return personDao.getAll();
     }
 }
