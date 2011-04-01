@@ -1,0 +1,51 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html">
+
+<f:view>
+<f:loadBundle var="text" basename="#{basePage.bundleName}"/>
+<head>
+    <title>#{text['display.title']}</title>
+    <meta name="heading" content="#{text['display.heading']}"/>
+    <meta name="menu" content="AdminMenu"/>
+</head>
+
+<p>Below is a list of attributes that were gathered in FileUpload.java.</p>
+
+<div class="separator"></div>
+
+<table class="detail" cellpadding="5">
+    <tr>
+        <th>Friendly Name:</th>
+        <td>${friendlyName}</td>
+    </tr>
+    <tr>
+        <th>Filename:</th>
+        <td>${fileName}</td>
+    </tr>
+    <tr>
+        <th>File content type:</th>
+        <td>${contentType}</td>
+    </tr>
+    <tr>
+        <th>File size:</th>
+        <td>${size}</td>
+    </tr>
+    <tr>
+        <th class="tallCell">File Location:</th>
+        <td>The file has been written to: <br />
+            <a href="${link}">${location}</a>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="buttonBar">
+            <input type="button" name="done" id="done" value="Done"
+                onclick="location.href='mainMenu'" />
+            <input type="button" name="done" style="width: 120px" value="Upload Another"
+                onclick="location.href='selectFile'" />
+        </td>
+    </tr>
+</table>
+
+</f:view>
+</html>

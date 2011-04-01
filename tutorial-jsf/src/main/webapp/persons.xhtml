@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:t="http://myfaces.apache.org/tomahawk">
+
+<f:view>
+<f:loadBundle var="text" basename="#{personList.bundleName}"/>
+    <head>
+        <title>#{text['personList.title']}</title>
+        <meta name="heading" content="#{text['personList.heading']}"/>
+        <meta name="menu" content="PersonMenu"/>
+    </head>
+<body id="personList">
+<h:form id="editPerson">
+
+<h:commandButton value="#{text['button.add']}" action="add" id="add" immediate="true" styleClass="button"/>
+<h:commandButton value="#{text['button.done']}" action="mainMenu" id="cancel" immediate="true" styleClass="button" style="margin-left: 5px"/>
+
+<!-- Error from this table is caused by http://issues.apache.org/jira/browse/TOMAHAWK-466 -->
+<t:dataTable id="persons" var="person" style="margin-top: 10px"
+    value="#{personList.persons}" rows="25" sortColumn="#{personList.sortColumn}"
+    sortAscending="#{personList.ascending}" styleClass="scrollerTable table"
+    headerClass="standardTable_Header" rowClasses="standardTable_Row1,standardTable_Row2"
+    columnClasses="standardTable_Column,standardTable_Column,standardTable_Column,standardTable_Column,standardTable_ColumnCentered">
+
+    <t:column>
+        <f:facet name="header">
+            <t:commandSortHeader columnName="id" arrow="true">
+                <h:outputText value="#{text['person.id']}" />
+            </t:commandSortHeader>
+        </f:facet>
+        <h:commandLink action="#{personForm.edit}" value="#{person.id}">
+            <f:param name="id" value="#{person.id}"/>
+            <f:param name="from" value="list"/>
+        </h:commandLink>
+    </t:column>
+
+    <t:column>
+        <f:facet name="header">
+            <t:commandSortHeader columnName="firstName" arrow="true">
+                <h:outputText value="#{text['person.firstName']}" />
+            </t:commandSortHeader>
+        </f:facet>
+        <h:outputText value="#{person.firstName}" escape="true"/>
+    </t:column>
+
+    <t:column>
+        <f:facet name="header">
+            <t:commandSortHeader columnName="lastName" arrow="true">
+                <h:outputText value="#{text['person.lastName']}" />
+            </t:commandSortHeader>
+        </f:facet>
+        <h:outputText value="#{person.lastName}" escape="true"/>
+    </t:column>
+
+</t:dataTable>
+
+<ui:include src="/common/tableFooter.xhtml">
+    <ui:param name="tableName" value="persons"/>
+</ui:include>
+
+<script type="text/javascript">
+    highlightTableRows("editPerson:persons");
+</script>
+
+</h:form>
+</body>
+</f:view>
+</html>
