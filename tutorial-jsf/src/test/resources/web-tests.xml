@@ -275,19 +275,17 @@
     </target>
 
     <!-- Edit a person and then save -->
-    <target name="SavePerson"
-            description="Tests editing and saving a user">
+    <target name="SavePerson" description="Tests editing and saving a person">
         <webtest name="savePerson">
             &config;
             <steps>
                 &login;
-                <invoke description="View Persons List" url="/persons"/>
+                <invoke description="View Person List" url="/persons"/>
                 <clicklink label="1"/>
                 <verifytitle description="we should see the personDetail title"
                              text=".*${personDetail.title}.*" regex="true"/>
                 <!-- update some of the required fields -->
-                <setinputfield description="set firstName" name="personForm:firstName" value="Canoo"/>
-                <setinputfield description="set lastName" name="personForm:lastName" value="WebTest"/>
+
                 <clickbutton label="${button.save}" description="Click Save"/>
                 <verifytitle description="Page re-appears if save successful"
                              text=".*${personDetail.title}.*" regex="true"/>
@@ -297,15 +295,16 @@
     </target>
 
     <!-- Add a new Person -->
-    <target name="AddPerson"
-            description="Adds a new Person">
+    <target name="AddPerson" description="Adds a new Person">
         <webtest name="addPerson">
             &config;
             <steps>
                 &login;
-                <invoke description="View Person Form" url="/personForm"/>
+                <invoke description="View Person List" url="/persons"/>
+                <clickbutton description="Click the 'Add' button" label="${button.add}"/>
                 <verifytitle description="we should see the personDetail title"
                              text=".*${personDetail.title}.*" regex="true"/>
+
                 <!-- enter required fields -->
                 <setinputfield description="set firstName" name="personForm:firstName" value="Jack"/>
                 <setinputfield description="set lastName" name="personForm:lastName" value="Raible"/>
@@ -318,13 +317,12 @@
     </target>
 
     <!-- Delete existing person -->
-    <target name="DeletePerson"
-            description="Deletes existing Person">
+    <target name="DeletePerson" description="Deletes existing Person">
         <webtest name="deletePerson">
             &config;
             <steps>
                 &login;
-                <invoke description="View Persons List" url="/persons"/>
+                <invoke description="View Person List" url="/persons"/>
                 <clicklink label="2"/>
                 <prepareDialogResponse description="Confirm delete" dialogType="confirm" response="true"/>
                 <clickbutton label="${button.delete}" description="Click button 'Delete'"/>

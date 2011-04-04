@@ -6,7 +6,7 @@
     <artifactId>tutorial-jsf</artifactId>
     <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>AppFuse JSF Application</name>
+    <name>AppFuse JSF Tutorial</name>
     <url>http://www.mycompany.com</url>
 
     <prerequisites>

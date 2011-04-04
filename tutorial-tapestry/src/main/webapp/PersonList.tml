@@ -1,0 +1,35 @@
+<t:layout title="message:personList.title"
+          heading="message:personList.heading" menu="literal:PersonMenu"
+          xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+    <t:messagebanner t:id="message" type="type"/>
+    <p>
+        <t:eventlink t:id="addTop">
+            <input type="button" class="button" value="${message:button.add}"/>
+        </t:eventlink>
+        <t:eventlink t:id="doneTop">
+            <input type="button" class="button" value="${message:button.done}"/>
+        </t:eventlink>
+    </p>
+
+    <t:grid source="persons" row="person" id="personList" class="table">
+        <t:parameter name="idCell">
+            <t:pagelink page="personform" context="person.id" id="person-${person.id}">
+                ${person.id}
+            </t:pagelink>
+        </t:parameter>
+    </t:grid>
+
+    <p>
+        <t:eventlink t:id="addBottom">
+            <input type="button" class="button" value="${message:button.add}"/>
+        </t:eventlink>
+        <t:eventlink t:id="doneBottom">
+            <input type="button" class="button" value="${message:button.done}"/>
+        </t:eventlink>
+    </p>
+
+    <script type="text/javascript">
+        highlightTableRows("personList");
+    </script>
+</t:layout>

@@ -1,0 +1,33 @@
+<t:layout title="message:personDetail.title"
+          heading="message:personDetail.heading" menu="literal:PersonMenu"
+          xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+
+    <t:messagebanner t:id="message" type="type"/>
+
+    <form t:id="personForm">
+        <t:errors/>
+
+        <ul>
+            <li>
+                <t:label class="desc" for="firstName">${message:person.firstName}</t:label>
+                <input class="text medium" type="text" t:id="firstName"/>
+            </li>
+            <li>
+                <t:label class="desc" for="lastName">${message:person.lastName}</t:label>
+                <input class="text medium" type="text" t:id="lastName"/>
+            </li>
+            <li class="buttonBar bottom">
+                <input t:type="submit" t:id="save" id="save" value="message:button.save"/>
+                <input t:type="submit" t:id="delete" id="delete" value="message:button.delete"
+                       onclick="form.onsubmit = null; return confirmDelete('Person')"/>
+                <input t:type="submit" t:id="cancel" id="cancel" value="message:button.cancel"
+                       onclick="form.onsubmit = null"/>
+            </li>
+        </ul>
+    </form>
+
+    <script type="text/javascript">
+        Form.focusFirstElement($("personForm"));
+    </script>
+
+</t:layout>

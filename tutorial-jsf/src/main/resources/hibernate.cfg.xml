@@ -9,6 +9,5 @@
         <mapping class="org.appfuse.model.User"/>
         <mapping class="org.appfuse.model.Role"/>
         <mapping class="org.appfuse.tutorial.model.Person"/>
-        <mapping class="org.appfuse.tutorial.model.Person"/>
     </session-factory>
 </hibernate-configuration>

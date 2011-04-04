@@ -14,7 +14,6 @@
 
 <h:form id="personForm" onsubmit="return validatePersonForm(this)">
 <h:inputHidden value="#{personForm.person.id}" id="id"/>
-
 <h:panelGrid columns="3">
     <h:outputLabel styleClass="desc" for="firstName" value="#{text['person.firstName']}"/>
     <h:inputText styleClass="text medium" id="firstName" value="#{personForm.person.firstName}" required="true">
@@ -44,8 +43,9 @@
 </h:form>
 
 <v:validatorScript functionName="validatePersonForm"/>
+
 <script type="text/javascript">
-    Form.focusFirstElement($('personForm'));
+    $('personForm:firstName').focus();
     highlightFormElements();
 </script>
 
