@@ -5,9 +5,9 @@
     <groupId>org.appfuse.tutorial</groupId>
     <artifactId>tutorial-ibatis</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <name>AppFuse iBATIS Example</name>
-    <url>http://www.mycompany.com</url>
+    <version>2.1.0</version>
+    <name>AppFuse iBATIS Tutorial</name>
+    <url>http://appfuse-demos.googlecode.com/</url>
 
     <prerequisites>
         <maven>2.2.1</maven>
@@ -671,7 +671,7 @@
         <db.name>tutorial_ibatis</db.name>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>2.1.0-SNAPSHOT</appfuse.version>
+        <appfuse.version>2.1.0</appfuse.version>
         <commons.fileupload.version>1.2.1</commons.fileupload.version>
         <commons.io.version>2.0.1</commons.io.version>
         <displaytag.version>1.2</displaytag.version>

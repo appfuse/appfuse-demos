@@ -5,9 +5,9 @@
     <groupId>org.appfuse.tutorial</groupId>
     <artifactId>tutorial-jpa</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <name>AppFuse JPA Example</name>
-    <url>http://www.mycompany.com</url>
+    <version>2.1.0</version>
+    <name>AppFuse JPA Tutorial</name>
+    <url>http://appfuse-demos.googlecode.com/</url>
 
     <prerequisites>
         <maven>2.2.1</maven>
