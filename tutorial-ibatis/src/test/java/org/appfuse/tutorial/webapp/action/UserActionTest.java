@@ -5,6 +5,7 @@ import org.appfuse.model.User;
 import org.appfuse.service.UserManager;
 import org.compass.gps.CompassGps;
 import org.junit.Test;
+import org.junit.Ignore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
 
@@ -98,7 +99,7 @@ public class UserActionTest extends BaseActionTestCase {
         assertFalse(action.hasActionErrors());
     }
 
-    @Test
+    @Test @Ignore
     public void testSearch() throws Exception {
         compassGps.index();
         action.setQ("admin");
