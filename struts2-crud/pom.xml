@@ -7,7 +7,7 @@
     <artifactId>struts2-crud</artifactId>
     <packaging>war</packaging>
     <version>2.0.2</version>
-    <name>AppFuse Struts 2 CRUD Example</name>
+    <name>AppFuse Struts 2 CRUD Tutorial</name>
     <url>http://www.mycompany.com</url>
 
     <prerequisites>
