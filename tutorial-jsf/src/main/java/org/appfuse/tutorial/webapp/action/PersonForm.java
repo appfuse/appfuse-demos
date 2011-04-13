@@ -40,21 +40,17 @@ public class PersonForm extends BasePage implements Serializable {
     }
 
     public String edit() {
-        // todo: figure out why Canoo is failing
         if (id == null) {
             id = new Long(getParameter("id"));
         }
 
-        // parameter gets set to 0 in IE
-        if (id != 0){
-            person = personManager.get(id);
-        }
+        person = personManager.get(id);
 
         return "edit";
     }
 
     public String save() {
-        boolean isNew = (person.getId() == null);
+        boolean isNew = (person.getId() == null || person.getId() == 0);
         personManager.save(person);
 
         String key = (isNew) ? "person.added" : "person.updated";
