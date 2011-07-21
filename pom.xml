@@ -39,9 +39,6 @@
     </build>
 
     <modules>
-        <module>helloworld</module>
-        <module>struts2-crud</module>
-        
         <module>tutorial-hibernate</module>
         <module>tutorial-ibatis</module>
         <module>tutorial-jpa</module>
