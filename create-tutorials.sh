@@ -1,8 +1,8 @@
 mkdir temp;cd temp
-mvn archetype:create -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=appfuse-basic-jsf  -DarchetypeVersion=2.0.2 -DgroupId=org.appfuse.tutorial -DartifactId=tutorial-jsf
-
-mvn archetype:create -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=appfuse-basic-spring  -DarchetypeVersion=2.0.2 -DgroupId=org.appfuse.tutorial -DartifactId=tutorial-spring
-
-mvn archetype:create -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=appfuse-basic-struts  -DarchetypeVersion=2.0.2 -DgroupId=org.appfuse.tutorial -DartifactId=tutorial-struts2
-
-mvn archetype:create -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=appfuse-basic-tapestry  -DarchetypeVersion=2.0.2 -DgroupId=org.appfuse.tutorial -DartifactId=tutorial-tapestry
+mvn archetype:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=appfuse-basic-struts-archetype -DarchetypeVersion=2.2-SNAPSHOT -DgroupId=org.appfuse.tutorial -DartifactId=tutorial-hibernate -DarchetypeRepository=http://oss.sonatype.org/content/repositories/appfuse
+mvn archetype:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=appfuse-basic-struts-archetype -DarchetypeVersion=2.2-SNAPSHOT -DgroupId=org.appfuse.tutorial -DartifactId=tutorial-jpa -DarchetypeRepository=http://oss.sonatype.org/content/repositories/appfuse
+mvn archetype:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=appfuse-basic-struts-archetype -DarchetypeVersion=2.2-SNAPSHOT -DgroupId=org.appfuse.tutorial -DartifactId=tutorial-service -DarchetypeRepository=http://oss.sonatype.org/content/repositories/appfuse
+mvn archetype:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=appfuse-basic-jsf-archetype -DarchetypeVersion=2.2-SNAPSHOT -DgroupId=org.appfuse.tutorial -DartifactId=tutorial-jsf -DarchetypeRepository=http://oss.sonatype.org/content/repositories/appfuse
+mvn archetype:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=appfuse-basic-spring-archetype -DarchetypeVersion=2.2-SNAPSHOT -DgroupId=org.appfuse.tutorial -DartifactId=tutorial-spring -DarchetypeRepository=http://oss.sonatype.org/content/repositories/appfuse
+mvn archetype:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=appfuse-basic-struts-archetype -DarchetypeVersion=2.2-SNAPSHOT -DgroupId=org.appfuse.tutorial -DartifactId=tutorial-struts -DarchetypeRepository=http://oss.sonatype.org/content/repositories/appfuse
+mvn archetype:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=appfuse-basic-tapestry-archetype -DarchetypeVersion=2.2-SNAPSHOT -DgroupId=org.appfuse.tutorial -DartifactId=tutorial-tapestry -DarchetypeRepository=http://oss.sonatype.org/content/repositories/appfuse
