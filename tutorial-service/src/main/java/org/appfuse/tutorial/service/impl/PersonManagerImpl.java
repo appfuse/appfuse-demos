@@ -4,6 +4,7 @@ import org.appfuse.service.impl.GenericManagerImpl;
 import org.appfuse.tutorial.dao.PersonDao;
 import org.appfuse.tutorial.model.Person;
 import org.appfuse.tutorial.service.PersonManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.jws.WebService;
@@ -14,10 +15,10 @@ import java.util.List;
 public class PersonManagerImpl extends GenericManagerImpl<Person, Long> implements PersonManager {
     PersonDao personDao;
 
-    public PersonManagerImpl() {};
+    public PersonManagerImpl() {}
 
-    public PersonManagerImpl(PersonDao personDao) {
-        super(personDao);
+    @Autowired
+    public void setPersonDao(PersonDao personDao) {
         this.personDao = personDao;
     }
 
