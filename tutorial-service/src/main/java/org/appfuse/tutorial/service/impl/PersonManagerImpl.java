@@ -18,7 +18,8 @@ public class PersonManagerImpl extends GenericManagerImpl<Person, Long> implemen
     public PersonManagerImpl() {}
 
     @Autowired
-    public void setPersonDao(PersonDao personDao) {
+    public PersonManagerImpl(PersonDao personDao) {
+        super(personDao);
         this.personDao = personDao;
     }
 
