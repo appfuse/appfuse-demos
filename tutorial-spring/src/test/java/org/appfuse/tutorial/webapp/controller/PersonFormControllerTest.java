@@ -38,6 +38,8 @@ public class PersonFormControllerTest extends BaseControllerTestCase {
 
         person = form.showForm(request);
         // update required fields
+        person.setFirstName("Homer");
+        person.setLastName("Simpson");
 
         BindingResult errors = new DataBinder(person).getBindingResult();
         form.onSubmit(person, errors, request, new MockHttpServletResponse());

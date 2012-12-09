@@ -2,10 +2,25 @@
     <!ENTITY config SYSTEM "./config.xmlf">
     <!ENTITY login SYSTEM "./login.xmlf">
 ]>
-<project basedir="." default="run-all-tests"> 
+<project basedir="." default="run-all-tests">
+    <taskdef resource="webtestTaskdefs.properties" />
+    <!-- for propertyregex: allows to build a message string with parameter replacement: "User {0} successfully created" -->
+    <!-- usage example -->
+    <!--
+        <propertyregex property="updated.byAdmin"
+            input="${user.updated.byAdmin}"
+            regexp="\{0\}"
+            replace="${it_user_signup.fullname}"
+            global="false" />
+        <verifytext description="verify success message" text="${updated.byAdmin}"/>
+     -->
+    <taskdef resource="net/sf/antcontrib/antcontrib.properties" />
+
     <!-- Use i18n bundle, 2nd one listed is the default -->
-    <property file="${i18n.classpath}/ApplicationResources_${user.language}.properties"/>
-    <property file="${i18n.classpath}/ApplicationResources.properties"/>
+    <property file="../../../target/classes/ApplicationResources_${user.language}.properties"/>
+    <property file="../../../target/classes/ApplicationResources.properties"/>
+    <property file="../../../target/classes/displaytag_${user.language}.properties"/>
+    <property file="../../../target/classes/displaytag.properties"/>
 
     <!-- runs all targets -->
     <target name="run-all-tests" 
@@ -30,7 +45,7 @@
 
     <!-- Logout of the application -->
     <target name="Logout" description="Runs logout test and verifies Login's Title">
-        <webtest name="login">
+        <webtest name="logout">
             &config;
             <steps>
                 &login;
@@ -90,7 +105,10 @@
                     text=".*${userList.title}.*" regex="true"/>
                 <setinputfield description="set search term" name="q" value="matt_raible"/>
                 <clickbutton label="${button.search}" description="Click Search"/>
-                <verifytext description="verify results" text="One user found."/>
+                <verifyXPath
+                     description="Count the number of users found"
+                     xpath="count(//table[@id='users']/tbody/tr)"
+                     text="1"/>
             </steps>
         </webtest>
     </target>
@@ -139,7 +157,7 @@
 
                 <verifytitle description="view user list screen" text=".*${userList.title}.*" regex="true"/>
                 <verifytext description="verify success message" regex="true"
-                    text='&lt;div class="message.*&gt;.*Test Name.*&lt;/div&gt;'/>
+                    text='&lt;div class="alert alert-success.*&gt;.*Test Name.*&lt;/div&gt;'/>
                     
                 <!-- Delete user -->
                 <clickLink description="Click edit user link" label="newuser"/>
@@ -147,7 +165,7 @@
                 <clickbutton label="${button.delete}" description="Click button 'Delete'"/>
                 <verifyNoDialogResponses/>
                 <verifytext description="verify success message" regex="true"
-                    text='&lt;div class="message.*&gt;.*Test Name.*&lt;/div&gt;'/>
+                    text='&lt;div class="alert alert-success.*&gt;.*Test Name.*&lt;/div&gt;'/>
                 <verifytitle description="display user list" text=".*${userList.title}.*" regex="true"/>
             </steps>
         </webtest>
@@ -203,10 +221,10 @@
                 <invoke description="click Upload a File link" url="/fileupload"/>
                 <verifytitle description="we should see file upload form" text=".*${upload.title}.*" regex="true"/>
                 <setinputfield description="set name" name="name" value="Canoo Test File"/>
-                <setFileField description="set file" name="file" fileName="pom.xml"/>
+                <setFileField description="set file" name="file" fileName="web-tests.xml"/>
                 <clickbutton label="${button.upload}" description="Click Upload"/>
                 <verifytitle description="show file data if upload OK" text=".*${display.title}.*" regex="true"/>
-                <verifytext description="verify original filename displayed on page" text="pom.xml"/>
+                <verifytext description="verify original filename displayed on page" text="web-tests.xml"/>
             </steps>
         </webtest>
     </target>

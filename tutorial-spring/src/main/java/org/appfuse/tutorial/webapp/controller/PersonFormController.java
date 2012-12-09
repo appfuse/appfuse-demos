@@ -33,7 +33,7 @@ public class PersonFormController extends BaseFormController {
     }
 
     @ModelAttribute
-    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(method = RequestMethod.GET)
     protected Person showForm(HttpServletRequest request)
     throws Exception {
         String id = request.getParameter("id");
@@ -51,6 +51,14 @@ public class PersonFormController extends BaseFormController {
     throws Exception {
         if (request.getParameter("cancel") != null) {
             return getCancelView();
+        }
+
+        if (validator != null) { // validator is null during testing
+            validator.validate(person, errors);
+
+            if (errors.hasErrors() && request.getParameter("delete") == null) { // don't validate when deleting
+                return "personform";
+            }
         }
 
         log.debug("entering 'onSubmit' method...");

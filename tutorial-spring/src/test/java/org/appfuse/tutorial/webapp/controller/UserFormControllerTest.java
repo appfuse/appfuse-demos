@@ -100,6 +100,8 @@ public class UserFormControllerTest extends BaseControllerTestCase {
         user.setConfirmPassword(user.getPassword());
         user.setLastName("Updated Last Name");
 
+        request.setRemoteUser(user.getUsername());
+
         BindingResult errors = new DataBinder(user).getBindingResult();
         c.onSubmit(user, errors, request, new MockHttpServletResponse());
 
@@ -117,7 +119,7 @@ public class UserFormControllerTest extends BaseControllerTestCase {
         BindingResult errors = new DataBinder(user).getBindingResult();
         c.onSubmit(user, errors, request, new MockHttpServletResponse());
         
-        assertTrue(errors.getAllErrors().size() == 10);
+        assertTrue(errors.getAllErrors().size() == 6);
     }
 
     @Test

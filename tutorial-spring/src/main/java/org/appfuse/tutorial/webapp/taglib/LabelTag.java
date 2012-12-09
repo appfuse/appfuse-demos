@@ -112,36 +112,17 @@ public class LabelTag extends TagSupport {
             cssClass = "required";
         }
 
-        String cssErrorClass = (errorClass != null) ? errorClass : "error";
-        StringBuffer label = new StringBuffer();
+        StringBuilder label = new StringBuilder();
 
         if ((message == null) || "".equals(message.trim())) {
             label.append("");
         } else {
             label.append("<label for=\"").append(fieldName).append("\"");
-
-            if (validationError) {
-                label.append(" class=\"").append(cssErrorClass).append("\"");
-            } else if (cssClass != null) {
-                label.append(" class=\"").append(cssClass).append("\"");
-            }
-
-            label.append(">").append(message);
+            label.append(" class=\"").append(cssClass).append("\">");
+            label.append(message);
             label.append((requiredField) ? " <span class=\"req\">*</span>" : "");
             label.append((colon) ? ":" : "");
             label.append("</label>");
-            
-            if (validationError) {
-                label.append("<img class=\"validationWarning\" alt=\"");
-                label.append(getMessageSource().getMessage("icon.warning", null, locale));
-                label.append("\"");
-
-                String context = ((HttpServletRequest) pageContext.getRequest()).getContextPath();
-
-                label.append(" src=\"").append(context);
-                label.append(getMessageSource().getMessage("icon.warning.img", null, locale));
-                label.append("\" />");
-            }
         }
 
         // Print the retrieved message to our output writer
@@ -155,18 +136,6 @@ public class LabelTag extends TagSupport {
         // Continue processing this page
         return (SKIP_BODY);
     }
-
-    /**
-     * Extract the error messages from the given ObjectError list.
-     */
-    /*private String getErrorMessages(List fes) throws NoSuchMessageException {
-        StringBuffer message = new StringBuffer();
-        for (int i = 0; i < fes.size(); i++) {
-            ObjectError error = (ObjectError) fes.get(i);
-            message.append(this.requestContext.getMessage(error, true));
-        }
-        return message.toString();
-    }*/
 
     /**
      * Write the message to the page.

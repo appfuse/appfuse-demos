@@ -5,9 +5,9 @@
     <groupId>org.appfuse.tutorial</groupId>
     <artifactId>tutorial-spring</artifactId>
     <packaging>war</packaging>
-    <version>2.1.0</version>
+    <version>2.2</version>
     <name>AppFuse Spring MVC Tutorial</name>
-    <url>http://appfuse-demos.googlecode.com/</url>
+    <url>https://github.com/appfuse/appfuse-demos</url>
 
     <prerequisites>
         <maven>2.2.1</maven>
@@ -48,6 +48,11 @@
                 <artifactId>appfuse-maven-plugin</artifactId>
                 <version>${appfuse.version}</version>
                 <configuration>
+                    <!-- Fix annotation detection issue for Java 7. Thanks Shred! -->
+                    <!-- http://www.shredzone.de/cilla/page/352/hibernate3-maven-plugin-fails-with-java-17.html -->
+                    <componentProperties>
+                        <implementation>annotationconfiguration</implementation>
+                    </componentProperties>
                     <genericCore>${amp.genericCore}</genericCore>
                     <fullSource>${amp.fullSource}</fullSource>
                 </configuration>
@@ -63,10 +68,10 @@
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.0.2</version>
+                <version>2.5.1</version>
                 <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
+                    <source>1.6</source>
+                    <target>1.6</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -148,33 +153,48 @@
             </plugin>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
-                <artifactId>maven-jetty-plugin</artifactId>
-                <version>6.1.26</version>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>8.1.3.v20120416</version>
                 <configuration>
-                    <contextPath>/</contextPath>
-                    <scanIntervalSeconds>3</scanIntervalSeconds>
-                    <scanTargetPatterns>
-                        <scanTargetPattern>
-                            <directory>src/main/webapp/WEB-INF</directory>
-                            <excludes>
-                                <exclude>**/*.jsp</exclude>
-                            </excludes>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                    </webApp>
+                </configuration>
+            </plugin>
+            <!-- clean-up previous hibernate-search indexed from integration tests, as there could be a lock -->
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${user.home}/${project.build.finalName}/index</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <!-- will package a ready-to-run app regarding hibernate-search index location -->
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <escapeString>\</escapeString>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/resources/packaged</directory>
+                            <targetPath>WEB-INF/classes</targetPath>
+                            <filtering>true</filtering>
                             <includes>
-                                <include>**/*.properties</include>
-                                <include>**/*.xml</include>
+                                <include>hibernate.properties</include>
                             </includes>
-                        </scanTargetPattern>
-                    </scanTargetPatterns>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>native2ascii-maven-plugin</artifactId>
-                <version>1.0-alpha-1</version>
-                <configuration>
-                    <dest>target/resources</dest>
-                    <src>src/main/resources</src>
-                </configuration>
+                <version>1.0-beta-1</version>
                 <executions>
                     <execution>
                         <id>native2ascii-utf8</id>
@@ -183,28 +203,11 @@
                         </goals>
                         <configuration>
                             <encoding>UTF8</encoding>
-                            <includes>ApplicationResources_*.properties</includes>
-                            <excludes>ApplicationResources.properties,
-                                ApplicationResources_de*.properties,
-                                ApplicationResources_fr*.properties,
-                                ApplicationResources_nl*.properties,
-                                ApplicationResources_pt*.properties,
-                                ApplicationResources_es*.properties</excludes>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>native2ascii-8859_1</id>
-                        <goals>
-                            <goal>native2ascii</goal>
-                        </goals>
-                        <configuration>
-                            <encoding>8859_1</encoding>
-                            <includes>ApplicationResources.properties,
-                                ApplicationResources_de.properties,
-                                ApplicationResources_fr.properties,
-                                ApplicationResources_nl.properties,
-                                ApplicationResources_pt*.properties,
-                                ApplicationResources_es*.properties</includes>
+                            <includes>
+                                <include>ApplicationResources_zh*.properties</include>
+                                <include>ApplicationResources_ko*.properties</include>
+                                <include>displaytag_zh*.properties</include>
+                            </includes>
                         </configuration>
                     </execution>
                 </executions>
@@ -213,13 +216,6 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>ApplicationResources*.properties</exclude>
-                </excludes>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>target/resources</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>
@@ -385,17 +381,17 @@
         <plugins>
             <plugin>
                 <artifactId>maven-changes-plugin</artifactId>
-                <version>2.3</version>
+                <version>2.8</version>
             </plugin>
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <configuration>
                     <consoleOutput>true</consoleOutput>
-                    <configLocation>https://svn.java.net/svn/appfuse~svn/trunk/www/checkstyle.xml</configLocation>
+                    <configLocation>https://raw.github.com/appfuse/appfuse/master/www/checkstyle.xml</configLocation>
                     <failsOnError>false</failsOnError>
                     <maxAllowedViolations>3</maxAllowedViolations>
                 </configuration>
-                <version>2.6</version>
+                <version>2.9.1</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -407,27 +403,32 @@
                         </excludes>
                     </instrumentation>
                 </configuration>
-                <version>2.4</version>
+                <version>2.5.2</version>
             </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.7</version>
+                <version>2.9</version>
             </plugin>
             <plugin>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <version>2.2</version>
+                <version>2.3</version>
             </plugin>
             <plugin>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <configuration>
                     <linkXRef>true</linkXRef>
-                    <targetJdk>1.5</targetJdk>
+                    <targetJdk>1.6</targetJdk>
                 </configuration>
-                <version>2.5</version>
+                <version>2.7.1</version>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.7.1</version>
+                <version>2.12.4</version>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>webtest-maven-plugin</artifactId>
+                <version>1.0.0</version>
             </plugin>
         </plugins>
     </reporting>
@@ -453,7 +454,7 @@
                                 <home>${cargo.container.home}</home>
                                 <zipUrlInstaller>
                                     <url>${cargo.container.url}</url>
-                                    <installDir>${installDir}</installDir>
+                                    <extractDir>${installDir}</extractDir>
                                 </zipUrlInstaller>
                             </container>
                             <configuration>
@@ -461,6 +462,8 @@
                                 <properties>
                                     <cargo.hostname>${cargo.host}</cargo.hostname>
                                     <cargo.servlet.port>${cargo.port}</cargo.servlet.port>
+                                    <!-- To prevent conflicts with already running instances -->
+                                    <cargo.tomcat.ajp.port>8123</cargo.tomcat.ajp.port>
                                 </properties>
                             </configuration>
                         </configuration>
@@ -482,43 +485,44 @@
                         </executions>
                     </plugin>
                     <plugin>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <version>1.3</version>
-                        <configuration>
-                            <tasks>
-                                <taskdef resource="webtest_base_relaxed.taskdef">
-                                    <classpath refid="maven.test.classpath" />
-                                </taskdef>
-                                <mkdir dir="target/webtest-data" />
-                                <!-- Delete old results file if it exists -->
-                                <delete file="target/webtest-data/web-tests-result.xml" />
-                                <!-- This is so the default will be used if no test case is specified -->
-                                <property name="test" value="run-all-tests" />
-                                <property name="i18n.classpath" value="${basedir}/target/classes" />
-                                <echo level="info">Testing '${project.build.finalName}' with locale '${user.language}'</echo>
-                                <ant antfile="src/test/resources/web-tests.xml" target="${test}">
-                                    <property name="user.language" value="${user.language}" />
-                                    <property name="webapp.name" value="${project.build.finalName}" />
-                                    <property name="host" value="${cargo.host}" />
-                                    <property name="port" value="${cargo.port}" />
-                                </ant>
-                            </tasks>
-                        </configuration>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>webtest-maven-plugin</artifactId>
+                        <version>1.0.0</version>
                         <executions>
                             <execution>
+                                <id>webtest-test</id>
                                 <phase>integration-test</phase>
                                 <goals>
-                                    <goal>run</goal>
+                                    <goal>test</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>webtest-verify</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>verify-result</goal>
+                                </goals>
+                            </execution>
+                            <execution>
+                                <id>webtest-report-html</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                    <goal>report</goal>
                                 </goals>
                             </execution>
                         </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.canoo.webtest</groupId>
-                                <artifactId>webtest</artifactId>
-                                <version>${webtest.version}</version>
-                            </dependency>
-                        </dependencies>
+                        <configuration>
+                            <host>${cargo.host}</host>
+                            <port>${cargo.port}</port>
+                            <sourcedirectory>src/test/resources</sourcedirectory>
+                            <sourcefile>web-tests.xml</sourcefile>
+                            <target>${webtest.target}</target>
+                            <basepath>${project.build.finalName}</basepath>
+                            <resultpath>target/webtest/webtest-results</resultpath>
+                            <haltonfailure>false</haltonfailure>
+                            <haltonerror>false</haltonerror>
+                            <loglevel>fatal</loglevel>
+                        </configuration>
                     </plugin>
                 </plugins>
             </build>
@@ -564,7 +568,7 @@
                 <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
                 <jdbc.groupId>com.h2database</jdbc.groupId>
                 <jdbc.artifactId>h2</jdbc.artifactId>
-                <jdbc.version>1.2.134</jdbc.version>
+                <jdbc.version>1.3.170</jdbc.version>
                 <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
                 <jdbc.url>jdbc:h2:/tmp/${db.name};MVCC=TRUE</jdbc.url>
                 <jdbc.username>sa</jdbc.username>
@@ -575,9 +579,9 @@
             <properties>
                 <dbunit.dataTypeFactoryName>org.dbunit.ext.hsqldb.HsqldbDataTypeFactory</dbunit.dataTypeFactoryName>
                 <hibernate.dialect>org.hibernate.dialect.HSQLDialect</hibernate.dialect>
-                <jdbc.groupId>hsqldb</jdbc.groupId>
+                <jdbc.groupId>org.hsqldb</jdbc.groupId>
                 <jdbc.artifactId>hsqldb</jdbc.artifactId>
-                <jdbc.version>1.8.0.7</jdbc.version>
+                <jdbc.version>2.2.9</jdbc.version>
                 <jdbc.driverClassName>org.hsqldb.jdbcDriver</jdbc.driverClassName>
                 <jdbc.url>jdbc:hsqldb:/tmp/${db.name};shutdown=true</jdbc.url>
                 <jdbc.username>sa</jdbc.username>
@@ -643,7 +647,7 @@
     <properties>
         <!-- Application settings -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <copyright.year>2011</copyright.year>
+        <copyright.year>2012</copyright.year>
         <dao.framework>hibernate</dao.framework>
         <web.framework>spring</web.framework>
         <amp.genericCore>true</amp.genericCore>
@@ -651,27 +655,27 @@
         <db.name>tutorial_spring</db.name>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>2.1.0</appfuse.version>
+        <appfuse.version>2.2-SNAPSHOT</appfuse.version>
         <commons.fileupload.version>1.2.1</commons.fileupload.version>
         <commons.io.version>1.3.2</commons.io.version>
         <displaytag.version>1.2</displaytag.version>
-        <spring.version>3.0.5.RELEASE</spring.version>
+        <spring.version>3.1.3.RELEASE</spring.version>
         <springmodules.validation.version>0.8</springmodules.validation.version>
 
         <!-- Testing dependency versions -->
-        <cargo.version>1.0.6</cargo.version>
+        <cargo.version>1.2.4</cargo.version>
         <jmock.version>2.5.1</jmock.version>
         <jsp.version>2.1</jsp.version>
-        <junit.version>4.8.2</junit.version>
+        <junit.version>4.10</junit.version>
         <servlet.version>2.5</servlet.version>
         <wiser.version>1.2</wiser.version>
 
-        <!-- WebTest dependency versions  -->
-        <webtest.version>3.0</webtest.version>
+        <!-- WebTest default target -->
+        <webtest.target>run-all-tests</webtest.target>
 
-        <cargo.container>tomcat6x</cargo.container>
+        <cargo.container>tomcat7x</cargo.container>
         <cargo.container.home>${env.CATALINA_HOME}</cargo.container.home>
-        <cargo.container.url>http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.29/bin/apache-tomcat-6.0.29.zip</cargo.container.url>
+        <cargo.container.url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.33/bin/apache-tomcat-7.0.33.zip</cargo.container.url>
         <cargo.host>localhost</cargo.host>
         <cargo.port>8081</cargo.port>
         <cargo.wait>false</cargo.wait>
@@ -687,7 +691,7 @@
         <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
         <jdbc.groupId>mysql</jdbc.groupId>
         <jdbc.artifactId>mysql-connector-java</jdbc.artifactId>
-        <jdbc.version>5.1.14</jdbc.version>
+        <jdbc.version>5.1.22</jdbc.version>
         <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
         <jdbc.url>jdbc:mysql://localhost/${db.name}?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;autoReconnect=true</jdbc.url>
         <jdbc.username>root</jdbc.username>

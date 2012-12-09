@@ -26,7 +26,6 @@ public class StartupListenerTest extends TestCase {
     protected void setUp() throws Exception {
         super.setUp();
         sc = new MockServletContext("");
-        sc.addInitParameter(Constants.CSS_THEME, "simplicity");
         
         // initialize Spring
         sc.addInitParameter(ContextLoader.CONFIG_LOCATION_PARAM,
@@ -50,8 +49,6 @@ public class StartupListenerTest extends TestCase {
         listener.contextInitialized(new ServletContextEvent(sc));
 
         assertTrue(sc.getAttribute(Constants.CONFIG) != null);
-        Map config = (Map) sc.getAttribute(Constants.CONFIG);
-        assertEquals(config.get(Constants.CSS_THEME), "simplicity");
         
         assertTrue(sc.getAttribute(WebApplicationContext
                 .ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE) != null);
