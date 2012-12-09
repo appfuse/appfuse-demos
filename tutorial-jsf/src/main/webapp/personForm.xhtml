@@ -1,7 +1,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jstl/core"
       xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:t="http://myfaces.apache.org/tomahawk"
-      xmlns:v="http://shale.apache.org/validator">
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:t="http://myfaces.apache.org/tomahawk">
 
 <f:view>
 <f:loadBundle var="text" basename="#{personForm.bundleName}"/>
@@ -12,43 +11,41 @@
     </head>
 <body id="personForm">
 
-<h:form id="personForm" onsubmit="return validatePersonForm(this)">
-<h:inputHidden value="#{personForm.person.id}" id="id"/>
-<h:panelGrid columns="3">
-    <h:outputLabel styleClass="desc" for="firstName" value="#{text['person.firstName']}"/>
-    <h:inputText styleClass="text medium" id="firstName" value="#{personForm.person.firstName}" required="true">
-        <v:commonsValidator client="true" type="required" arg="#{text['person.firstName']}"/>
-    </h:inputText>
-    <t:message for="firstName" styleClass="fieldError"/>
+<div class="span2">
+    <h2>#{text['personDetail.heading']}</h2>
+</div>
+<div class="span7">
+<h:form id="personForm" styleClass="well form-horizontal">
+    <h:inputHidden value="#{personForm.person.id}" id="id"/>
 
-    <h:outputLabel styleClass="desc" for="lastName" value="#{text['person.lastName']}"/>
-    <h:inputText styleClass="text medium" id="lastName" value="#{personForm.person.lastName}" required="true">
-        <v:commonsValidator client="true" type="required" arg="#{text['person.lastName']}"/>
-    </h:inputText>
-    <t:message for="lastName" styleClass="fieldError"/>
+    <div class="control-group">
+        <h:outputLabel styleClass="control-label" for="firstName" value="#{text['person.firstName']}"/>
+        <div class="controls">
+            <h:inputText id="firstName" value="#{personForm.person.firstName}" required="true"/>
+            <t:message for="firstName" styleClass="help-inline"/>
+        </div>
+    </div>
+    <div class="control-group">
+        <h:outputLabel styleClass="control-label" for="lastName" value="#{text['person.lastName']}"/>
+        <div class="controls">
+            <h:inputText id="lastName" value="#{personForm.person.lastName}" required="true"/>
+            <t:message for="lastName" styleClass="help-inline"/>
+        </div>
+    </div>
 
-    <h:panelGroup styleClass="buttonBar bottom">
-        <h:commandButton value="#{text['button.save']}" action="#{personForm.save}" id="save" styleClass="button"/>
+    <div class="form-actions">
+        <h:commandButton value="#{text['button.save']}" action="#{personForm.save}" id="save" styleClass="btn btn-primary"/>
 
         <c:if test="${not empty personForm.person.id}">
         <h:commandButton value="#{text['button.delete']}" action="#{personForm.delete}"
-            id="delete" styleClass="button" onclick="bCancel=true; return confirmDelete('Person')"/>
+            id="delete" styleClass="btn" onclick="return confirmDelete('Person')"/>
         </c:if>
 
         <h:commandButton value="#{text['button.cancel']}" action="cancel" immediate="true"
-            id="cancel" styleClass="button" onclick="bCancel=true"/>
-    </h:panelGroup>
-    <h:outputText/><h:outputText/>
-</h:panelGrid>
+            id="cancel" styleClass="btn"/>
+    </div>
 </h:form>
-
-<v:validatorScript functionName="validatePersonForm"/>
-
-<script type="text/javascript">
-    $('personForm:firstName').focus();
-    highlightFormElements();
-</script>
-
+</div>
 </body>
 </f:view>
 </html>
