@@ -4,13 +4,28 @@ import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.dom.Node;
 import static org.junit.Assert.*;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class PersonFormTest extends BasePageTestCase {
+
+    @Test
+    public void testEdit() {
+        doc = tester.renderPage("personList");
+
+        Element table = doc.getElementById("personList");
+        List<Node> rows = table.find("tbody").getChildren();
+        String id = ((Element) rows.get(0)).find("td/a").getChildMarkup().trim();
+        Element editLink = table.getElementById("person-" + id);
+        doc = tester.clickLink(editLink);
+
+        ResourceBundle rb = ResourceBundle.getBundle(MESSAGES);
+
+        assertTrue(doc.toString().contains("<title>" +
+                rb.getString("personDetail.title")));
+    }
 
     @Test
     public void testCancel() throws Exception {
@@ -23,7 +38,7 @@ public class PersonFormTest extends BasePageTestCase {
         doc = tester.clickLink(editLink);
 
         Element cancelButton = doc.getElementById("cancel");
-        doc = tester.clickSubmit(cancelButton, fieldValues);
+        doc = tester.clickLink(cancelButton);
 
         ResourceBundle rb = ResourceBundle.getBundle(MESSAGES);
 
@@ -52,9 +67,7 @@ public class PersonFormTest extends BasePageTestCase {
 
         assertNull(doc.getElementById("errorMessages"));
 
-        Element successMessages = doc.getElementById("successMessages");
-        assertNotNull(successMessages);
-        assertTrue(successMessages.toString().contains("added successfully"));
+        assertTrue(doc.toString().contains("added successfully"));
         Element table = doc.getElementById("personList");
         assertNotNull(table);
     }
@@ -70,7 +83,7 @@ public class PersonFormTest extends BasePageTestCase {
         doc = tester.clickLink(editLink);
 
         Element deleteButton = doc.getElementById("delete");
-        doc = tester.clickSubmit(deleteButton, fieldValues);
+        doc = tester.clickLink(deleteButton);
         assertTrue(doc.toString().contains("deleted successfully"));
     }
 }

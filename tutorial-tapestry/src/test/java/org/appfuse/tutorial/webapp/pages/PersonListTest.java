@@ -16,20 +16,4 @@ public class PersonListTest extends BasePageTestCase {
         assertNotNull(doc.getElementById("personList"));
         assertTrue(doc.getElementById("personList").find("tbody").getChildren().size() >= 2);
     }
-
-    @Test
-    public void testEdit() {
-        doc = tester.renderPage("personList");
-
-        Element table = doc.getElementById("personList");
-        List<Node> rows = table.find("tbody").getChildren();
-        String id = ((Element) rows.get(0)).find("td/a").getChildMarkup().trim();
-        Element editLink = table.getElementById("person-" + id);
-        doc = tester.clickLink(editLink);
-
-        ResourceBundle rb = ResourceBundle.getBundle(MESSAGES);
-
-        assertTrue(doc.toString().contains("<title>" +
-                rb.getString("personDetail.title")));
-    }
 }

@@ -1,17 +1,29 @@
 package org.appfuse.tutorial.webapp.pages;
 
+import org.apache.tapestry5.alerts.AlertManager;
+import org.apache.tapestry5.alerts.Duration;
+import org.apache.tapestry5.alerts.Severity;
+import org.apache.tapestry5.corelib.components.TextField;
+import org.apache.tapestry5.ioc.Messages;
+import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.annotations.Component;
 import org.apache.tapestry5.annotations.InjectPage;
+import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Service;
+import org.apache.tapestry5.corelib.components.EventLink;
 import org.apache.tapestry5.corelib.components.Form;
-import org.apache.tapestry5.corelib.components.TextField;
-import org.apache.tapestry5.ioc.annotations.Inject;
+import org.apache.tapestry5.PersistenceConstants;
+import org.apache.tapestry5.EventContext;
+
 import org.appfuse.service.GenericManager;
 import org.appfuse.tutorial.model.Person;
+
 import org.slf4j.Logger;
 
-public class PersonForm extends BasePage {
+import java.util.List;
+
+public class PersonForm {
     @Inject
     private Logger log;
 
@@ -19,18 +31,16 @@ public class PersonForm extends BasePage {
     @Service("personManager")
     private GenericManager<Person, Long> personManager;
 
-    void beginRender() {
-        if (person == null) {
-            person = new Person();
-        }
-    }
+    @Inject
+    private AlertManager alertManager;
 
+    @Inject
+    private Messages messages;
+
+    @Property(write = false)
     @Persist
     private Person person;
 
-    public Person getPerson() {
-        return person;
-    }
 
     /**
      * Allows setting person object from another class (i.e. PersonList)
@@ -50,12 +60,6 @@ public class PersonForm extends BasePage {
     private boolean cancel;
     private boolean delete;
 
-    @Component(id = "firstName", parameters = {"value=person.firstName", "validate=required"})
-    private TextField firstNameField;
-
-    @Component(id = "lastName", parameters = {"value=person.lastName", "validate=required"})
-    private TextField lastNameField;
-
     void onValidateForm() {
         if (!delete && !cancel) {
             // manually validate required fields or annotate the Person object
@@ -65,29 +69,62 @@ public class PersonForm extends BasePage {
         }
     }
 
-    void onActivate(Long id) {
-        if (id != null) {
-            person = personManager.get(id);
+    @Component(id = "firstName", parameters = {"value=person.firstName", "validate=required"})
+    private TextField firstNameField;
+
+    @Component(id = "lastName", parameters = {"value=person.lastName", "validate=required"})
+    private TextField lastNameField;
+
+    void beginRender() {
+        if (person == null) {
+            person = new Person();
         }
+    }
+
+    void onActivate(EventContext ec) {
+        if (ec.getCount() == 0) {
+            person = null;
+        }
+        else if (ec.getCount() == 1) {
+            person = personManager.get(ec.get(Long.class, 0));
+        }
+        else {
+            throw new IllegalStateException("Invalid Request");
+        }
+    }
+
+    Long onPassivate() {
+        return   person != null ? person.getId() : null;
+    }
+
+    void onPrepare() {
+        if (person == null) {
+            person = new Person();
+        }
+    }
+
+    Object onException(Throwable cause) {
+        log.error("Exception: " +  cause.getMessage());
+
+        return this;
     }
 
     Object onSuccess() {
         if (delete) return onDelete();
         if (cancel) return onCancel();
 
-        log.debug("Saving person...");
+        log.debug("Saving person..." + person);
 
-        boolean isNew = (getPerson().getId() == null);
+        boolean isNew = (person.getId() == null);
 
         personManager.save(person);
 
         String key = (isNew) ? "person.added" : "person.updated";
+        alertManager.alert(Duration.TRANSIENT, Severity.INFO,  messages.get(key));
 
         if (isNew) {
-            personList.addInfo(key, true);
             return personList;
         } else {
-            addInfo(key, true);
             return this;
         }
     }
@@ -104,7 +141,7 @@ public class PersonForm extends BasePage {
 
     Object onDelete() {
         personManager.remove(person.getId());
-        personList.addInfo("person.deleted", true);
+        alertManager.alert(Duration.TRANSIENT, Severity.INFO, messages.format("person.deleted"));
         return personList;
     }
 

@@ -1,33 +1,36 @@
-<t:layout title="message:personDetail.title"
-          heading="message:personDetail.heading" menu="literal:PersonMenu"
-          xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<html t:type="layout" title="message:personDetail.title"
+          heading="message:personDetail.heading" menu="PersonMenu"
+          xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd">
 
-    <t:messagebanner t:id="message" type="type"/>
+<div class="span2">
+    <h2>${message:personDetail.heading}</h2>
+    ${message:personDetail.message}
+</div>
 
-    <form t:id="personForm">
-        <t:errors/>
+<div class="span7">
+    <form t:id="personForm" class="well form-horizontal" clientValidation="true">
 
-        <ul>
-            <li>
-                <t:label class="desc" for="firstName">${message:person.firstName}</t:label>
-                <input class="text medium" type="text" t:id="firstName"/>
-            </li>
-            <li>
-                <t:label class="desc" for="lastName">${message:person.lastName}</t:label>
-                <input class="text medium" type="text" t:id="lastName"/>
-            </li>
-            <li class="buttonBar bottom">
-                <input t:type="submit" t:id="save" id="save" value="message:button.save"/>
-                <input t:type="submit" t:id="delete" id="delete" value="message:button.delete"
-                       onclick="form.onsubmit = null; return confirmDelete('Person')"/>
-                <input t:type="submit" t:id="cancel" id="cancel" value="message:button.cancel"
-                       onclick="form.onsubmit = null"/>
-            </li>
-        </ul>
+        <div class="control-group">
+            <t:label class="control-label" for="firstName">${message:person.firstName}</t:label>
+            <div class="controls">
+                <input type="text" t:id="firstName"/>
+            </div>
+        </div>
+        <div class="control-group">
+            <t:label class="control-label" for="lastName">${message:person.lastName}</t:label>
+            <div class="controls">
+                <input type="text" t:id="lastName"/>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button type="submit" id="save" class="btn btn-primary"><i class="icon-ok icon-white"></i> ${message:button.save}</button>
+            <t:if test="person.id">
+            <button t:type="eventlink" t:id="delete" id="delete" class="btn btn-danger" onclick="return confirmDelete('Person')">
+                <i class="icon-trash"></i> ${message:button.delete}
+            </button>
+            </t:if>
+            <button t:type="eventlink" t:id="cancel" id="cancel" class="btn"><i class="icon-remove"></i> ${message:button.cancel}</button>
+        </div>
     </form>
-
-    <script type="text/javascript">
-        Form.focusFirstElement($("personForm"));
-    </script>
-
-</t:layout>
+</div>
+</html>

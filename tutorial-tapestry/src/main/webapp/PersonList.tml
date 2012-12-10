@@ -1,35 +1,21 @@
-<t:layout title="message:personList.title"
-          heading="message:personList.heading" menu="literal:PersonMenu"
-          xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
+<html t:type="layout" title="message:personList.title"
+          heading="message:personList.heading" menu="PersonMenu"
+          xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 
-    <t:messagebanner t:id="message" type="type"/>
-    <p>
-        <t:eventlink t:id="addTop">
-            <input type="button" class="button" value="${message:button.add}"/>
-        </t:eventlink>
-        <t:eventlink t:id="doneTop">
-            <input type="button" class="button" value="${message:button.done}"/>
-        </t:eventlink>
-    </p>
+<div class="span10">
+    <h2>${message:personList.heading}</h2>
 
-    <t:grid source="persons" row="person" id="personList" class="table">
-        <t:parameter name="idCell">
-            <t:pagelink page="personform" context="person.id" id="person-${person.id}">
+    <div id="actions" class="form-actions">
+        <a t:type="eventlink" event="add" id="add" class="btn btn-primary"><i class="icon-plus icon-white"></i> ${message:button.add}</a>
+        <a t:type="eventlink" event="done" id="done" class="btn"><i class="icon-ok"></i> ${message:button.done}</a>
+    </div>
+
+    <t:grid source="persons" row="person" id="personList" class="table table-condensed table-striped table-hover">
+        <p:idcell>
+            <a t:type="actionlink" t:id="edit" context="person.id" id="person-${person.id}">
                 ${person.id}
-            </t:pagelink>
-        </t:parameter>
+            </a>
+        </p:idcell>
     </t:grid>
-
-    <p>
-        <t:eventlink t:id="addBottom">
-            <input type="button" class="button" value="${message:button.add}"/>
-        </t:eventlink>
-        <t:eventlink t:id="doneBottom">
-            <input type="button" class="button" value="${message:button.done}"/>
-        </t:eventlink>
-    </p>
-
-    <script type="text/javascript">
-        highlightTableRows("personList");
-    </script>
-</t:layout>
+</div>
+</html>
