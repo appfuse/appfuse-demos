@@ -8,8 +8,7 @@
 <html>
 <head>
     <title>Confirm Access</title>
-    <link rel="stylesheet" type="text/css" media="all"
-          href="http://demo.appfuse.org/appfuse-struts/styles/simplicity/theme.css"/>
+    <link rel="stylesheet" type="text/css" media="all" href="${pageContext.request.contextPath}/styles/simplicity/theme.css"/>
     <style type="text/css">
         h1 {
             margin-left: -300px;

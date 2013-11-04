@@ -7,7 +7,7 @@
 <head>
     <title>Login</title>
     <link rel="stylesheet" type="text/css" media="all"
-          href="http://demo.appfuse.org/appfuse-struts/styles/simplicity/theme.css"/>
+          href="styles/simplicity/theme.css"/>
     <style type="text/css">
         h1 {
             margin-left: -300px;
