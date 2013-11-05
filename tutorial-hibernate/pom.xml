@@ -5,7 +5,7 @@
     <groupId>org.appfuse.tutorial</groupId>
     <artifactId>tutorial-hibernate</artifactId>
     <packaging>war</packaging>
-    <version>2.2</version>
+    <version>3.0-SNAPSHOT</version>
     <name>AppFuse Hibernate Tutorial</name>
     <url>https://github.com/appfuse/appfuse-demos</url>
 
@@ -20,7 +20,7 @@
         </license>
     </licenses>
 
-    <scm>
+    <scm>                                                                          <version>2.2.1</version>
         <connection></connection>
         <developerConnection></developerConnection>
         <url></url>
@@ -700,7 +700,7 @@
         <db.name>tutorial_hibernate</db.name>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>2.2-SNAPSHOT</appfuse.version>
+        <appfuse.version>2.2.2-SNAPSHOT</appfuse.version>
         <commons.fileupload.version>1.2.1</commons.fileupload.version>
         <commons.io.version>2.0.1</commons.io.version>
         <displaytag.version>1.2</displaytag.version>
