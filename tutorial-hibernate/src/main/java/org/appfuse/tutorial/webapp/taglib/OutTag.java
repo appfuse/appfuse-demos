@@ -22,29 +22,46 @@ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-package org.appfuse.tutorial.webapp.jsp;
 
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.jsp.JspFactory;
+package org.appfuse.tutorial.webapp.taglib;
+
+import org.appfuse.tutorial.webapp.jsp.EscapeXmlELResolver;
+
+import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * Registers ELResolver that escapes XML in EL expression String values.
+ * Tag surrounds JSP code in which EL expressions should not be XML-escaped.
  */
-public class EscapeXmlELResolverListener implements ServletContextListener {
+public class OutTag extends TagSupport {
+    private static final long serialVersionUID = 1L;
 
-    public void contextInitialized(ServletContextEvent event) {
-        // APF-1379: Prevent NPE when using Tomcat Maven Plugin
-        try {
-            Class.forName("org.apache.jasper.compiler.JspRuntimeContext");
-        } catch (ClassNotFoundException cnfe) {
-            // ignore
-        }
-        JspFactory.getDefaultFactory()
-                .getJspApplicationContext(event.getServletContext())
-                .addELResolver(new EscapeXmlELResolver());
+    private static final boolean ESCAPE_XML_DEFAULT = true;
+    private boolean escapeXml;
+    
+    public OutTag() {
+        release();
     }
-
-    public void contextDestroyed(ServletContextEvent event) {
+    
+    public void setEscapeXml(boolean escapeXml) {
+        this.escapeXml = escapeXml;
+    }
+    
+    @Override
+    public int doStartTag() {
+        pageContext.setAttribute(
+                EscapeXmlELResolver.ESCAPE_XML_ATTRIBUTE, escapeXml);
+        return EVAL_BODY_INCLUDE;
+    }
+    
+    @Override
+    public int doEndTag() {
+        pageContext.setAttribute(
+                EscapeXmlELResolver.ESCAPE_XML_ATTRIBUTE, ESCAPE_XML_DEFAULT);
+        return EVAL_PAGE;
+    }
+    
+    @Override
+    public void release() {
+        escapeXml = ESCAPE_XML_DEFAULT;
     }
 }
