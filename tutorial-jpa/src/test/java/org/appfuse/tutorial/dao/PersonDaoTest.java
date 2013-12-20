@@ -5,7 +5,6 @@ import org.appfuse.tutorial.model.Person;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.test.annotation.ExpectedException;
 
 import java.util.List;
 
@@ -21,8 +20,7 @@ public class PersonDaoTest extends BaseDaoTestCase {
         assertTrue(people.size() > 0);
     }
 
-    @Test
-    @ExpectedException(DataAccessException.class)
+    @Test(expected=DataAccessException.class)
     public void testAddAndRemovePerson() throws Exception {
         Person person = new Person();
         person.setFirstName("John");

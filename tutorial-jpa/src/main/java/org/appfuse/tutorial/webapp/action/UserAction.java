@@ -8,6 +8,7 @@ import org.appfuse.model.Role;
 import org.appfuse.model.User;
 import org.appfuse.service.UserExistsException;
 import org.appfuse.tutorial.webapp.util.RequestUtil;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.mail.MailException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
@@ -89,7 +90,7 @@ public class UserAction extends BaseAction implements Preparable {
      */
     public String edit() throws IOException {
         HttpServletRequest request = getRequest();
-        boolean editProfile = (request.getRequestURI().indexOf("editProfile") > -1);
+        boolean editProfile = request.getRequestURI().contains("editProfile");
 
         // if URL is "editProfile" - make sure it's the current user
         if (editProfile && ((request.getParameter("id") != null) || (request.getParameter("from") != null))) {
@@ -142,13 +143,13 @@ public class UserAction extends BaseAction implements Preparable {
     }
 
     /**
-     * Sends users to "mainMenu" when !from.equals("list"). Sends everyone else to "cancel"
+     * Sends users to "home" when !from.equals("list"). Sends everyone else to "cancel"
      *
-     * @return "mainMenu" or "cancel"
+     * @return "home" or "cancel"
      */
     public String cancel() {
         if (!"list".equals(from)) {
-            return "mainMenu";
+            return "home";
         }
         return "cancel";
     }
@@ -172,7 +173,11 @@ public class UserAction extends BaseAction implements Preparable {
 
             for (int i = 0; userRoles != null && i < userRoles.length; i++) {
                 String roleName = userRoles[i];
-                user.addRole(roleManager.getRole(roleName));
+                try {
+                    user.addRole(roleManager.getRole(roleName));
+                } catch (DataIntegrityViolationException e) {
+                    return showUserExistsException(originalVersion);
+                }
             }
         }
 
@@ -184,22 +189,13 @@ public class UserAction extends BaseAction implements Preparable {
             getResponse().sendError(HttpServletResponse.SC_FORBIDDEN);
             return null;
         } catch (UserExistsException e) {
-            List<Object> args = new ArrayList<Object>();
-            args.add(user.getUsername());
-            args.add(user.getEmail());
-            addActionError(getText("errors.existing.user", args));
-
-            // reset the version # to what was passed in
-            user.setVersion(originalVersion);
-            // redisplay the unencrypted passwords
-            user.setPassword(user.getConfirmPassword());
-            return INPUT;
+            return showUserExistsException(originalVersion);
         }
 
         if (!"list".equals(from)) {
             // add success messages
             saveMessage(getText("user.saved"));
-            return "mainMenu";
+            return "home";
         } else {
             // add success messages
             List<Object> args = new ArrayList<Object>();
@@ -215,10 +211,24 @@ public class UserAction extends BaseAction implements Preparable {
                 }
                 return SUCCESS;
             } else {
+                user.setConfirmPassword(user.getPassword());
                 saveMessage(getText("user.updated.byAdmin", args));
                 return INPUT;
             }
         }
+    }
+
+    private String showUserExistsException(Integer originalVersion) {
+        List<Object> args = new ArrayList<Object>();
+        args.add(user.getUsername());
+        args.add(user.getEmail());
+        addActionError(getText("errors.existing.user", args));
+
+        // reset the version # to what was passed in
+        user.setVersion(originalVersion);
+        // redisplay the unencrypted passwords
+        user.setPassword(user.getConfirmPassword());
+        return INPUT;
     }
 
     /**

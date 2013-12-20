@@ -113,6 +113,10 @@
             <param-value>org.appfuse.tutorial.webapp.action</param-value>
         </init-param>
     </filter>
+    <filter>
+        <filter-name>wroFilter</filter-name>
+        <filter-class>ro.isdc.wro.http.WroFilter</filter-class>
+    </filter>
 
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
@@ -133,6 +137,12 @@
     <filter-mapping>
         <filter-name>rewriteFilter</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>wroFilter</filter-name>
+        <url-pattern>/assets/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     <filter-mapping>
         <filter-name>securityFilter</filter-name>
@@ -162,7 +172,7 @@
     <!-- For Struts debugging console -->
     <filter-mapping>
         <filter-name>struts</filter-name>
-        <url-pattern>*.html</url-pattern>
+        <url-pattern>/struts/*</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>exportFilter</filter-name>
@@ -215,10 +225,6 @@
         <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
 
-    <session-config>
-        <session-timeout>10</session-timeout>
-    </session-config>
-
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
@@ -246,4 +252,13 @@
             <trim-directive-whitespaces>true</trim-directive-whitespaces>
         </jsp-property-group>
     </jsp-config>
+
+    <session-config>
+        <session-timeout>15</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+            <!--<secure>true</secure>-->
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
 </web-app>
