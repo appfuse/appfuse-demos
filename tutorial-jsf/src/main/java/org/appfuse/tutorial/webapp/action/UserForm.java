@@ -64,7 +64,7 @@ public class UserForm extends BasePage implements Serializable {
         }
 
         if (!"list".equals(getParameter("from"))) {
-            return "mainMenu";
+            return "home";
         } else {
             return "cancel";
         }
@@ -121,16 +121,15 @@ public class UserForm extends BasePage implements Serializable {
             String roleName = userRoles[i];
             user.addRole(roleManager.getRole(roleName));
         }
-        
-        Integer originalVersion = user.getVersion();
 
-        String userAgent = getRequest().getHeader("User-Agent");
-        // For some reason, IE causes version to be 0. Set it to null so test will pass.
-        if (userAgent != null && userAgent.contains("MSIE") && user.getVersion() == 0) {
-            log.debug("Detected IE, setting version and id to null");
+        // Check for Integers set to 0: happens in Tomcat, not in Jetty
+        if (user.getId() != null && user.getId() == 0 ||
+            user.getVersion() != null && user.getVersion() == 0) {
             user.setId(null);
             user.setVersion(null);
         }
+
+        Integer originalVersion = user.getVersion();
 
         try {
             user = userManager.saveUser(user);
@@ -152,7 +151,7 @@ public class UserForm extends BasePage implements Serializable {
             addMessage("user.saved");
 
             // return to main Menu
-            return "mainMenu";
+            return "home";
         } else {
             // add success messages
             if ("".equals(getParameter("userForm:version"))) {

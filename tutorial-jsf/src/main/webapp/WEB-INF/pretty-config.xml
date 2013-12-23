@@ -12,7 +12,7 @@
 
     <url-mapping>
         <pattern value="/passwordHint/#{username}"/>
-        <view-id value="/passwordHint.jsf"/>
+        <view-id value="/passwordHint.xhtml"/>
         <action>#{passwordHint.execute}</action>
     </url-mapping>
 

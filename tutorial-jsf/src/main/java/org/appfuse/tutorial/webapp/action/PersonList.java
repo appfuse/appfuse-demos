@@ -1,17 +1,17 @@
 package org.appfuse.tutorial.webapp.action;
 
-import java.io.Serializable;
-import java.util.List;
-
-import org.appfuse.tutorial.model.Person;
 import org.appfuse.service.GenericManager;
+import org.appfuse.tutorial.model.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@Scope("request")
+import java.io.Serializable;
+import java.util.List;
+
 @Component("personList")
+@Scope("session")
 public class PersonList extends BasePage implements Serializable {
     private GenericManager<Person, Long> personManager;
 
@@ -24,7 +24,11 @@ public class PersonList extends BasePage implements Serializable {
         setSortColumn("id"); // sets the default sort column
     }
 
-    public List getPersons() {
+    public List<Person> getPersons() {
         return sort(personManager.getAll());
     }
-} 
+
+    public String search() {
+        return "success";
+    }
+}

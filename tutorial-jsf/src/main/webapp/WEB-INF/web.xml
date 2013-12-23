@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
 
     <display-name>appfuse</display-name>
     <distributable/>
 
-    <!-- Define the default CSS Theme -->
-    <context-param>
-        <param-name>csstheme</param-name>
-        <param-value>simplicity</param-value>
-    </context-param>
     <!-- Define the basename for a resource bundle for I18N -->
     <context-param>
         <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
@@ -36,8 +32,8 @@
         </param-value>
     </context-param>
     <context-param>
-        <param-name>org.ajax4jsf.VIEW_HANDLERS</param-name>
-        <param-value>com.sun.facelets.FaceletViewHandler</param-value>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
     </context-param>
     <context-param>
         <param-name>javax.faces.STATE_SAVING_METHOD</param-name>
@@ -48,21 +44,19 @@
         <param-value>.xhtml</param-value>
     </context-param>
     <context-param>
-        <param-name>facelets.DEVELOPMENT</param-name>
-        <param-value>true</param-value>
-    </context-param>
-    <context-param>
-        <param-name>facelets.LIBRARIES</param-name>
+        <param-name>javax.faces.FACELETS_LIBRARIES</param-name>
         <param-value>
-            /WEB-INF/taglibs/acegijsf.taglib.xml;
-            /WEB-INF/taglibs/tomahawk.taglib.xml
+            /WEB-INF/taglibs/acegijsf.taglib.xml
         </param-value>
     </context-param>
-
-    <filter>
-        <filter-name>ajax4jsf</filter-name>
-        <filter-class>org.ajax4jsf.Filter</filter-class>
-    </filter>
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>bootstrap</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.omnifaces.FACES_VIEWS_SCAN_PATHS</param-name>
+        <param-value>/*.xhtml</param-value>
+    </context-param>
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -73,14 +67,6 @@
         <init-param>
             <param-name>forceEncoding</param-name>
             <param-value>true</param-value>
-        </init-param>
-    </filter>
-    <filter>
-        <filter-name>extensionsFilter</filter-name>
-        <filter-class>org.apache.myfaces.webapp.filter.ExtensionsFilter</filter-class>
-        <init-param>
-            <param-name>maxFileSize</param-name>
-            <param-value>2m</param-value>
         </init-param>
     </filter>
     <!-- GZipFilter has issues with XFire's service-listing servlet. -->
@@ -94,7 +80,7 @@
     </filter-->
     <!--<filter>
         <filter-name>lazyLoadingFilter</filter-name>
-        <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
     </filter>-->
     <!-- Use "org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter" if you're using JPA -->
     <filter>
@@ -136,31 +122,13 @@
         </init-param>
     </filter>
     <filter>
-        <filter-name>sitemesh</filter-name>
-        <filter-class>com.opensymphony.module.sitemesh.filter.PageFilter</filter-class>
+        <filter-name>wroFilter</filter-name>
+        <filter-class>ro.isdc.wro.http.WroFilter</filter-class>
     </filter>
 
     <filter-mapping>
-        <filter-name>sitemesh</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>extensionsFilter</filter-name>
-        <servlet-name>faces</servlet-name>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>extensionsFilter</filter-name>
-        <url-pattern>/faces/myFacesExtensionResource/*</url-pattern>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>ajax4jsf</filter-name>
-        <servlet-name>faces</servlet-name>
-        <dispatcher>REQUEST</dispatcher>
-        <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     <!--<filter-mapping>
         <filter-name>lazyLoadingFilter</filter-name>
@@ -185,6 +153,12 @@
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
     <filter-mapping>
+        <filter-name>wroFilter</filter-name>
+        <url-pattern>/assets/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
         <filter-name>securityFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
@@ -194,13 +168,14 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>messageFilter</filter-name>
-        <url-pattern>*.jsf</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
 
+    <!-- http://stackoverflow.com/questions/7886035/could-not-find-factory-javax-faces-context-facescontextfactory/7889899 -->
     <listener>
-        <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
+        <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
     </listener>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -235,7 +210,7 @@
             <param-value>true</param-value>
         </init-param>
     </servlet>
-    
+
     <servlet>
         <servlet-name>CXFServlet</servlet-name>
         <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
@@ -243,22 +218,18 @@
 
     <servlet-mapping>
         <servlet-name>faces</servlet-name>
-        <url-pattern>*.jsf</url-pattern>
+        <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>dwr-invoker</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
     </servlet-mapping>
-    
+
     <servlet-mapping>
         <servlet-name>CXFServlet</servlet-name>
         <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
-
-    <session-config>
-        <session-timeout>10</session-timeout>
-    </session-config>
 
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
@@ -280,4 +251,13 @@
         <error-code>404</error-code>
         <location>/404.jsp</location>
     </error-page>
+
+    <session-config>
+        <session-timeout>15</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+            <!--<secure>true</secure>-->
+        </cookie-config>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
 </web-app>

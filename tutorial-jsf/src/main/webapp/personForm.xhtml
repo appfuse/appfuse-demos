@@ -1,51 +1,49 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jstl/core"
-      xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:t="http://myfaces.apache.org/tomahawk">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<f:view>
-<f:loadBundle var="text" basename="#{personForm.bundleName}"/>
-    <head>
-        <title>#{text['personDetail.title']}</title>
-        <meta name="heading" content="#{text['personDetail.heading']}"/>
-        <meta name="menu" content="PersonMenu"/>
-    </head>
-<body id="personForm">
+<ui:composition template="/layouts/default.xhtml">
+    <ui:define name="title">#{text['personDetail.title']}</ui:define>
+    <ui:param name="menu" value="PersonMenu"/>
 
-<div class="span2">
-    <h2>#{text['personDetail.heading']}</h2>
-</div>
-<div class="span7">
-<h:form id="personForm" styleClass="well form-horizontal">
-    <h:inputHidden value="#{personForm.person.id}" id="id"/>
+    <ui:define name="body">
+        <script type="text/javascript">var msgDelConfirm =
+           "<h:outputFormat value="#{text['delete.confirm']}"><f:param value="person"/></h:outputFormat>";
+        </script>
 
-    <div class="control-group">
+        <div class="col-sm-3">
+            <h2>#{text['personDetail.heading']}</h2>
+        </div>
+
+        <div class="col-sm-7">
+<h:form id="personForm" styleClass="well">
+    <div class="form-group">
+        <h:inputHidden value="#{personForm.person.id}" id="id"/>
+    </div>
+
+    <div class="form-group">
         <h:outputLabel styleClass="control-label" for="firstName" value="#{text['person.firstName']}"/>
-        <div class="controls">
-            <h:inputText id="firstName" value="#{personForm.person.firstName}" required="true"/>
-            <t:message for="firstName" styleClass="help-inline"/>
-        </div>
+        <h:inputText id="firstName" value="#{personForm.person.firstName}" styleClass="form-control"
+                     required="true" maxlength="50"/>
+        <p:message for="firstName"/>
     </div>
-    <div class="control-group">
+    <div class="form-group">
         <h:outputLabel styleClass="control-label" for="lastName" value="#{text['person.lastName']}"/>
-        <div class="controls">
-            <h:inputText id="lastName" value="#{personForm.person.lastName}" required="true"/>
-            <t:message for="lastName" styleClass="help-inline"/>
-        </div>
+        <h:inputText id="lastName" value="#{personForm.person.lastName}" styleClass="form-control"
+                     required="true" maxlength="50"/>
+        <p:message for="lastName"/>
     </div>
-
-    <div class="form-actions">
-        <h:commandButton value="#{text['button.save']}" action="#{personForm.save}" id="save" styleClass="btn btn-primary"/>
-
-        <c:if test="${not empty personForm.person.id}">
+    <div class="form-group form-actions">
+        <h:commandButton value="#{text['button.save']}" action="#{personForm.save}"
+                         id="save" styleClass="btn btn-primary"/>
         <h:commandButton value="#{text['button.delete']}" action="#{personForm.delete}"
-            id="delete" styleClass="btn" onclick="return confirmDelete('Person')"/>
-        </c:if>
-
+                         id="delete" styleClass="btn btn-default"
+                         onclick="return confirmMessage(msgDelConfirm)"/>
         <h:commandButton value="#{text['button.cancel']}" action="cancel" immediate="true"
-            id="cancel" styleClass="btn"/>
+                         id="cancel" styleClass="btn btn-default"/>
     </div>
 </h:form>
-</div>
-</body>
-</f:view>
-</html>
+        </div>
+    </ui:define>
+</ui:composition>
+</html><!---->
