@@ -34,7 +34,7 @@
     </target>
     
     <!-- Login to the application -->
-    <target name="Login" description="Runs login test and verifies Main Menu's Title">
+    <target name="Login" description="Runs login test and verifies Home's Title">
         <webtest name="login">
             &config;
             <steps>
@@ -63,8 +63,7 @@
                 <invoke description="get Login Page" url="/"/>
                 <verifytitle description="we should see the login title" text=".*${login.title}.*" regex="true"/>
                 <invoke description="click password hint link" url="/passwordHint?username=admin"/>
-                <verifytitle description="we should see the login title again"
-                    text=".*${login.title}.*" regex="true"/>
+                <verifytitle description="show login title again" text=".*${login.title}.*" regex="true"/>
             </steps>
         </webtest>
     </target>
@@ -125,8 +124,8 @@
                 <setinputfield description="set address" name="address.address" value="2255 Lane Avenue"/>
                 <setinputfield description="set zipcode" name="address.postalCode" value="59826"/>
                 <clickbutton label="${button.save}" description="Click Save"/>
-                <verifytitle description="display Main Menu if save OK"
-                     text=".*${mainMenu.title}.*" regex="true"/>
+                <verifytitle description="display Home if save OK"
+                     text=".*${home.title}.*" regex="true"/>
             </steps>
         </webtest>
     </target>
@@ -141,8 +140,8 @@
                 <verifytitle description="view the user profile title" text=".*${userProfile.title}.*" regex="true"/>
                     
                 <setinputfield description="set username" name="username" value="newuser"/>
-                <setinputfield description="set password" name="password" value="test"/>
-                <setinputfield description="set confirmPassword" name="confirmPassword" value="test"/>
+<!--                 <setinputfield description="set password" name="password" value="test"/> -->
+<!--                 <setinputfield description="set confirmPassword" name="confirmPassword" value="test"/> -->
                 <setinputfield description="set firstName" name="firstName" value="Test"/>
                 <setinputfield description="set lastName" name="lastName" value="Name"/>
                 <setinputfield description="set city" name="address.city" value="Denver"/>
@@ -181,7 +180,7 @@
                 
                 <setinputfield description="set username" name="username" value="signup-user"/>
                 <setinputfield description="set password" name="password" value="test"/>
-                <setinputfield description="set confirmPassword" name="confirmPassword" value="test"/>
+<!--                 <setinputfield description="set confirmPassword" name="confirmPassword" value="test"/> -->
                 <setinputfield description="set firstName" name="firstName" value="Test"/>
                 <setinputfield description="set lastName" name="lastName" value="Name"/>
                 <setinputfield description="set city" name="address.city" value="Denver"/>
@@ -193,7 +192,7 @@
                 <setinputfield description="set passwordHint" name="passwordHint" value="test"/>
                 <clickbutton label="${button.register}" description="Click button 'Signup'"/>
 
-                <verifytitle description="view main menu" text=".*${mainMenu.title}.*" regex="true"/>
+                <verifytitle description="view main menu" text=".*${home.title}.*" regex="true"/>
                 <verifytext description="verify success message" text="${user.registered}"/>
             </steps>
         </webtest>

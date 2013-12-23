@@ -53,7 +53,7 @@ public class UserFormControllerTest extends BaseControllerTestCase {
         BindingResult errors = new DataBinder(user).getBindingResult();
         String view = c.onSubmit(user, errors, request, new MockHttpServletResponse());
 
-        assertEquals("redirect:/mainMenu", view);
+        assertEquals("redirect:/home", view);
     }
 
     @Test
@@ -119,7 +119,7 @@ public class UserFormControllerTest extends BaseControllerTestCase {
         BindingResult errors = new DataBinder(user).getBindingResult();
         c.onSubmit(user, errors, request, new MockHttpServletResponse());
         
-        assertTrue(errors.getAllErrors().size() == 6);
+        assertEquals(4, errors.getAllErrors().size());
     }
 
     @Test

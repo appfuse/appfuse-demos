@@ -13,7 +13,7 @@
     function validateForm(form) {                                                               
         var valid = validateRequired(form);
         if (valid == false) {
-            $(".control-group").addClass('error');
+            $(".form-group").addClass('error');
         }
         return valid;
     }
@@ -26,6 +26,15 @@
             location.href="<c:url value="/passwordHint"/>?username=" + $("#j_username").val();
         }
     }
+    
+    function requestRecoveryToken() {
+        if ($("#j_username").val().length == 0) {
+            alert("<fmt:message key="errors.required"><fmt:param><fmt:message key="label.username"/></fmt:param></fmt:message>");
+            $("#j_username").focus();
+        } else {
+            location.href="<c:url value="/requestRecoveryToken"/>?username=" + $("#j_username").val();
+        }
+    }    
     
     function required () { 
         this.aa = new Array("j_username", "<fmt:message key="errors.required"><fmt:param><fmt:message key="label.username"/></fmt:param></fmt:message>", new Function ("varName", " return this[varName];"));

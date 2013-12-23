@@ -5,18 +5,19 @@
     <meta name="menu" content="PersonMenu"/>
 </head>
 
-<div class="span10">
+<div class="col-sm-10">
     <h2><fmt:message key='personList.heading'/></h2>
 
-    <div id="actions" class="form-actions">
+    <div id="actions" class="btn-group">
         <a class="btn btn-primary" href="<c:url value='/personform'/>">
             <i class="icon-plus icon-white"></i> <fmt:message key="button.add"/></a>
 
-        <a class="btn" href="<c:url value='/mainMenu'/>">
+        <a class="btn btn-default" href="<c:url value='/home'/>">
             <i class="icon-ok"></i> <fmt:message key="button.done"/></a>
     </div>
 
-    <display:table name="personList" class="table table-condensed table-striped table-hover" requestURI="" id="personList" export="true" pagesize="25">
+    <display:table name="personList" class="table table-condensed table-striped table-hover" requestURI=""
+                   id="personList" export="true" pagesize="25">
         <display:column property="id" sortable="true" href="personform" media="html"
             paramId="id" paramProperty="id" titleKey="person.id"/>
         <display:column property="id" media="csv excel xml pdf" titleKey="person.id"/>

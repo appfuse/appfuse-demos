@@ -9,7 +9,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.util.Map;
 
 
 /**
@@ -40,6 +39,8 @@ public class StartupListenerTest extends TestCase {
 
     protected void tearDown() throws Exception {
         super.tearDown();
+        // cleanup: close sessionFactory and related resources (search index locks)
+        springListener.closeWebApplicationContext(sc);
         springListener = null;
         listener = null;
         sc = null;
@@ -48,10 +49,10 @@ public class StartupListenerTest extends TestCase {
     public void testContextInitialized() {
         listener.contextInitialized(new ServletContextEvent(sc));
 
-        assertTrue(sc.getAttribute(Constants.CONFIG) != null);
-        
         assertTrue(sc.getAttribute(WebApplicationContext
                 .ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE) != null);
         assertTrue(sc.getAttribute(Constants.AVAILABLE_ROLES) != null);
+
+        assertNotNull(sc.getAttribute(Constants.ASSETS_VERSION));
     }
 }
