@@ -1,18 +1,17 @@
-package org.appfuse.tutorial.service;
+package org.appfuse.tutorial.service.impl;
 
 import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.appfuse.tutorial.dao.PersonDao;
 import org.appfuse.tutorial.model.Person;
-import org.appfuse.tutorial.service.impl.PersonManagerImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.easymock.EasyMock.*;
 
-public class PersonManagerEasyMockImplTest extends TestCase {
+public class PersonManagerEasyMockTest extends TestCase {
     private final Log log = LogFactory.getLog(PersonManagerImplTest.class);
     private PersonManagerImpl manager = null;
     private PersonDao dao = null;

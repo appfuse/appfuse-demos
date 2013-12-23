@@ -69,10 +69,10 @@
             </plugin>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
+                <version>3.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -91,7 +91,7 @@
                     <componentProperties>
                         <drop>true</drop>
                         <jdk5>true</jdk5>
-                        <propertyfile>target/classes/jdbc.properties</propertyfile>
+                        <propertyfile>${project.build.outputDirectory}/jdbc.properties</propertyfile>
                         <skip>${skipTests}</skip>
                     </componentProperties>
                 </configuration>
@@ -155,7 +155,7 @@
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
-                <version>8.1.3.v20120416</version>
+                <version>8.1.14.v20131031</version>
                 <configuration>
                     <webApp>
                         <contextPath>/</contextPath>
@@ -190,6 +190,14 @@
                             </includes>
                         </resource>
                     </webResources>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
             </plugin>
             <plugin>
@@ -205,15 +213,15 @@
                         <configuration>
                             <encoding>UTF8</encoding>
                             <includes>
-                                <include>ApplicationResources_*.properties</include>
+                                <include>ApplicationResources_el*.properties</include>
                             </includes>
                             <excludes>
-                                <exclude>ApplicationResources.properties</exclude>
-                                <exclude>ApplicationResources_de*.properties</exclude>
-                                <exclude>ApplicationResources_fr*.properties</exclude>
-                                <exclude>ApplicationResources_nl*.properties</exclude>
-                                <exclude>ApplicationResources_pt*.properties</exclude>
-                                <exclude>ApplicationResources_es*.properties</exclude>
+                                <include>ApplicationResources_zh*.properties</include>
+                                <include>ApplicationResources_ko*.properties</include>
+                                <include>displaytag_el*.properties</include>
+                                <include>displaytag_zh*.properties</include>
+                                <include>errors_el*.properties</include>
+                                <include>errors_zh*.properties</include>
                             </excludes>
                         </configuration>
                     </execution>
@@ -229,8 +237,7 @@
                                 <include>ApplicationResources_de.properties</include>
                                 <include>ApplicationResources_fr.properties</include>
                                 <include>ApplicationResources_nl.properties</include>
-                                <include>ApplicationResources_pt*.properties</include>
-                                <include>ApplicationResources_es*.properties</include>
+                                <include>errors_ko*.properties</include>
                             </includes>
                         </configuration>
                     </execution>
@@ -290,6 +297,29 @@
         </pluginRepository>
     </pluginRepositories>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>bootstrap</artifactId>
+                <version>${bootstrap.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
             <groupId>org.appfuse</groupId>
@@ -329,7 +359,7 @@
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
+            <artifactId>javax.servlet-api</artifactId>
             <version>${servlet.version}</version>
             <scope>provided</scope>
         </dependency>
@@ -351,24 +381,17 @@
         </dependency>
         <dependency>
             <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-dojo-plugin</artifactId>
+            <version>${struts.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
             <artifactId>struts2-spring-plugin</artifactId>
             <version>${struts.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
-                    <artifactId>spring-beans</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-core</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-context</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring-web</artifactId>
+                    <artifactId>*</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -383,23 +406,16 @@
             <artifactId>commons-io</artifactId>
             <version>${commons.io.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.jmock</groupId>
-            <artifactId>jmock</artifactId>
-            <version>${jmock.version}</version>
+       <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.jmock</groupId>
-            <artifactId>jmock-junit4</artifactId>
-            <version>${jmock.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- Upgrade junit-dep used by jmock -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit-dep</artifactId>
-            <version>4.5</version>
+            <groupId>org.easymock</groupId>
+            <artifactId>easymock</artifactId>
+            <version>3.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -411,7 +427,6 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -419,13 +434,28 @@
             <artifactId>subethasmtp-wiser</artifactId>
             <version>${wiser.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
+        <!-- Add Bootstrap via WebJars -->
         <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
-            <version>2.2</version>
-            <scope>test</scope>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap-datepicker</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <!-- Downgrade jQuery so it works with HtmlUnit -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>1.8.3</version>
         </dependency>
     </dependencies>
 
@@ -433,7 +463,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-changes-plugin</artifactId>
-                <version>2.8</version>
+                <version>2.9</version>
             </plugin>
             <plugin>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -443,7 +473,7 @@
                     <failsOnError>false</failsOnError>
                     <maxAllowedViolations>3</maxAllowedViolations>
                 </configuration>
-                <version>2.9.1</version>
+                <version>2.10</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -455,11 +485,11 @@
                         </excludes>
                     </instrumentation>
                 </configuration>
-                <version>2.5.2</version>
+                <version>2.6</version>
             </plugin>
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.9</version>
+                <version>2.9.1</version>
             </plugin>
             <plugin>
                 <artifactId>maven-jxr-plugin</artifactId>
@@ -471,11 +501,11 @@
                     <linkXRef>true</linkXRef>
                     <targetJdk>1.6</targetJdk>
                 </configuration>
-                <version>2.7.1</version>
+                <version>3.0.1</version>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-report-plugin</artifactId>
-                <version>2.12.4</version>
+                <version>2.16</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -487,12 +517,7 @@
 
     <profiles>
         <profile>
-            <id>integration-test</id>
-            <activation>
-                <property>
-                    <name>!skipTests</name>
-                </property>
-            </activation>
+            <id>itest</id>
             <build>
                 <plugins>
                     <plugin>
@@ -573,7 +598,6 @@
                             <resultpath>target/webtest/webtest-results</resultpath>
                             <haltonfailure>false</haltonfailure>
                             <haltonerror>false</haltonerror>
-                                <version>${webtest.version}</version>
                             <loglevel>fatal</loglevel>
                         </configuration>
                     </plugin>
@@ -604,10 +628,10 @@
         <profile>
             <id>derby</id>
             <properties>
-                <hibernate.dialect>org.hibernate.dialect.DerbyDialect</hibernate.dialect>
+                <hibernate.dialect>org.hibernate.dialect.DerbyTenSevenDialect</hibernate.dialect>
                 <jdbc.groupId>org.apache.derby</jdbc.groupId>
                 <jdbc.artifactId>derbyclient</jdbc.artifactId>
-                <jdbc.version>10.2.2.0</jdbc.version>
+                <jdbc.version>10.9.1.0</jdbc.version>
                 <jdbc.driverClassName>org.apache.derby.jdbc.ClientDriver</jdbc.driverClassName>
                 <jdbc.url>jdbc:derby://localhost/${db.name};create=true</jdbc.url>
                 <jdbc.username>any</jdbc.username>
@@ -621,10 +645,11 @@
                 <hibernate.dialect>org.hibernate.dialect.H2Dialect</hibernate.dialect>
                 <jdbc.groupId>com.h2database</jdbc.groupId>
                 <jdbc.artifactId>h2</jdbc.artifactId>
-                <jdbc.version>1.2.134</jdbc.version>
+                <jdbc.version>1.3.170</jdbc.version>
                 <jdbc.driverClassName>org.h2.Driver</jdbc.driverClassName>
                 <jdbc.url>jdbc:h2:/tmp/${db.name};MVCC=TRUE</jdbc.url>
                 <jdbc.username>sa</jdbc.username>
+                <jdbc.validationQuery>SELECT 1 + 1</jdbc.validationQuery>
             </properties>
         </profile>
         <profile>
@@ -632,12 +657,13 @@
             <properties>
                 <dbunit.dataTypeFactoryName>org.dbunit.ext.hsqldb.HsqldbDataTypeFactory</dbunit.dataTypeFactoryName>
                 <hibernate.dialect>org.hibernate.dialect.HSQLDialect</hibernate.dialect>
-                <jdbc.groupId>hsqldb</jdbc.groupId>
+                <jdbc.groupId>org.hsqldb</jdbc.groupId>
                 <jdbc.artifactId>hsqldb</jdbc.artifactId>
-                <jdbc.version>1.8.0.7</jdbc.version>
+                <jdbc.version>2.2.9</jdbc.version>
                 <jdbc.driverClassName>org.hsqldb.jdbcDriver</jdbc.driverClassName>
                 <jdbc.url>jdbc:hsqldb:/tmp/${db.name};shutdown=true</jdbc.url>
                 <jdbc.username>sa</jdbc.username>
+                <jdbc.validationQuery>SELECT 1 + 1</jdbc.validationQuery>
             </properties>
         </profile>
         <profile>
@@ -653,6 +679,7 @@
                 <jdbc.url>jdbc:oracle:thin:@localhost:1521:XE</jdbc.url>
                 <jdbc.username>system</jdbc.username>
                 <jdbc.password>system</jdbc.password>
+                <jdbc.validationQuery>SELECT 1 + 1 from DUAL</jdbc.validationQuery>
             </properties>
         </profile>
         <profile>
@@ -661,11 +688,12 @@
                 <hibernate.dialect>org.hibernate.dialect.PostgreSQLDialect</hibernate.dialect>
                 <jdbc.groupId>postgresql</jdbc.groupId>
                 <jdbc.artifactId>postgresql</jdbc.artifactId>
-                <jdbc.version>8.1-407.jdbc3</jdbc.version>
+                <jdbc.version>9.1-901-1.jdbc4</jdbc.version>
                 <jdbc.driverClassName>org.postgresql.Driver</jdbc.driverClassName>
                 <jdbc.url>jdbc:postgresql://localhost/${db.name}</jdbc.url>
                 <jdbc.username>postgres</jdbc.username>
                 <jdbc.password>postgres</jdbc.password>
+                <jdbc.validationQuery>SELECT 1 + 1</jdbc.validationQuery>
             </properties>
         </profile>
         <profile>
@@ -678,11 +706,12 @@
                 <hibernate.dialect>org.hibernate.dialect.SQLServerDialect</hibernate.dialect>
                 <jdbc.groupId>net.sourceforge.jtds</jdbc.groupId>
                 <jdbc.artifactId>jtds</jdbc.artifactId>
-                <jdbc.version>1.2</jdbc.version>
+                <jdbc.version>1.3.0</jdbc.version>
                 <jdbc.driverClassName>net.sourceforge.jtds.jdbc.Driver</jdbc.driverClassName>
                 <jdbc.url>jdbc:jtds:sqlserver://localhost:3683/${db.name}</jdbc.url>
                 <jdbc.username>sa</jdbc.username>
                 <jdbc.password>appfuse</jdbc.password>
+                <jdbc.validationQuery>SELECT 1 + 1</jdbc.validationQuery>
             </properties>
         </profile>
 
@@ -700,7 +729,7 @@
     <properties>
         <!-- Application settings -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <copyright.year>2012</copyright.year>
+        <copyright.year>2014</copyright.year>
         <dao.framework>hibernate</dao.framework>
         <web.framework>struts</web.framework>
         <amp.genericCore>true</amp.genericCore>
@@ -708,19 +737,20 @@
         <db.name>tutorial_hibernate</db.name>
 
         <!-- Framework dependency versions -->
-        <appfuse.version>2.2.1</appfuse.version>
-        <commons.fileupload.version>1.2.1</commons.fileupload.version>
-        <commons.io.version>2.0.1</commons.io.version>
+        <appfuse.version>3.0.0</appfuse.version>
+        <bootstrap.version>3.0.2</bootstrap.version>
+        <commons.fileupload.version>1.3</commons.fileupload.version>
+        <commons.io.version>2.4</commons.io.version>
         <displaytag.version>1.2</displaytag.version>
-        <spring.version>3.1.3.RELEASE</spring.version>
-        <struts.version>2.3.7</struts.version>
+        <spring.version>4.0.0.RELEASE</spring.version>
+        <struts.version>2.3.16</struts.version>
 
         <!-- Testing dependency versions -->
-        <cargo.version>1.2.4</cargo.version>
-        <jmock.version>2.5.1</jmock.version>
+        <cargo.version>1.4.4</cargo.version>
+        <mockito.version>1.9.5</mockito.version>
         <jsp.version>2.1</jsp.version>
-        <junit.version>4.10</junit.version>
-        <servlet.version>2.5</servlet.version>
+        <junit.version>4.11</junit.version>
+        <servlet.version>3.1.0</servlet.version>
         <wiser.version>1.2</wiser.version>
 
         <!-- WebTest default target -->
@@ -728,7 +758,7 @@
 
         <cargo.container>tomcat7x</cargo.container>
         <cargo.container.home>${env.CATALINA_HOME}</cargo.container.home>
-        <cargo.container.url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.33/bin/apache-tomcat-7.0.33.zip</cargo.container.url>
+        <cargo.container.url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.47/bin/apache-tomcat-7.0.47.zip</cargo.container.url>
         <cargo.host>localhost</cargo.host>
         <cargo.port>8081</cargo.port>
         <cargo.wait>false</cargo.wait>
@@ -744,10 +774,11 @@
         <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
         <jdbc.groupId>mysql</jdbc.groupId>
         <jdbc.artifactId>mysql-connector-java</jdbc.artifactId>
-        <jdbc.version>5.1.22</jdbc.version>
+        <jdbc.version>5.1.27</jdbc.version>
         <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
         <jdbc.url>jdbc:mysql://localhost/${db.name}?createDatabaseIfNotExist=true&amp;amp;useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;autoReconnect=true</jdbc.url>
         <jdbc.username>root</jdbc.username>
         <jdbc.password></jdbc.password>
+        <jdbc.validationQuery>SELECT 1 + 1</jdbc.validationQuery>
     </properties>
 </project>
