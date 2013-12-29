@@ -1,7 +1,7 @@
 <!DOCTYPE project [
-        <!ENTITY config SYSTEM "./config.xmlf">
-        <!ENTITY login SYSTEM "./login.xmlf">
-        ]>
+    <!ENTITY config SYSTEM "./config.xmlf">
+    <!ENTITY login SYSTEM "./login.xmlf">
+]>
 <project basedir="." default="run-all-tests">
     <taskdef resource="webtestTaskdefs.properties" />
 
@@ -23,7 +23,7 @@
     </target>
     
     <!-- Login to the application -->
-    <target name="Login" description="Runs login test and verifies Main Menu's Title">
+    <target name="Login" description="Runs login test and verifies Home's Title">
         <webtest name="login">
             &config;
             <steps>
@@ -90,10 +90,13 @@
                 &login;
                 <invoke description="click View Users link" url="/admin/users"/>
                 <verifytitle description="we should see the user list title"
-                             text=".*${userList.title}.*" regex="true"/>
+                    text=".*${userList.title}.*" regex="true"/>
                 <setinputfield description="set search term" name="q" value="tomcat"/>
                 <clickbutton label="${button.search}" description="Click Search"/>
-                <verifytext description="verify results" text="One user found."/>
+                <verifyXPath
+                     description="Count the number of users found"
+                     xpath="count(//table[@id='users']/tbody/tr)"
+                     text="1"/>
             </steps>
         </webtest>
     </target>
@@ -106,11 +109,11 @@
                 &login;
                 <invoke description="click Edit Profile link" url="/editProfile"/>
                 <verifytitle description="we should see the user profile title"
-                             text=".*${userProfile.title}.*" regex="true"/>
+                    text=".*${userProfile.title}.*" regex="true"/>
                 <setinputfield description="set address" name="user.address.address" value="2255 Lane Avenue"/>
                 <setinputfield description="set zipcode" name="user.address.postalCode" value="59826"/>
                 <clickbutton label="${button.save}" description="Click Save"/>
-                <verifytitle description="display Main Menu if save OK" text=".*${mainMenu.title}.*" regex="true"/>
+                <verifytitle description="display Home if save OK" text=".*${home.title}.*" regex="true"/>
             </steps>
         </webtest>
     </target>
@@ -181,7 +184,7 @@
                 <enableJavaScript enable="false"/> <!-- HtmlUnit doesn't understand table.rows.length -->
                 <clickbutton label="${button.register}"  description="Click button 'Signup'"/>
                 
-                <verifytitle description="view main menu" text=".*${mainMenu.title}.*" regex="true"/>
+                <verifytitle description="view main menu" text=".*${home.title}.*" regex="true"/>
                 <verifytext description="verify success message" text="${user.registered}"/>
             </steps>
         </webtest>
@@ -195,7 +198,7 @@
                 &login;
                 <invoke description="get activeUsers URL" url="/admin/activeUsers"/>
                 <verifytitle description="we should see the activeUsers title"
-                             text=".*${activeUsers.title}.*" regex="true"/>
+                    text=".*${activeUsers.title}.*" regex="true"/>
             </steps>
         </webtest>
     </target>
@@ -206,7 +209,7 @@
             &config;
             <steps>
                 &login;
-                <invoke description="click Upload a File link" url="/uploadFile"/>
+                <invoke description="click Upload a File link" url="/selectFile"/>
                 <verifytitle description="should see file upload form" text=".*${upload.title}.*" regex="true"/>
                 <setinputfield description="set name" name="name" value="Canoo Test File"/>
                 <setFileField description="set file" name="file" fileName="web-tests.xml"/>

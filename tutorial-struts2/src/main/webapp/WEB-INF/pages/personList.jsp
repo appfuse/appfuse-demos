@@ -5,14 +5,14 @@
     <meta name="menu" content="PersonMenu"/>
 </head>
 
-<div class="span10">
+<div class="col-sm-10">
     <h2><fmt:message key="personList.heading"/></h2>
 
-    <div id="actions" class="form-actions">
+    <div id="actions" class="btn-group">
         <a class="btn btn-primary" href="<c:url value="/editPerson"/>" >
             <i class="icon-plus icon-white"></i> <fmt:message key="button.add"/>
         </a>
-        <a class="btn" href="<c:url value="/mainMenu"/>">
+        <a class="btn btn-default" href="<c:url value="/mainMenu"/>">
             <i class="icon-ok"></i> <fmt:message key="button.done"/>
         </a>
     </div>

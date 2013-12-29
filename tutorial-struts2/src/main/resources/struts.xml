@@ -15,6 +15,8 @@
     <constant name="struts.enable.SlashesInActionNames" value="true"/>
     <constant name="struts.convention.action.disableScanning" value="true"/>
     <constant name="struts.mapper.alwaysSelectFullNamespace" value="false"/>
+    <!-- Allow <s:submit> to call method names directly -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
 
     <!-- Configuration for the default package. -->
     <package name="default" extends="struts-default">
@@ -61,7 +63,7 @@
         </interceptors>
 
         <global-results>
-            <result name="mainMenu" type="redirectAction">mainMenu</result>
+            <result name="home" type="redirectAction">home</result>
             <result name="dataAccessFailure">/WEB-INF/pages/dataAccessFailure.jsp</result>
         </global-results>
 
@@ -69,8 +71,8 @@
             <exception-mapping exception="org.springframework.dao.DataAccessException" result="dataAccessFailure"/>
         </global-exception-mappings>
 
-        <action name="mainMenu">
-            <result name="success">/WEB-INF/pages/mainMenu.jsp</result>
+        <action name="home">
+            <result name="success">/WEB-INF/pages/home.jsp</result>
         </action>
 
         <action name="signup">
@@ -80,7 +82,7 @@
         <action name="saveSignup" class="signupAction" method="save">
             <result name="cancel" type="redirect">/</result>
             <result name="input">/WEB-INF/pages/signup.jsp</result>
-            <result name="success" type="redirectAction">mainMenu</result>
+            <result name="success" type="redirectAction">home</result>
         </action>
 
         <action name="editUser" class="userAction" method="edit">
@@ -91,7 +93,7 @@
 
         <action name="editProfile" class="userAction" method="edit">
             <result name="success">/WEB-INF/pages/userForm.jsp</result>
-            <result name="error">/WEB-INF/pages/mainMenu.jsp</result>
+            <result name="error">/WEB-INF/pages/home.jsp</result>
         </action>
 
         <action name="saveUser" class="userAction" method="save">
@@ -100,11 +102,15 @@
             <result name="success" type="redirectAction">admin/users</result>
         </action>
 
-        <action name="uploadFile" class="org.appfuse.tutorial.webapp.action.FileUploadAction">
+        <action name="selectFile" class="org.appfuse.tutorial.webapp.action.FileUploadAction">
+            <result name="success">/WEB-INF/pages/uploadForm.jsp</result>
+        </action>
+
+        <action name="uploadFile" class="org.appfuse.tutorial.webapp.action.FileUploadAction" method="upload">
             <interceptor-ref name="fileUploadStack"/>
             <result name="input">/WEB-INF/pages/uploadForm.jsp</result>
             <result name="success">/WEB-INF/pages/uploadDisplay.jsp</result>
-            <result name="cancel" type="redirectAction">mainMenu</result>
+            <result name="cancel" type="redirectAction">home</result>
         </action>
 
         <action name="passwordHint" class="passwordHintAction">
@@ -136,11 +142,11 @@
         <action name="activeUsers" class="com.opensymphony.xwork2.ActionSupport">
             <result name="success">/WEB-INF/pages/admin/activeUsers.jsp</result>
         </action>
-        
+
         <action name="reload" class="org.appfuse.tutorial.webapp.action.ReloadAction">
             <interceptor-ref name="adminCheck"/>
             <!-- this should never be used, it's here to prevent warnings -->
-            <result name="success">/WEB-INF/pages/mainMenu.jsp</result>
+            <result name="success">/WEB-INF/pages/home.jsp</result>
         </action>
 
         <action name="users" class="userAction" method="list">
