@@ -1,27 +1,17 @@
 package org.appfuse.tutorial.webapp.pages;
 
+import org.apache.tapestry5.EventContext;
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.alerts.Duration;
 import org.apache.tapestry5.alerts.Severity;
+import org.apache.tapestry5.annotations.*;
+import org.apache.tapestry5.corelib.components.Form;
 import org.apache.tapestry5.corelib.components.TextField;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.apache.tapestry5.annotations.Component;
-import org.apache.tapestry5.annotations.InjectPage;
-import org.apache.tapestry5.annotations.Property;
-import org.apache.tapestry5.annotations.Persist;
-import org.apache.tapestry5.annotations.Service;
-import org.apache.tapestry5.corelib.components.EventLink;
-import org.apache.tapestry5.corelib.components.Form;
-import org.apache.tapestry5.PersistenceConstants;
-import org.apache.tapestry5.EventContext;
-
 import org.appfuse.service.GenericManager;
 import org.appfuse.tutorial.model.Person;
-
 import org.slf4j.Logger;
-
-import java.util.List;
 
 public class PersonForm {
     @Inject

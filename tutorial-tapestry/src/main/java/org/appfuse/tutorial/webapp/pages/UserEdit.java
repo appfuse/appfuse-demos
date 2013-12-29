@@ -1,6 +1,7 @@
 package org.appfuse.tutorial.webapp.pages;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.tapestry5.Link;
 import org.apache.tapestry5.PersistenceConstants;
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.alerts.Duration;
@@ -27,7 +28,6 @@ import org.springframework.security.access.AccessDeniedException;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -272,6 +272,14 @@ public class UserEdit {
         );
         logger.debug("After deletion.. ready to return userList object");
         return UserList.class;
+    }
+
+
+    @Log
+    Object onUpdatePassword() {
+        Link link = pageRenderLinkSource.createPageRenderLinkWithContext(PasswordUpdate.class);
+        link.addParameter("username", user.getUsername());
+        return link;
     }
 
     public void setFrom(String from) {

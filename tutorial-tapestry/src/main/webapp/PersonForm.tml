@@ -2,34 +2,30 @@
           heading="message:personDetail.heading" menu="PersonMenu"
           xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd">
 
-<div class="span2">
+<div class="col-sm-3">
     <h2>${message:personDetail.heading}</h2>
     ${message:personDetail.message}
 </div>
 
-<div class="span7">
-    <form t:id="personForm" class="well form-horizontal" clientValidation="true">
+<div class="col-sm-7">
+    <form t:id="personForm" class="well" clientValidation="true">
 
-        <div class="control-group">
+        <div class="form-group">
             <t:label class="control-label" for="firstName">${message:person.firstName}</t:label>
-            <div class="controls">
-                <input type="text" t:id="firstName"/>
-            </div>
+            <input type="text" class="form-control" t:id="firstName"/>
         </div>
-        <div class="control-group">
+        <div class="form-group">
             <t:label class="control-label" for="lastName">${message:person.lastName}</t:label>
-            <div class="controls">
-                <input type="text" t:id="lastName"/>
-            </div>
+            <input type="text" class="form-control" t:id="lastName"/>
         </div>
-        <div class="form-actions">
+        <div class="form-group form-actions">
             <button type="submit" id="save" class="btn btn-primary"><i class="icon-ok icon-white"></i> ${message:button.save}</button>
             <t:if test="person.id">
             <button t:type="eventlink" t:id="delete" id="delete" class="btn btn-danger" onclick="return confirmDelete('Person')">
                 <i class="icon-trash"></i> ${message:button.delete}
             </button>
             </t:if>
-            <button t:type="eventlink" t:id="cancel" id="cancel" class="btn"><i class="icon-remove"></i> ${message:button.cancel}</button>
+            <button t:type="eventlink" t:id="cancel" id="cancel" class="btn btn-default"><i class="icon-remove"></i> ${message:button.cancel}</button>
         </div>
     </form>
 </div>

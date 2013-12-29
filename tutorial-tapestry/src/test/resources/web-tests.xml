@@ -23,7 +23,7 @@
     </target>
     
     <!-- Login to the application -->
-    <target name="Login" description="Runs login test and verifies Main Menu's Title">
+    <target name="Login" description="Runs login test and verifies Home's Title">
         <webtest name="login">
             &config;
             <steps>
@@ -115,8 +115,8 @@
                 <setinputfield name="address" value="2255 Lane Avenue"/>
                 <setinputfield name="postalCode"  value="59826"/>
                 <clickbutton label="${button.save}" description="Click Save"/>
-                <verifytitle description="display Main Menu if save OK"
-                     text=".*${mainMenu.title}.*" regex="true"/>
+                <verifytitle description="display Home if save OK"
+                     text=".*${home.title}.*" regex="true"/>
             </steps>
         </webtest>
     </target>
@@ -154,7 +154,7 @@
                 <clicklink description="Click edit user link" label="newuser"/>
                 <prepareDialogResponse description="Confirm delete" dialogType="confirm" response="true"/>
                 <clicklink label="${button.delete}" description="Click button 'Delete'"/>
-                <clicklink label="${button.save}" description="Click button 'Save'"/>
+                <clicklink htmlId="delete" description="Click modal button 'Delete'"/>
                 <!--<verifyNoDialogResponses/>-->
                 <verifytext description="verify success message" regex="true" text='.*Test Name.*'/>
                 <verifytitle description="display user list" text=".*${userList.title}.*" regex="true"/>
@@ -184,7 +184,7 @@
                 <setinputfield name="passwordHint" value="test"/>
                 <clickbutton htmlid="save" description="Click button 'Signup'"/>
 
-                <verifytitle description="view main menu" text=".*${mainMenu.title}.*" regex="true"/>
+                <verifytitle description="view main menu" text=".*${home.title}.*" regex="true"/>
                 <verifytext description="verify success message" text="${user.registered}"/>
             </steps>
         </webtest>

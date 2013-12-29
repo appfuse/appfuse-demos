@@ -1,12 +1,13 @@
 package org.appfuse.tutorial.webapp.pages;
 
-import org.apache.tapestry5.Asset;
 import org.apache.tapestry5.alerts.AlertManager;
-import org.apache.tapestry5.annotations.*;
+import org.apache.tapestry5.annotations.Environmental;
+import org.apache.tapestry5.annotations.Import;
+import org.apache.tapestry5.annotations.Log;
+import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.ioc.annotations.Symbol;
-import org.apache.tapestry5.ioc.annotations.Value;
 import org.apache.tapestry5.json.JSONObject;
 import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.PageRenderLinkSource;
@@ -81,10 +82,12 @@ public class Login {
 
     void afterRender() {
         JSONObject spec = new JSONObject();
+
         String requiredUsernameError = messages.format("errors.required",
                 messages.get("label.username"));
         String requiredPasswordError = messages.format("errors.required",
                 messages.get("label.password"));
+
         spec.put("url", createLink(this.getClass()))
                 .put("passwordHintLink", createLink(PasswordHint.class))
                 .put("requiredUsername", requiredUsernameError)

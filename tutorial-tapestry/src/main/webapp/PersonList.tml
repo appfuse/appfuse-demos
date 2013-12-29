@@ -2,12 +2,12 @@
           heading="message:personList.heading" menu="PersonMenu"
           xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 
-<div class="span10">
+<div class="col-sm-10">
     <h2>${message:personList.heading}</h2>
 
-    <div id="actions" class="form-actions">
+    <div id="actions" class="btn-group">
         <a t:type="eventlink" event="add" id="add" class="btn btn-primary"><i class="icon-plus icon-white"></i> ${message:button.add}</a>
-        <a t:type="eventlink" event="done" id="done" class="btn"><i class="icon-ok"></i> ${message:button.done}</a>
+        <a t:type="eventlink" event="done" id="done" class="btn btn-default"><i class="icon-ok"></i> ${message:button.done}</a>
     </div>
 
     <t:grid source="persons" row="person" id="personList" class="table table-condensed table-striped table-hover">

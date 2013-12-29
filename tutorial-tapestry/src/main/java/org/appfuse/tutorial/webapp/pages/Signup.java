@@ -116,7 +116,7 @@ public class Signup {
     }
 
     @Log
-    Object onSuccess() throws IOException {
+    Object onSuccess() throws UserExistsException, IOException {
         try {
             user = userManager.saveUser(user);
         } catch (AccessDeniedException ade) {
@@ -135,6 +135,7 @@ public class Signup {
             //return this;
 
             response.sendRedirect("signup");
+            return null;
         }
 
         // log user in automatically
@@ -152,10 +153,7 @@ public class Signup {
         }
 
         alertManager.alert(Duration.TRANSIENT, Severity.INFO,  messages.get("user.registered"));
-        if (request != null) { // needed for testing
-            response.sendRedirect(request.getContextPath());
-        }
-        return null;
+        return Home.class;
     }
 
     @Log
