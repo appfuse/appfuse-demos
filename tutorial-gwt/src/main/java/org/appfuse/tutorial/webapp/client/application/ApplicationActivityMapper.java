@@ -14,6 +14,7 @@ import org.appfuse.tutorial.webapp.client.ui.login.LoginActivity;
 import org.appfuse.tutorial.webapp.client.ui.login.LoginPlace;
 import org.appfuse.tutorial.webapp.client.ui.logout.LogoutActivity;
 import org.appfuse.tutorial.webapp.client.ui.logout.LogoutPlace;
+import org.appfuse.tutorial.webapp.client.ui.people.edit.EditPersonActivity;
 import org.appfuse.tutorial.webapp.client.ui.people.list.PeopleSearchActivity;
 import org.appfuse.tutorial.webapp.client.ui.reloadOptions.ReloadOptionsActivity;
 import org.appfuse.tutorial.webapp.client.ui.reloadOptions.ReloadOptionsPlace;
@@ -68,6 +69,8 @@ public class ApplicationActivityMapper implements ActivityMapper {
 
     @Inject
     private AsyncProvider<PeopleSearchActivity> peopleSearchActivityProvider;
+    @Inject
+    private AsyncProvider<EditPersonActivity> editPersonActivityProvider;
 
     @Override
     public Activity getActivity(final Place place) {
@@ -104,6 +107,9 @@ public class ApplicationActivityMapper implements ActivityMapper {
             final EntityProxyPlace proxyPlace = (EntityProxyPlace) place;
             if (UserProxy.class.equals(proxyPlace.getProxyClass())) {
                 activity = new AsyncActivityProxy<EditUserActivity>(this.editUserActivityProvider);
+            }
+            else if (PersonProxy.class.equals(proxyPlace.getProxyClass())) {
+                activity = new AsyncActivityProxy<EditPersonActivity>(this.editPersonActivityProvider);
             }
         }
         else if (place instanceof EntitySearchPlace) {
