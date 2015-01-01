@@ -33,5 +33,6 @@
         <module>tutorial-spring</module>
         <module>tutorial-struts2</module>
         <module>tutorial-tapestry</module>
+    <module>tutorial-gwt</module>
   </modules>
 </project>
