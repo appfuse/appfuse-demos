@@ -6,6 +6,7 @@ package org.appfuse.tutorial.webapp.client.application;
 import org.appfuse.tutorial.webapp.client.application.base.activity.AsyncActivityProxy;
 import org.appfuse.tutorial.webapp.client.application.base.place.EntityProxyPlace;
 import org.appfuse.tutorial.webapp.client.application.base.place.EntitySearchPlace;
+import org.appfuse.tutorial.webapp.client.proxies.PersonProxy;
 import org.appfuse.tutorial.webapp.client.proxies.UserProxy;
 import org.appfuse.tutorial.webapp.client.ui.home.HomeActivity;
 import org.appfuse.tutorial.webapp.client.ui.home.HomePlace;
@@ -13,6 +14,7 @@ import org.appfuse.tutorial.webapp.client.ui.login.LoginActivity;
 import org.appfuse.tutorial.webapp.client.ui.login.LoginPlace;
 import org.appfuse.tutorial.webapp.client.ui.logout.LogoutActivity;
 import org.appfuse.tutorial.webapp.client.ui.logout.LogoutPlace;
+import org.appfuse.tutorial.webapp.client.ui.people.list.PeopleSearchActivity;
 import org.appfuse.tutorial.webapp.client.ui.reloadOptions.ReloadOptionsActivity;
 import org.appfuse.tutorial.webapp.client.ui.reloadOptions.ReloadOptionsPlace;
 import org.appfuse.tutorial.webapp.client.ui.upload.FileUploadActivity;
@@ -64,6 +66,8 @@ public class ApplicationActivityMapper implements ActivityMapper {
     @Inject
     private AsyncProvider<UsersSearchActivity> usersSearchActivityProvider;
 
+    @Inject
+    private AsyncProvider<PeopleSearchActivity> peopleSearchActivityProvider;
 
     @Override
     public Activity getActivity(final Place place) {
@@ -106,6 +110,9 @@ public class ApplicationActivityMapper implements ActivityMapper {
             final EntitySearchPlace listPlace = (EntitySearchPlace) place;
             if (UserProxy.class.equals(listPlace.getProxyClass())) {
                 activity = new AsyncActivityProxy<UsersSearchActivity>(this.usersSearchActivityProvider);
+            }
+            else if (PersonProxy.class.equals(listPlace.getProxyClass())) {
+                activity = new AsyncActivityProxy<PeopleSearchActivity>(this.peopleSearchActivityProvider);
             }
         }
 

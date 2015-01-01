@@ -15,6 +15,8 @@ import org.appfuse.tutorial.webapp.client.ui.login.LoginActivity;
 import org.appfuse.tutorial.webapp.client.ui.login.LoginView;
 import org.appfuse.tutorial.webapp.client.ui.login.LoginViewImpl;
 import org.appfuse.tutorial.webapp.client.ui.logout.LogoutActivity;
+import org.appfuse.tutorial.webapp.client.ui.people.list.PeopleSearchView;
+import org.appfuse.tutorial.webapp.client.ui.people.list.PeopleSearchViewImpl;
 import org.appfuse.tutorial.webapp.client.ui.reloadOptions.ReloadOptionsActivity;
 import org.appfuse.tutorial.webapp.client.ui.upload.FileUploadActivity;
 import org.appfuse.tutorial.webapp.client.ui.upload.views.FileUploadView;
@@ -80,6 +82,8 @@ public class ClientGinModule extends AbstractGinModule {
         bind(UploadedFileView.class).to(UploadedFileViewImpl.class).in(Singleton.class);
         bind(EditUserView.class).to(EditUserViewImpl.class).in(Singleton.class);
         bind(UsersSearchView.class).to(UsersSearchViewImpl.class).in(Singleton.class);
+
+        bind(PeopleSearchView.class).to(PeopleSearchViewImpl.class).in(Singleton.class);
     }
 
     @Provides

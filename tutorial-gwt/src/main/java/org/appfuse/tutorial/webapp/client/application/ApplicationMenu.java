@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.appfuse.tutorial.webapp.client.application.base.place.EntitySearchPlace;
 import org.appfuse.tutorial.webapp.client.application.utils.menu.MenuItem;
+import org.appfuse.tutorial.webapp.client.proxies.PersonProxy;
 import org.appfuse.tutorial.webapp.client.proxies.RoleProxy;
 import org.appfuse.tutorial.webapp.client.proxies.UserProxy;
 import org.appfuse.tutorial.webapp.client.ui.home.HomePlace;
@@ -42,6 +43,9 @@ public class ApplicationMenu {
         adminMenu.add(new MenuItem(i18n.home_activeUsers(), new ActiveUsersPlace(), RoleProxy.ROLE_ADMIN));
         adminMenu.add(new MenuItem(i18n.menu_admin_reload(), new ReloadOptionsPlace(), RoleProxy.ROLE_ADMIN));
         adminMenu.add(new MenuItem(i18n.menu_selectFile(), new FileUploadPlace(), RoleProxy.ROLE_ADMIN));
+
+        rootMenu.add(new MenuItem("People", new EntitySearchPlace(PersonProxy.class), RoleProxy.ROLE_USER,
+                RoleProxy.ROLE_ADMIN));
 
         rootMenu.add(new MenuItem(i18n.login_title(), new LoginPlace(), RoleProxy.ANONYMOUS));
         rootMenu.add(new MenuItem(i18n.user_logout(), new LogoutPlace(), RoleProxy.AUTHENTICATED));
