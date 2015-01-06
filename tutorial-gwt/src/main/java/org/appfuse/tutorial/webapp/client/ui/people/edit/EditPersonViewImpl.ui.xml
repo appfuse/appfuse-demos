@@ -6,8 +6,8 @@
         type="org.appfuse.tutorial.webapp.client.application.ApplicationResources" />
     <g:HTMLPanel>
         <b:Column size="2">
-            <b:Heading size="2" ui:field="heading" text="Person" />
-            <b:Paragraph ui:field="subheading">Edit Person Details</b:Paragraph>
+            <b:Heading size="2" ui:field="heading" text="{i18n.personDetail_title}" />
+            <b:Paragraph ui:field="subheading"><ui:text from="{i18n.personDetail_heading}" /></b:Paragraph>
         </b:Column>
         <b:Column size="7">
             <b:Form type="HORIZONTAL" styleName="well form-horizontal">
@@ -15,7 +15,7 @@
                 <b:IntegerBox ui:field="version" visible="false" />
                 <b:ControlGroup ui:field="firstNameControlGroup">
                     <b:ControlLabel for="firstName">
-                        <ui:text from="{i18n.user_firstName}" />
+                        <ui:text from="{i18n.person_firstName}" />
                         <span class="required">*</span>
                     </b:ControlLabel>
                     <b:Controls>
@@ -27,7 +27,7 @@
                 </b:ControlGroup>
                 <b:ControlGroup ui:field="lastNameControlGroup">
                     <b:ControlLabel for="lastName">
-                        <ui:text from="{i18n.user_lastName}" />
+                        <ui:text from="{i18n.person_lastName}" />
                         <span class="required">*</span>
                     </b:ControlLabel>
                     <b:Controls>

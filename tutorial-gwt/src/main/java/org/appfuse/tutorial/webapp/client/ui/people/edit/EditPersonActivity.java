@@ -21,6 +21,7 @@ public class EditPersonActivity extends AbstractProxyEditActivity<PersonProxy> i
     @Inject
     public EditPersonActivity(Application application, EditPersonView view) {
         super(application, view);
+        setTitle(application.getI18n().personDetail_title());
     }
 
     @Override

@@ -2,11 +2,13 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
     xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:b="urn:import:com.github.gwtbootstrap.client.ui"
     xmlns:c="urn:import:com.google.gwt.user.cellview.client">
-    <ui:with field="i18n" 
-        type="org.appfuse.tutorial.webapp.client.application.ApplicationResources" />
-    <ui:with type="java.lang.Integer" field="pageSize" />
+    
+    <ui:with field="i18n" type="org.appfuse.tutorial.webapp.client.application.ApplicationResources" />
+    <ui:with field="pageSize" type="java.lang.Integer" />
+    
     <b:Column size="10">
-        <b:Heading size="2" ui:field="heading" text="People List"></b:Heading>
+        <b:Heading size="2" ui:field="heading" text="{i18n.personList_title}" />
+
         <g:HTMLPanel>
             <form class="form-inline" id="searchForm">
                 <div id="search" class="text-right">
@@ -22,15 +24,16 @@
                 </div>
             </form>             
         </g:HTMLPanel>
+
         <b:FormActions>
-            <b:Button ui:field="addButton" text="{i18n.button_add}"
-                type="PRIMARY" icon="PLUS" customIconStyle="icon-white" />
-            <b:Button ui:field="doneButton" text="{i18n.button_done}"
-                icon="OK" />
+            <b:Button ui:field="addButton" text="{i18n.button_add}" icon="PLUS"
+                type="PRIMARY" customIconStyle="icon-white" />
+            <b:Button ui:field="doneButton" text="{i18n.button_done}" icon="OK" />
         </b:FormActions>
+
         <c:SimplePager display="{table}" location="LEFT" />
-        <c:CellTable pageSize="{pageSize}" ui:field="table"
-            width="100%" />
+        <c:CellTable pageSize="{pageSize}" ui:field="table" width="100%" />
         <c:SimplePager display="{table}" location="LEFT" />
+
     </b:Column>
 </ui:UiBinder>

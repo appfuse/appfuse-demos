@@ -117,26 +117,35 @@ public class PeopleSearchViewImpl extends AbstractProxySearchView<PersonProxy, S
     }
 
     public void createTableColumns() {
-        FieldUpdater<PersonProxy, String> showDetails = new FieldUpdater<PersonProxy, String>() {
+        FieldUpdater<PersonProxy, Long> showDetails = new FieldUpdater<PersonProxy, Long>() {
             @Override
-            public void update(int index, PersonProxy object, String value) {
-                delegate.showDetails(PersonProxy.class, object.getId().toString());
+            public void update(int rowIndex, PersonProxy rowPersonProxy, Long columnValue) {
+                delegate.showDetails(PersonProxy.class, rowPersonProxy.getId().toString());
             }
         };
 
+        paths.add("id");
+        table.addColumn(new CustomColumn<PersonProxy, Long>("firstName", true, showDetails) {
+            @Override
+            public Long getValue(PersonProxy person) {
+                return person.getId();
+            }
+
+            @Override
+            public void render(Context context, PersonProxy object, SafeHtmlBuilder sb) {
+                Anchor anchor = new Anchor(SafeHtmlUtils.htmlEscape(getValue(object).toString()));
+                sb.append(SafeHtmlUtils.fromTrustedString(anchor.toString()));
+            };
+        }, i18n.person_id());
+
         paths.add("firstName");
-        table.addColumn(new CustomColumn<PersonProxy, String>("firstName", true, showDetails) {
+        table.addColumn(new CustomColumn<PersonProxy, String>("firstName", true) {
             @Override
             public String getValue(PersonProxy person) {
                 return person.getFirstName();
             }
 
-            @Override
-            public void render(Context context, PersonProxy object, SafeHtmlBuilder sb) {
-                Anchor anchor = new Anchor(SafeHtmlUtils.htmlEscape(getValue(object)));
-                sb.append(SafeHtmlUtils.fromTrustedString(anchor.toString()));
-            };
-        }, "First Name");
+        }, i18n.person_firstName());
 
         paths.add("lastName");
         table.addColumn(new CustomColumn<PersonProxy, String>("lastName", true) {
@@ -144,12 +153,12 @@ public class PeopleSearchViewImpl extends AbstractProxySearchView<PersonProxy, S
             public String getValue(PersonProxy person) {
                 return person.getLastName();
             }
-        }, "Last Name");
+        }, i18n.person_lastName());
     }
 
     @Override
     protected SimpleBeanEditorDriver<String, ?> getEditorDriver() {
-        // TODO Auto-generated method stub
+        // useful to bind complex search forms
         return null;
     }
 }

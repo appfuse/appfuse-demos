@@ -44,8 +44,8 @@ public class ApplicationMenu {
         adminMenu.add(new MenuItem(i18n.menu_admin_reload(), new ReloadOptionsPlace(), RoleProxy.ROLE_ADMIN));
         adminMenu.add(new MenuItem(i18n.menu_selectFile(), new FileUploadPlace(), RoleProxy.ROLE_ADMIN));
 
-        rootMenu.add(new MenuItem("People", new EntitySearchPlace(PersonProxy.class), RoleProxy.ROLE_USER,
-                RoleProxy.ROLE_ADMIN));
+        rootMenu.add(new MenuItem(i18n.menu_viewPeople(), new EntitySearchPlace(PersonProxy.class),
+                RoleProxy.ROLE_USER, RoleProxy.ROLE_ADMIN));
 
         rootMenu.add(new MenuItem(i18n.login_title(), new LoginPlace(), RoleProxy.ANONYMOUS));
         rootMenu.add(new MenuItem(i18n.user_logout(), new LogoutPlace(), RoleProxy.AUTHENTICATED));

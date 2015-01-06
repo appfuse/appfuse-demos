@@ -11,7 +11,6 @@ import org.appfuse.tutorial.webapp.client.requests.PersonRequest;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.cellview.client.Column;
-import com.google.gwt.user.cellview.client.ColumnSortEvent;
 import com.google.gwt.user.cellview.client.ColumnSortEvent.Handler;
 import com.google.gwt.user.cellview.client.ColumnSortList;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
@@ -31,15 +30,15 @@ public class PeopleSearchActivity extends AbstractProxySearchActivity<PersonProx
     @Inject
     public PeopleSearchActivity(Application application, PeopleSearchView view) {
         super(application, view, String.class);
-        setTitle("People List");
+        setTitle(application.getI18n().personList_title());
     }
 
     @Override
     public void start(final AcceptsOneWidget panel, final EventBus eventBus) {
         view.setDelegate(this);
         // Configure local/remote sorting
-        // sortHandler = createLocalColumnSortHandler(view.asHasData());
-        sortHandler = new ColumnSortEvent.AsyncHandler(view.asHasData());
+        // sortHandler = new ColumnSortEvent.AsyncHandler(view.asHasData());
+        sortHandler = createLocalColumnSortHandler(view.asHasData());
         view.addColumnSortHandler(sortHandler);
 
         super.start(panel, eventBus);
