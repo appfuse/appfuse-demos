@@ -125,7 +125,7 @@ public class PeopleSearchViewImpl extends AbstractProxySearchView<PersonProxy, S
         };
 
         paths.add("id");
-        table.addColumn(new CustomColumn<PersonProxy, Long>("firstName", true, showDetails) {
+        table.addColumn(new CustomColumn<PersonProxy, Long>("id", true, showDetails) {
             @Override
             public Long getValue(PersonProxy person) {
                 return person.getId();
