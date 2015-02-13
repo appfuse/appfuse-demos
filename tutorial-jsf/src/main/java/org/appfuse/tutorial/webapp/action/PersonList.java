@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Component("personList")
-@Scope("session")
+@Scope("request")
 public class PersonList extends BasePage implements Serializable {
     private GenericManager<Person, Long> personManager;
 

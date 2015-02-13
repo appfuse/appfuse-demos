@@ -43,6 +43,7 @@ public class ValidatorExtensionPostProcessor implements BeanFactoryPostProcessor
      * Adds the validation configuration files to the list already held in the validator factory bean configuration.
      * @param configurableListableBeanFactory the bean factory
      */
+    @SuppressWarnings("unchecked")
     public void postProcessBeanFactory(ConfigurableListableBeanFactory configurableListableBeanFactory) {
         if (configurableListableBeanFactory.containsBean(validatorFactoryBeanName)) {
             BeanDefinition validatorFactoryBeanDefinition =

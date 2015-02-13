@@ -12,16 +12,16 @@
     <property file="../../../target/classes/displaytag.properties"/>
 
     <!-- runs all targets -->
-    <target name="run-all-tests" 
+    <target name="run-all-tests"
         depends="Login,Logout,PasswordHint,Signup,UserTests,StaticPages,WebServices,DWR,FileUpload,PersonTests"
         description="Call and executes all test cases (targets)"/>
-    
+
     <!-- runs user-related tests -->
     <target name="UserTests" depends="EditUser,SearchUser,SaveUser,AddUser,ActiveUsers"
         description="Call and executes all user test cases (targets)">
         <echo>Successfully ran all User UI tests!</echo>
     </target>
-    
+
     <!-- Login to the application -->
     <target name="Login" description="Runs login test and verifies Home's Title">
         <webtest name="login">
@@ -149,10 +149,7 @@
 
                 <!-- Delete user -->
                 <clickLink description="Click edit user link" label="newuser"/>
-                <enableJavaScript enable="false"/>
-                <!--prepareDialogResponse description="Confirm delete" dialogType="confirm" response="true"/-->
                 <clickbutton label="${button.delete}" description="Click button 'Delete'"/>
-                <!--verifyNoDialogResponses/-->
                 <verifytext description="verify success message" regex="true"
                     text='&lt;div class="alert alert-success.*&gt;.*Test Name.*&lt;/div&gt;'/>
                 <verifytitle description="display user list" text=".*${userList.title}.*" regex="true"/>
@@ -180,10 +177,9 @@
                 <setinputfield description="set email" name="user.email" value="signup-user@raibledesigns.com"/>
                 <setinputfield description="set website" name="user.website" value="http://raibledesigns.com"/>
                 <setinputfield description="set passwordHint" name="user.passwordHint" value="test"/>
-                
-                <enableJavaScript enable="false"/> <!-- HtmlUnit doesn't understand table.rows.length -->
+
                 <clickbutton label="${button.register}"  description="Click button 'Signup'"/>
-                
+
                 <verifytitle description="view main menu" text=".*${home.title}.*" regex="true"/>
                 <verifytext description="verify success message" text="${user.registered}"/>
             </steps>
@@ -329,9 +325,7 @@
             <steps>
                 &login;
                 <invoke description="click Edit Person link" url="/editPerson?id=1"/>
-                <prepareDialogResponse description="Confirm delete" dialogType="confirm" response="true"/>
                 <clickbutton label="${button.delete}" description="Click button 'Delete'"/>
-                <verifyNoDialogResponses/>
                 <verifytitle description="display Person List" text=".*${personList.title}.*" regex="true"/>
                 <verifytext description="verify success message" text="${person.deleted}"/>
             </steps>

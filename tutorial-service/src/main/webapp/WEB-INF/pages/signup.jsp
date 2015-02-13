@@ -69,9 +69,6 @@
                     <label class="control-label" for="user.address.country">
                         <fmt:message key="user.address.country"/>
                     </label>
-                    <label class="control-label" for="user.address.country">
-                        <fmt:message key="user.address.country"/>
-                    </label>
 
                     <appfuse:country name="user.address.country" prompt="" default="${country}"/>
                 </div>

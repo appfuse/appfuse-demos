@@ -25,9 +25,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package org.appfuse.tutorial.webapp.taglib;
 
-import org.appfuse.tutorial.webapp.jsp.EscapeXmlELResolver;
-
 import javax.servlet.jsp.tagext.TagSupport;
+import org.appfuse.tutorial.webapp.jsp.EscapeXmlELResolver;
 
 /**
  * Tag surrounds JSP code in which EL expressions should not be XML-escaped.

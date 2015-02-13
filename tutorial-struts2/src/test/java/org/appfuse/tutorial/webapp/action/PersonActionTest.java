@@ -4,21 +4,26 @@ import com.opensymphony.xwork2.ActionSupport;
 import org.apache.struts2.ServletActionContext;
 import org.appfuse.service.GenericManager;
 import org.appfuse.tutorial.model.Person;
-import org.junit.Before;
-import org.junit.Test;
+import org.appfuse.tutorial.webapp.action.BaseActionTestCase;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class PersonActionTest extends BaseActionTestCase {
     private PersonAction action;
+
+    @Autowired
+    private GenericManager personManager;
 
     @Before
     public void onSetUp() {
         super.onSetUp();
 
         action = new PersonAction();
-        GenericManager personManager = (GenericManager) applicationContext.getBean("personManager");
         action.setPersonManager(personManager);
 
         // add a test person to the database

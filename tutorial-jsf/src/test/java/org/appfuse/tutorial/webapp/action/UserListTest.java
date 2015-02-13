@@ -28,7 +28,9 @@ public class UserListTest extends BasePageTestCase {
 
     @Test
     public void testSearch() throws Exception {
+        // reindex before searching
         userManager.reindex();
+
         bean.setQuery("admin");
         assertEquals("success", bean.search());
         assertTrue(bean.getUsers().size() == 1);

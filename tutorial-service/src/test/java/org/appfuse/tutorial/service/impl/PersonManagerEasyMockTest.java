@@ -1,28 +1,32 @@
 package org.appfuse.tutorial.service.impl;
 
-import junit.framework.TestCase;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.appfuse.tutorial.dao.PersonDao;
 import org.appfuse.tutorial.model.Person;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.easymock.EasyMock.*;
+import static org.junit.Assert.*;
 
-public class PersonManagerEasyMockTest extends TestCase {
+public class PersonManagerEasyMockTest {
     private final Log log = LogFactory.getLog(PersonManagerImplTest.class);
     private PersonManagerImpl manager = null;
     private PersonDao dao = null;
     private Person person = null;
 
-    protected void setUp() throws Exception {
+    @Before
+    public void setUp() throws Exception {
         log.debug("setUpDao for PersonManagerImplTest");
         dao = createStrictMock(PersonDao.class);
         manager = new PersonManagerImpl((PersonDao) dao);
     }
 
+    @Test
     public void testGetPerson() {
         log.debug("testing getPerson");
 
@@ -38,6 +42,7 @@ public class PersonManagerEasyMockTest extends TestCase {
         verify(dao);
     }
 
+    @Test
     public void testGetPersons() {
         log.debug("testing getPersons");
 
@@ -52,6 +57,7 @@ public class PersonManagerEasyMockTest extends TestCase {
         verify(dao);
     }
 
+    @Test
     public void testGetByLastName() {
         log.debug("testing getByLastName");
 
@@ -80,6 +86,7 @@ public class PersonManagerEasyMockTest extends TestCase {
         verify(dao);
     }
 
+    @Test
     public void testRemovePerson() {
         log.debug("testing removePerson");
 

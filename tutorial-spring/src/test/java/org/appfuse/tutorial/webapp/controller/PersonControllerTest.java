@@ -1,24 +1,35 @@
 package org.appfuse.tutorial.webapp.controller;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import java.util.List;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 public class PersonControllerTest extends BaseControllerTestCase {
     @Autowired
     private PersonController controller;
 
+    private MockMvc mockMvc;
+
+    @Before
+    public void setup() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("/WEB-INF/pages/");
+        viewResolver.setSuffix(".jsp");
+
+        mockMvc = MockMvcBuilders.standaloneSetup(controller).setViewResolvers(viewResolver).build();
+    }
+
     @Test
     public void testHandleRequest() throws Exception {
-        ModelAndView mav = controller.handleRequest();
-        ModelMap m = mav.getModelMap();
-        assertNotNull(m.get("personList"));
-        assertTrue(((List) m.get("personList")).size() > 0);
+        mockMvc.perform(get("/persons"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("personList"))
+                .andExpect(view().name("persons"));
     }
 }

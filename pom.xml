@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.appfuse.tutorial</groupId>
-    <artifactId>appfuse-demos</artifactId>
-    <version>3.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <name>AppFuse Demos</name>
+	<groupId>org.appfuse.tutorial</groupId>
+	<artifactId>appfuse-demos</artifactId>
+	<version>3.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>AppFuse Demos</name>
 
-    <description>
-        AppFuse demos are the living code samples used to write the tutorials.
-    </description>
+	<description>
+		AppFuse demos are the living code samples used to write the tutorials.
+	</description>
 
-    <scm>
-        <connection>scm:git:git@github.com:appfuse/appfuse-demos.git</connection>
-        <developerConnection>scm:git:git@github.com:appfuse/appfuse-demos.git</developerConnection>
-        <url>https://github.com/appfuse/appfuse-demos</url>
-    </scm>
-    
-    <build>
-        <defaultGoal>install</defaultGoal>
-    </build>
+	<scm>
+		<connection>scm:git:git@github.com:appfuse/appfuse-demos.git</connection>
+		<developerConnection>scm:git:git@github.com:appfuse/appfuse-demos.git</developerConnection>
+		<url>https://github.com/appfuse/appfuse-demos</url>
+	</scm>
 
-    <modules>
-        <module>tutorial-hibernate</module>
-        <module>tutorial-jpa</module>
-        
-        <module>tutorial-service</module>
-        
-        <module>tutorial-jsf</module>
-        <module>tutorial-spring</module>
-        <module>tutorial-struts2</module>
-        <module>tutorial-tapestry</module>
-    <module>tutorial-gwt</module>
-  </modules>
+	<build>
+		<defaultGoal>install</defaultGoal>
+	</build>
+
+	<modules>
+		<module>tutorial-hibernate</module>
+		<module>tutorial-jpa</module>
+
+		<module>tutorial-service</module>
+
+		<module>tutorial-jsf</module>
+		<module>tutorial-spring</module>
+		<module>tutorial-struts2</module>
+		<module>tutorial-tapestry</module>
+		<module>tutorial-gwt</module>
+	</modules>
 </project>

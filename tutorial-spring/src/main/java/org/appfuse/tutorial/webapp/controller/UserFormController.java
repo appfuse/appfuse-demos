@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * Implementation of <strong>SimpleFormController</strong> that interacts with
- * the {@link org.appfuse.service.UserManager} to retrieve/persist values to the database.
+ * the {@link UserManager} to retrieve/persist values to the database.
  *
  * <p><a href="UserFormController.java.html"><i>View Source</i></a>
  *

@@ -29,6 +29,11 @@ body#login {
 	position: static;
 }
 
+/* Fix for dropdowns not working in IE: APF-1448 */
+.navbar {
+    filter:none !important;
+}
+
 #switchLocale {
     position: absolute;
     right: 10px;
@@ -47,6 +52,11 @@ h1, h2 {
 }
 
 /* FORMS */
+
+ul.feedbackPanel {
+    list-style: none;
+    padding-left: 10px;
+}
 
 .controls.readonly {
     padding-top: 5px;
@@ -87,6 +97,7 @@ h1, h2 {
 
 .form-signin .checkbox {
     font-weight: normal;
+    margin-left: 20px;
 }
 
 .form-signin .form-control {
