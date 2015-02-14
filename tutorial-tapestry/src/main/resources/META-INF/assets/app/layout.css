@@ -52,7 +52,7 @@ h1, h2 {
     padding-top: 5px;
 }
 
-.well.form-horizontal .form-actions {
+.well.form-horizontal .form-group {
     margin-bottom: 0;
 }
 
@@ -60,7 +60,7 @@ h1, h2 {
     margin-bottom: 10px;
 }
 
-.btn-group .btn, .form-actions .btn {
+.btn-group .btn, .form-group .btn {
     margin-left: 5px;
 }
 
@@ -87,6 +87,7 @@ h1, h2 {
 
 .form-signin .checkbox {
     font-weight: normal;
+    margin-left: 20px;
 }
 
 .form-signin .form-control {
@@ -124,18 +125,11 @@ h1, h2 {
     text-align: center
 }
 
+
 /* TABLES */
 
 th.sorted a, th.sortable a {
     display: block;
-}
-
-.table th.order1 a {
-    background-image: url(../images/arrow_down.png);
-}
-
-.table th.order2 a {
-    background-image: url(../images/arrow_up.png);
 }
 
 .table th.sorted a, .table th.sortable a {
@@ -151,22 +145,6 @@ div.exportlinks a {
 div.exportlinks span {
     background-repeat: no-repeat;
     background-position: 1px 2px;
-}
-
-span.csv {
-    background-image: url(../images/ico_file_csv.png);
-}
-
-span.excel {
-    background-image: url(../images/ico_file_excel.png);
-}
-
-span.pdf {
-    background-image: url(../images/ico_file_pdf.png);
-}
-
-span.xml {
-    background-image: url(../images/ico_file_xml.png);
 }
 
 span.export {
@@ -256,25 +234,3 @@ span.pagelinks {
     }
 }
 
-/* Wicket */
-.table thead tr th.wicket_orderDown a {
-    background-image: url(../images/arrow_down.png) !important;
-    background-position: right center;
-    background-repeat: no-repeat;
-    display: block;
-    /*padding-right: 15px;*/
-}
-
-.table thead tr th.wicket_orderUp a {
-    background-image: url(../images/arrow_up.png) !important;
-    background-position: right center;
-    background-repeat: no-repeat;
-    display: block;
-}
-
-/* Fix for Bootstrap theme errors in PrimeFaces: http://forum.primefaces.org/viewtopic.php?f=9&t=19250&start=10 */
-.ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
-    background: url("") repeat-x scroll 50% 50% #CD0A0A;
-    border: 1px solid #CD0A0A;
-    color: #FFFFFF;
-}

@@ -16,5 +16,4 @@ public class AppFuseSymbolConstants {
 
     public static final String APP_URL = "app.url";
 
-    public static final String BOOTSTRAP_STACK = "bootstrap.stack";
 }
