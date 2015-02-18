@@ -3,6 +3,7 @@ package org.appfuse.tutorial.webapp.pages;
 import de.agilecoders.wicket.core.Bootstrap;
 import de.agilecoders.wicket.core.markup.html.bootstrap.common.NotificationMessage;
 import de.agilecoders.wicket.core.markup.html.bootstrap.common.NotificationPanel;
+import de.agilecoders.wicket.webjars.request.resource.WebjarsCssResourceReference;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
@@ -47,6 +48,10 @@ public abstract class AbstractWebPage extends WebPage {
 
     private void addCommonStyles(IHeaderResponse response) {
         response.render(CssHeaderItem.forUrl("styles/style.css"));
+	// Add Bootswatch
+        response.render(CssHeaderItem.forReference(
+            new WebjarsCssResourceReference("bootswatch-spacelab/3.3.1+2/css/bootstrap.min.css")
+        ));
     }
 
     private void addCommonScripts(IHeaderResponse response) {
