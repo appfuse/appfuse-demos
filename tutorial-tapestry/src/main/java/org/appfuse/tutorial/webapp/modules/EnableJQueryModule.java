@@ -8,9 +8,6 @@ import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.services.compatibility.Compatibility;
 import org.apache.tapestry5.services.compatibility.Trait;
 
-/**
- * Class to enable JQuery Module
- */
 public class EnableJQueryModule {
 
     @Contribute(SymbolProvider.class)

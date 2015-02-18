@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+<html lang="en" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd" xmlns:p="tapestry:parameter">
 <head>
     <t:meta/>
     <title>${title} | ${message:webapp.name}</title>
@@ -12,15 +12,19 @@
 </head>
 <body id="${bodyId}" class="${bodyClass}">
 
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+    <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+            <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" t:type="pagelink" page="index">${message:webapp.name}</a>
     </div>
+
     <div class="collapse navbar-collapse" id="navbar">
     <t:menu class="nav navbar-nav" active="${menu}">
         <t:if test="prop:loggedIn">
@@ -45,12 +49,13 @@
     </t:menu>
     </div>
     <t:header/>
-</div>
+</nav>
 
-<div class="container" id="content">
+<div class="container">
     <!-- messages here  -->
     <div t:type="alerts"/>
     <div class="row">
+
         <t:body/>
 
         <t:if test="sidebar">
@@ -60,8 +65,8 @@
 </div>
 
 <t:block id="adminMenuBlock">
-    <div class="col-sm-2">
-        <t:menu class="nav nav-list" active="${menu}">
+    <div class="col-md-2">
+        <t:menu class="nav nav-pills nav-stacked" active="${menu}">
             <li class="nav-header">Administration</li>
             <t:delegate to="block:adminItemsBlock"/>
         </t:menu>

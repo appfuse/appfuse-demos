@@ -1,0 +1,291 @@
+body {
+    padding-top: 80px;
+}
+
+.navbar-brand {
+    color: #000000;
+    font-weight: bold;
+    margin-left: 0;
+    margin-right: 20px;
+    padding-right: 0;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.125);
+}
+
+.nav-stacked .nav-header {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+body#login {
+    padding-bottom: 40px;
+}
+
+.navbar .brand:hover {
+    color: #0099ff;
+}
+
+/* Fix for non-clickable dropdown nested menus on mobile browsers: APF-1384 */
+.navbar .dropdown-backdrop {
+	position: static;
+}
+
+/* Fix for dropdowns not working in IE: APF-1448 */
+.navbar { 
+    filter:none !important; 
+}
+
+#switchLocale {
+    position: absolute;
+    right: 10px;
+}
+
+h1, h2 {
+    margin-bottom: 10px;
+}
+
+#content {
+    padding-bottom: 60px;
+}
+
+.row h2 {
+    margin-top: 0;
+}
+
+/* FORMS */
+
+ul.feedbackPanel {
+    list-style: none;
+    padding-left: 10px;
+}
+
+.controls.readonly {
+    padding-top: 5px;
+}
+
+.well.form-horizontal .form-group {
+    margin-bottom: 0;
+}
+
+.btn-group {
+    margin-bottom: 10px;
+}
+
+.btn-group .btn, .form-group .btn {
+    margin-left: 5px;
+}
+
+#search {
+    float: right;
+    margin-top: -40px;
+    width: 250px;
+}
+
+#search input[type="text"] {
+    display: inline-block;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+    margin-bottom: 10px;
+}
+
+.form-signin .checkbox {
+    font-weight: normal;
+    margin-left: 20px;
+}
+
+.form-signin .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+.form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+#login p {
+    text-align: center
+}
+
+/* When using Wicket tag id can be overridden - using class here seems to more universal */
+.login p {
+    text-align: center
+}
+
+/* TABLES */
+
+th.sorted a, th.sortable a {
+    display: block;
+}
+
+.table th.order1 a {
+    background-image: url(../images/arrow_down.png);
+}
+
+.table th.order2 a {
+    background-image: url(../images/arrow_up.png);
+}
+
+.table th.sorted a, .table th.sortable a {
+    background-position: right;
+    background-repeat: no-repeat;
+    display: block;
+}
+
+div.exportlinks a {
+    text-decoration: none;
+}
+
+div.exportlinks span {
+    background-repeat: no-repeat;
+    background-position: 1px 2px;
+}
+
+span.csv {
+    background-image: url(../images/ico_file_csv.png);
+}
+
+span.excel {
+    background-image: url(../images/ico_file_excel.png);
+}
+
+span.pdf {
+    background-image: url(../images/ico_file_pdf.png);
+}
+
+span.xml {
+    background-image: url(../images/ico_file_xml.png);
+}
+
+span.export {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 4px 1px 20px;
+}
+
+span.pagebanner {
+    display: block;
+    margin: 0 0 0 10px;
+    padding: 2px 4px 2px 0;
+}
+
+span.pagelinks {
+    display: block;
+    font-size: .95em;
+    margin-bottom: 5px;
+    margin-top: -18px;
+    padding: 2px 0 2px 0;
+    text-align: right;
+    width: 80%;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+    background-color: #f5f5f5;
+}
+
+/* FOOTER */
+#footer {
+    clear: both;
+    margin: 0 auto;
+    padding: 10px 0 20px 0;
+    border-top: 4px solid #f0f0f0;
+    text-align: center;
+    background-color: white;
+    color: #808080;
+    font-size: 0.9em;
+}
+
+#footer a {
+    color: #808080;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+#footer a:hover {
+    text-decoration: underline;
+}
+
+#footer p {
+    margin: 0;
+}
+
+/* Responsive
+-------------------------------------------------- */
+
+/* Desktop large
+------------------------- */
+@media (min-width: 1200px) {
+
+}
+
+/* Desktop
+------------------------- */
+@media (max-width: 980px) {
+
+}
+
+/* Tablet to desktop
+------------------------- */
+
+/* Tablet
+------------------------- */
+@media (max-width: 767px) {
+
+}
+
+/* Landscape phones
+------------------------- */
+@media (max-width: 480px) {
+
+    #search {
+        float: none;
+        margin-top: 0;
+    }
+}
+
+/* Wicket */
+.table thead tr th.wicket_orderDown a {
+    background-image: url(../images/arrow_down.png) !important;
+    background-position: right center;
+    background-repeat: no-repeat;
+    display: block;
+    /*padding-right: 15px;*/
+}
+
+.table thead tr th.wicket_orderUp a {
+    background-image: url(../images/arrow_up.png) !important;
+    background-position: right center;
+    background-repeat: no-repeat;
+    display: block;
+}
+
+/* Fix for Bootstrap theme errors in PrimeFaces: http://forum.primefaces.org/viewtopic.php?f=9&t=19250&start=10 */
+.ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {
+    background: url("") repeat-x scroll 50% 50% #CD0A0A;
+    border: 1px solid #CD0A0A;
+    color: #FFFFFF;
+}

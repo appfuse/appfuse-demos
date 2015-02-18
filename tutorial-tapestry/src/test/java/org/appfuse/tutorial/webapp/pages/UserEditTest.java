@@ -25,7 +25,6 @@ public class UserEditTest extends BasePageTestCase {
         Element idLink = table.getElementById("user-" + username);
         doc = tester.clickLink(idLink);
 
-
         Element cancelButton = doc.getElementById("cancel");
 
         doc = tester.clickLink(cancelButton);
@@ -38,7 +37,6 @@ public class UserEditTest extends BasePageTestCase {
 
     @Test
     public void testSave() throws Exception {
-
         doc = tester.renderPage("admin/UserList");
         Element addLink = doc.getElementById("add");
 
@@ -61,9 +59,7 @@ public class UserEditTest extends BasePageTestCase {
         fieldValues.put("country", "US");
 
         // start SMTP Server
-        Wiser wiser = new Wiser();
-        wiser.setPort(getSmtpPort());
-        wiser.start();
+        Wiser wiser = startWiser(getSmtpPort());
 
         doc = tester.submitForm(form, fieldValues);
 
@@ -79,9 +75,6 @@ public class UserEditTest extends BasePageTestCase {
         assertEquals(1, wiser.getMessages().size());
         wiser.stop();
 
-        //Element successMessages = doc.getElementById("successMessages");
-        //assertNotNull(successMessages);
-        //assertTrue(successMessages.toString().contains("added successfully"));
         assertTrue(doc.toString().contains("added successfully"));
         Element table = doc.getElementById("userList");
         assertTrue(table.toString().contains("tapestry"));
@@ -101,9 +94,7 @@ public class UserEditTest extends BasePageTestCase {
 
         Element deleteButton = doc.getElementById("delete");
 
-        // TODO: Figure out how to get Tapestry to rollback transactions after tests,
-        // which should be done by extending AbstractTransactionalJUnit4SpringContextTests
-        // doc = tester.clickSubmit(deleteButton, fieldValues);
-        // assertTrue(doc.toString().contains("deleted successfully"));
+        doc = tester.clickLink(deleteButton);
+        assertTrue(doc.toString().contains("deleted successfully"));
     }
 }

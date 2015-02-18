@@ -8,7 +8,7 @@
     <http pattern="/images/**" security="none"/>
     <http pattern="/styles*/**" security="none"/>
     <http pattern="/scripts*/**" security="none"/>
-    <http pattern="/assets*/**" security="none"/>
+    <http pattern="/asset*/**" security="none"/>
 
     <http auto-config="true" access-denied-page="/accessdenied">
         <intercept-url pattern="/login*/**" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>
@@ -19,12 +19,12 @@
         <intercept-url pattern="/signup*" access="ROLE_ANONYMOUS,ROLE_ADMIN,ROLE_USER"/>
         <intercept-url pattern="/**" access="ROLE_ADMIN,ROLE_USER"/>
 
-        <form-login login-page="/login" 
-                    default-target-url="/home" 
-                    always-use-default-target="true"  
-                    authentication-failure-url="/login/error" 
+        <form-login login-page="/login"
+                    default-target-url="/home"
+                    always-use-default-target="true"
+                    authentication-failure-url="/login/error"
                     login-processing-url="/j_security_check"/>
-                    
+
         <remember-me user-service-ref="userDao" key="e37f4b31-0c45-11dd-bd0b-0800200c9a66"/>
     </http>
 

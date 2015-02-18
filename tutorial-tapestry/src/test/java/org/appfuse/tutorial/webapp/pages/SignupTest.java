@@ -2,18 +2,30 @@ package org.appfuse.tutorial.webapp.pages;
 
 import org.apache.tapestry5.dom.Element;
 import org.apache.tapestry5.internal.test.TestableResponse;
-import org.junit.Ignore;
+import org.appfuse.model.User;
+import org.appfuse.service.UserManager;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.subethamail.wiser.Wiser;
-import org.subethamail.wiser.WiserMessage;
-
-import java.text.MessageFormat;
-import java.util.ResourceBundle;
 
 import static org.junit.Assert.*;
 
 public class SignupTest extends BasePageTestCase {
+
+    @Before
+    @After
+    public void removeSignupUser() {
+        UserManager userManager = applicationContext.getBean(UserManager.class);
+        try {
+            User signup = userManager.getUserByUsername("self-registered");
+            userManager.removeUser(signup);
+        } catch (UsernameNotFoundException e) {
+            // OK: ignore
+        }
+    }
 
     @Test
     public void testNewUserSignup() {
@@ -29,24 +41,20 @@ public class SignupTest extends BasePageTestCase {
         fieldValues.put("lastName", "Last");
 
         fieldValues.put("email", "self-registered@raibledesigns.com");
-        fieldValues.put("website", "http:raibledesigns.com");
+        fieldValues.put("website", "http://raibledesigns.com");
         fieldValues.put("passwordHint", "Password is one with you.");
 
         fieldValues.put("city", "Denver");
         fieldValues.put("state", "CO");
-        fieldValues.put("country", "USA");
+        fieldValues.put("country", "US");
         fieldValues.put("postalCode", "80210");
 
         // start SMTP Server
-        Wiser wiser = new Wiser();
-        wiser.setPort(getSmtpPort());
-        wiser.start();
+        Wiser wiser = startWiser(getSmtpPort());
 
         TestableResponse response = tester.submitFormAndReturnResponse(form, fieldValues);
 
-
         assertFalse(response.getOutput().contains("exception"));
-
         // verify an account information e-mail was sent
         assertEquals(1, wiser.getMessages().size());
         wiser.stop();
@@ -54,8 +62,7 @@ public class SignupTest extends BasePageTestCase {
         SecurityContextHolder.getContext().setAuthentication(null);
     }
 
-    // Disabled for now.... UserExistsException not trapped in test mode?
-    @Ignore @Test
+    @Test
     public void testExistingUserSignup() {
         doc = tester.renderPage("Signup");
 
@@ -69,27 +76,19 @@ public class SignupTest extends BasePageTestCase {
         fieldValues.put("lastName", "Last");
 
         fieldValues.put("email", "self-registered@raibledesigns.com");
-        fieldValues.put("website", "http:raibledesigns.com");
+        fieldValues.put("website", "http://raibledesigns.com");
         fieldValues.put("passwordHint", "Password is one with you.");
 
         fieldValues.put("city", "Denver");
         fieldValues.put("state", "CO");
-        fieldValues.put("country", "USA");
+        fieldValues.put("country", "US");
         fieldValues.put("postalCode", "80210");
 
         // start SMTP Server
-        Wiser wiser = new Wiser();
-        wiser.setPort(getSmtpPort());
-        wiser.start();
+        Wiser wiser = startWiser(getSmtpPort());
 
         TestableResponse response = tester.submitFormAndReturnResponse(form, fieldValues);
-
-        ResourceBundle rb = ResourceBundle.getBundle(MESSAGES);
-        String errorMessage = MessageFormat.format(rb.getString("errors.existing.user"),
-                fieldValues.get("username"), fieldValues.get("email"));
-
-
-        assertTrue(response.getRenderedDocument().toString().contains(errorMessage));
+        assertEquals(response.getRedirectURL(), "signup");
 
         // verify no account information e-mail was sent
         assertEquals(0, wiser.getMessages().size());

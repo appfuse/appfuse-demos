@@ -25,16 +25,16 @@ public class PersonList {
         return personManager.getAll();
     }
 
-    Object onDone() {
-        return Home.class;
-    }
-
     @InjectPage
     private PersonForm form;
 
     Object onAdd() {
         form.setPerson(new Person());
         return form;
+    }
+
+    Object onDone() {
+        return Home.class;
     }
 
     Object onActionFromEdit(Long id) {
