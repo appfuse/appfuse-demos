@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       default-lazy-init="true">
+
+    <!-- Activates scanning of @Autowired -->
+    <context:annotation-config/>
+
+    <!-- Activates scanning of @Repository and @Service -->
+    <context:component-scan base-package="org.appfuse.tutorial"/>
+
+    <!-- Add new DAOs here -->
+
+    <!--PersonManager-START-->
+    <bean id="personManager" class="org.appfuse.service.impl.GenericManagerImpl">
+        <constructor-arg>
+            <bean class="org.appfuse.dao.hibernate.GenericDaoHibernate">
+                <constructor-arg value="org.appfuse.tutorial.model.Person"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+    <!--PersonManager-END-->
+
+    <!-- Add new Managers here -->
+
+    <!-- Wicket application -->
+    <bean id="appFuseWicketApplication" class="org.appfuse.tutorial.webapp.AppFuseWicketApplication"/>
+
+</beans>

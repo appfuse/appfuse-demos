@@ -1,0 +1,45 @@
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title><wicket:message key="personDetail.title"/></title>
+</head>
+<body>
+    <div class="col-sm-3">
+        <h2><wicket:message key="personDetail.heading"/></h2>
+        <wicket:message key="personDetail.message"/>
+    </div>
+    <div class="col-sm-6">
+        <div wicket:id="feedback" class="alert alert-dismissable"></div>
+
+        <form wicket:id="person-form" id="personForm" class="well">
+            <div class="form-group">
+                <label for="firstName" class="control-label"><wicket:message key="person.firstName">First Name</wicket:message>:</label>
+                <input type="text" wicket:id="firstName" id="firstName" class="form-control"/>
+                <div wicket:id="firstName-feedback" class="help-block">[firstName errors]</div>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="control-label"><wicket:message key="person.lastName">Last Name</wicket:message>:</label>
+                <input type="text" wicket:id="lastName" id="lastName" class="form-control"/>
+                <div wicket:id="lastName-feedback" class="help-block">[lastName errors]</div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" id="save" wicket:id="save">
+                    <i class="icon-ok icon-white"></i> <wicket:message key="button.save">Save</wicket:message>
+                </button>
+
+                <button type="submit" class="btn btn-danger" id="delete" wicket:id="delete">
+                    <i class="icon-trash"></i> <wicket:message key="button.delete">Delete</wicket:message>
+                </button>
+
+                <a href="persons" class="btn btn-default" wicket:id="cancel">
+                    <i class="icon-remove"></i> <wicket:message key="button.cancel">Cancel</wicket:message>
+                </a>
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("input[type='text']:visible:enabled:first", document.forms['personForm']).focus();
+        });
+    </script>
+</body>
+</html>

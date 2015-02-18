@@ -35,5 +35,6 @@
 		<module>tutorial-struts2</module>
 		<module>tutorial-tapestry</module>
 		<module>tutorial-gwt</module>
+		<module>tutorial-wicket</module>
 	</modules>
 </project>
