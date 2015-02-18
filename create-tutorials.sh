@@ -1,4 +1,5 @@
 #!/bin/sh
+rm -rf temp
 mkdir temp;cd temp
 mvn archetype:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=appfuse-basic-struts-archetype -DarchetypeVersion=3.5.0-SNAPSHOT -DgroupId=org.appfuse.tutorial -DartifactId=tutorial-hibernate -DarchetypeRepository=http://oss.sonatype.org/content/repositories/appfuse
 mvn archetype:generate -B -DarchetypeGroupId=org.appfuse.archetypes -DarchetypeArtifactId=appfuse-basic-struts-archetype -DarchetypeVersion=3.5.0-SNAPSHOT -DgroupId=org.appfuse.tutorial -DartifactId=tutorial-jpa -DarchetypeRepository=http://oss.sonatype.org/content/repositories/appfuse

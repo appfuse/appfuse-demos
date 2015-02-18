@@ -3,7 +3,6 @@
 <head>
     <title><fmt:message key="personDetail.title"/></title>
     <meta name="menu" content="PersonMenu"/>
-    <meta name="heading" content="<fmt:message key='personDetail.heading'/>"/>
 </head>
 
 <c:set var="delObject" scope="request"><fmt:message key="personList.person"/></c:set>
