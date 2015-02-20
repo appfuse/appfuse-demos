@@ -6,14 +6,14 @@
     <groupId>org.appfuse.tutorial</groupId>
     <artifactId>tutorial-service</artifactId>
     <packaging>war</packaging>
-    <version>3.5.0-SNAPSHOT</version>
+    <version>3.5.0</version>
     <name>AppFuse Services Tutorial</name>
     <url>https://github.com/appfuse/appfuse-demos</url>
 
     <parent>
         <groupId>org.appfuse</groupId>
         <artifactId>appfuse-web</artifactId>
-        <version>3.5.0-SNAPSHOT</version>
+        <version>3.5.0</version>
     </parent>
 
     <repositories>
@@ -72,7 +72,7 @@
         <web.framework>struts</web.framework>
 
         <!-- Framework/Plugin versions -->
-        <appfuse.version>3.5.0-SNAPSHOT</appfuse.version>
+        <appfuse.version>3.5.0</appfuse.version>
         <java.version>1.7</java.version>
     </properties>
 

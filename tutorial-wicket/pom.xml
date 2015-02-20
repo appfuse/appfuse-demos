@@ -5,13 +5,13 @@
     <groupId>org.appfuse.tutorial</groupId>
     <artifactId>tutorial-wicket</artifactId>
     <packaging>war</packaging>
-    <version>3.5.0-SNAPSHOT</version>
+    <version>3.5.0</version>
     <name>AppFuse Wicket Application</name>
 
     <parent>
         <groupId>org.appfuse</groupId>
         <artifactId>appfuse-web</artifactId>
-        <version>3.5.0-SNAPSHOT</version>
+        <version>3.5.0</version>
     </parent>
 
     <repositories>
@@ -69,7 +69,7 @@
         <web.framework>wicket</web.framework>
 
         <!-- Framework/Plugin versions -->
-        <appfuse.version>3.5.0-SNAPSHOT</appfuse.version>
+        <appfuse.version>3.5.0</appfuse.version>
         <java.version>1.7</java.version>
     </properties>
 
