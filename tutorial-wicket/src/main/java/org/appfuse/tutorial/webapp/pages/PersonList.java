@@ -1,11 +1,5 @@
 package org.appfuse.tutorial.webapp.pages;
 
-import java.util.List;
-
-import org.appfuse.service.GenericManager;
-import org.appfuse.tutorial.model.Person;
-
-import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.extensions.markup.html.repeater.data.sort.OrderByBorder;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
@@ -15,8 +9,9 @@ import org.apache.wicket.markup.html.navigation.paging.PagingNavigator;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
-import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.appfuse.service.GenericManager;
+import org.appfuse.tutorial.model.Person;
 import org.wicketstuff.annotation.mount.MountPath;
 
 @MountPath("persons")
@@ -52,16 +47,10 @@ public class PersonList extends AbstractWebPage {
                         onEditPerson(getModelObject());
                     }
                 };
-
                 link.add(new Label("person.id", person.getId()));
                 item.add(link);
                 item.add(new Label("person.firstName", person.getFirstName()));
                 item.add(new Label("person.lastName", person.getLastName()));
-                item.add(new AttributeModifier("class", new LoadableDetachableModel() {
-                    protected Object load() {
-                        return (item.getIndex() % 2 == 1) ? "even" : "odd";
-                    }
-                }));
             }
         };
 

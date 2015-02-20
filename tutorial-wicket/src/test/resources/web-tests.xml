@@ -278,10 +278,6 @@
                 <invoke description="click View Person link" url="/persons"/>
                 <verifytitle description="we should see the personList title"
                     text=".*${personList.title}.*" regex="true"/>
-                <!--APF-1463: still need to add support for search to generated PersonList.java-->
-                <!--setinputfield description="set search term" name="searchQuery" value="*"/>
-                <clickbutton label="${button.search}" description="Click Search"/>
-                <verifytitle text=".*${personList.title}.*" regex="true"/-->
             </steps>
         </webtest>
     </target>
@@ -293,7 +289,7 @@
             <steps>
                 &login;
                 <invoke description="View Person List" url="/persons"/>
-                <clicklink description="click on first record in list" label="-1"/>
+                <clicklink description="click on first record in list" label="1"/>
                 <verifytitle description="we should see the personDetail title"
                     text=".*${personDetail.title}.*" regex="true"/>
             </steps>
@@ -307,7 +303,7 @@
             <steps>
                 &login;
                 <invoke description="View Person List" url="/persons"/>
-                <clicklink description="click on first record in list" label="-1"/>
+                <clicklink description="click on first record in list" label="1"/>
                 <verifytitle description="we should see the personDetail title"
                     text=".*${personDetail.title}.*" regex="true"/>
 
@@ -332,6 +328,8 @@
                     text=".*${personDetail.title}.*" regex="true"/>
 
                 <!-- enter required fields -->
+                <setinputfield description="set firstName" name="firstName" value="Joe"/>
+                <setinputfield description="set lastName" name="lastName" value="Smith"/>
 
                 <clickbutton label="${button.save}" description="Click button 'Save'"/>
                 <verifytitle description="Person List appears if save successful"
@@ -348,7 +346,7 @@
             <steps>
                 &login;
                 <invoke description="View Person List" url="/persons"/>
-                <clicklink description="click on first record in list" label="-1"/>
+                <clicklink description="click on first record in list" label="2"/>
                 <clickbutton label="${button.delete}" description="Click button 'Delete'"/>
                 <verifytitle description="display Person List" text=".*${personList.title}.*" regex="true"/>
                 <verifytext description="verify success message" text="${person.deleted}"/>

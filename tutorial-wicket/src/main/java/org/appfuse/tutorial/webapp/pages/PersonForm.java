@@ -2,17 +2,17 @@ package org.appfuse.tutorial.webapp.pages;
 
 import org.apache.wicket.Page;
 import org.apache.wicket.RestartResponseAtInterceptPageException;
-import org.apache.wicket.extensions.markup.html.form.DateTextField;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.panel.ComponentFeedbackPanel;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
-import org.apache.wicket.model.*;
+import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.IModel;
+import org.apache.wicket.model.ResourceModel;
+import org.apache.wicket.model.StringResourceModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.wicketstuff.annotation.mount.MountPath;
 import org.appfuse.service.GenericManager;
 import org.appfuse.tutorial.model.Person;
-
-import java.util.Date;
+import org.wicketstuff.annotation.mount.MountPath;
 
 @MountPath("personform")
 public class PersonForm extends AbstractWebPage {
@@ -28,8 +28,8 @@ public class PersonForm extends AbstractWebPage {
      * Constructor used to edit an person
      *
      * @param responsePage page to navigate to after this page completes its work
-     * @param person person to edit
-    */
+     * @param person       person to edit
+     */
     public PersonForm(final Page responsePage, Person person) {
         this.responsePage = responsePage;
 
@@ -136,7 +136,7 @@ public class PersonForm extends AbstractWebPage {
         /**
          * Constructor
          *
-         * @param id component id
+         * @param id     component id
          * @param person Person object that will be used as a form bean
          */
         public EditForm(String id, Person person) {
@@ -146,8 +146,8 @@ public class PersonForm extends AbstractWebPage {
              * (component id is used as the property expression)
              */
             super(id, new CompoundPropertyModel<>(person));
-            add(new TextField<>("firstName"), new ResourceModel("person.firstName"));
-            add(new TextField<>("lastName"), new ResourceModel("person.lastName"));
+            add(new RequiredTextField<>("firstName"), new ResourceModel("person.firstName"));
+            add(new RequiredTextField<>("lastName"), new ResourceModel("person.lastName"));
 
             add(new Button("save", new StringResourceModel("button.save", this, null)) {
                 public void onSubmit() {
@@ -173,10 +173,10 @@ public class PersonForm extends AbstractWebPage {
              * perform any form processing (ie bind request values to the bean).
             */
             add(new Button("cancel", new StringResourceModel("button.cancel", this, null)) {
-                    public void onSubmit() {
-                        onCancel();
-                    }
-                }.setDefaultFormProcessing(false));
+                public void onSubmit() {
+                    onCancel();
+                }
+            }.setDefaultFormProcessing(false));
         }
 
         /**

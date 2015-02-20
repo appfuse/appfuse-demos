@@ -4,13 +4,11 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.util.tester.FormTester;
 import org.appfuse.service.GenericManager;
 import org.appfuse.tutorial.model.Person;
-import org.appfuse.util.DateUtil;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.springframework.web.context.support.StaticWebApplicationContext;
 
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class PersonFormTest extends BasePageTest {
 
@@ -36,8 +34,7 @@ public class PersonFormTest extends BasePageTest {
         tester.submitForm("person-form");
 
         // then
-        tester.assertErrorMessages(new String[] {
-        });
+        tester.assertErrorMessages("'First Name' is required.", "'Last Name' is required.");
     }
 
     @Test
@@ -61,9 +58,13 @@ public class PersonFormTest extends BasePageTest {
 
     private Person createTestPerson() {
         Person person = new Person();
+        person.setFirstName("Joe");
+        person.setLastName("Smith");
         return person;
     }
 
     private void fillFormWithValuesFromPerson(FormTester formTester, Person person) {
+        formTester.setValue("firstName", person.getFirstName());
+        formTester.setValue("lastName", person.getLastName());
     }
 }

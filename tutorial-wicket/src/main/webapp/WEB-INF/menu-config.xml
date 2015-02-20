@@ -13,9 +13,7 @@
             <Item name="FileUpload" title="menu.selectFile" page="/fileUpload"/>
         </Menu>
         <Menu name="Logout" title="user.logout" page="/logout" roles="ROLE_ADMIN,ROLE_USER"/>
-        <!--Person-START-->
-        <Menu name="PersonMenu" title="personList.title" page="/persons"/>
-        <!--Person-END-->
+        <Menu name="PersonMenu" title="menu.viewPeople" page="/persons"/>
     </Menus>
 
 </MenuConfig>

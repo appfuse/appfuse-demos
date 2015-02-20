@@ -10,11 +10,9 @@
     </c:if>
     <menu:displayMenu name="Home"/>
     <menu:displayMenu name="UserMenu"/>
+    <menu:displayMenu name="PersonMenu"/>
     <menu:displayMenu name="AdminMenu"/>
     <menu:displayMenu name="Logout"/>
-    <!--Person-START-->
-    <menu:displayMenu name="PersonMenu"/>
-    <!--Person-END-->
 </ul>
 </div>
 </menu:useMenuDisplayer>
