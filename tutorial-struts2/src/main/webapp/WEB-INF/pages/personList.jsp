@@ -4,15 +4,14 @@
     <title><fmt:message key="personList.title"/></title>
     <meta name="menu" content="PersonMenu"/>
 </head>
-
-<div class="col-sm-10">
+<body>
     <h2><fmt:message key="personList.heading"/></h2>
 
     <div id="actions" class="btn-group">
-        <a class="btn btn-primary" href="<c:url value="/editPerson"/>" >
+        <a class="btn btn-primary" href="<c:url value='/editPerson'/>" >
             <i class="icon-plus icon-white"></i> <fmt:message key="button.add"/>
         </a>
-        <a class="btn btn-default" href="<c:url value="/mainMenu"/>">
+        <a class="btn btn-default" href="<c:url value="/home"/>" >
             <i class="icon-ok"></i> <fmt:message key="button.done"/>
         </a>
     </div>
@@ -31,4 +30,4 @@
         <display:setProperty name="export.csv.filename"><fmt:message key="personList.title"/>.csv</display:setProperty>
         <display:setProperty name="export.pdf.filename"><fmt:message key="personList.title"/>.pdf</display:setProperty>
     </display:table>
-</div>
+</body>

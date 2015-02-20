@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.Config;
 import java.io.IOException;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * Filter to wrap request with a request including user preferred locale.

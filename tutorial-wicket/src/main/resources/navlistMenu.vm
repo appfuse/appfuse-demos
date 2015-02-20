@@ -1,0 +1,18 @@
+#macro( displayStackedMenu $menu )
+  #if ($displayer.isAllowed($menu))
+      ## set menu title
+      #set ($title = $displayer.getMessage($menu.title))
+
+      <ul class="nav nav-pills nav-stacked">
+          #if (!$menu.parent) <li class="nav-header">$title</li>#end
+      #foreach ($menuItem in $menu.components)
+        #if ($displayer.isAllowed($menuItem))
+          #set ($title = $displayer.getMessage($menuItem.title))
+          <li #if ($request.getRequestURI().contains($menuItem.url))class="active"#end><a href="$menuItem.url" title="$title" #if($menuItem.target)target="$menuItem.target"#end>${title}</a></li>
+        #end
+      #end
+      </ul>
+  #end
+#end
+
+#displayStackedMenu($menu)

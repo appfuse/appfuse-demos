@@ -152,11 +152,12 @@ public class CountryTag extends TagSupport {
      *
      * @return List of LabelValues for all available countries.
      */
-    protected List buildCountryList(Locale locale) {
+    @SuppressWarnings("unchecked")
+    protected List<LabelValue> buildCountryList(Locale locale) {
         final String EMPTY = "";
         final Locale[] available = Locale.getAvailableLocales();
 
-        List countries = new ArrayList();
+        List<LabelValue> countries = new ArrayList<>();
 
         for (int i = 0; i < available.length; i++) {
             final String iso = available[i].getCountry();
@@ -181,7 +182,7 @@ public class CountryTag extends TagSupport {
      * locale-sensitive behaviour.
      */
     public class LabelValueComparator implements Comparator {
-        private Comparator c;
+        private Comparator<Object> c;
 
         /**
          * Creates a new LabelValueComparator object.

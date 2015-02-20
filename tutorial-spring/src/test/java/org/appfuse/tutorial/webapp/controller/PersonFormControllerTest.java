@@ -1,62 +1,66 @@
 package org.appfuse.tutorial.webapp.controller;
 
-import org.appfuse.tutorial.model.Person;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpServletRequest;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.DataBinder;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import static org.junit.Assert.*;
+import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
+import static org.junit.Assert.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@Transactional
 public class PersonFormControllerTest extends BaseControllerTestCase {
     @Autowired
-    private PersonFormController form;
-    private Person person;
-    private MockHttpServletRequest request;
+    private PersonFormController controller;
+    private MockMvc mockMvc;
+
+    @Before
+    public void setUp() {
+        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix("/WEB-INF/pages/");
+        viewResolver.setSuffix(".jsp");
+
+        mockMvc = MockMvcBuilders.standaloneSetup(controller).setViewResolvers(viewResolver).build();
+    }
 
     @Test
     public void testEdit() throws Exception {
         log.debug("testing edit...");
-        request = newGet("/personform");
-        request.addParameter("id", "1");
-
-        person = form.showForm(request);
-        assertNotNull(person);
+        mockMvc.perform(get("/personform")
+                .param("id", "1"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("person"));
     }
 
     @Test
     public void testSave() throws Exception {
-        request = newGet("/personform");
-        request.addParameter("id", "1");
+        HttpSession session = mockMvc.perform((post("/personform"))
+                .param("firstName", "Homer")
+                .param("lastName", "Simpson"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(model().hasNoErrors())
+                .andReturn()
+                .getRequest()
+                .getSession();
 
-        person = form.showForm(request);
-        assertNotNull(person);
-
-        request = newPost("/personform");
-
-        person = form.showForm(request);
-        // update required fields
-        person.setFirstName("Homer");
-        person.setLastName("Simpson");
-
-        BindingResult errors = new DataBinder(person).getBindingResult();
-        form.onSubmit(person, errors, request, new MockHttpServletResponse());
-        assertFalse(errors.hasErrors());
-        assertNotNull(request.getSession().getAttribute("successMessages"));
+        assertNotNull(session.getAttribute("successMessages"));
     }
 
     @Test
     public void testRemove() throws Exception {
-        request = newPost("/personform");
-        request.addParameter("delete", "");
-        person = new Person();
-        person.setId(2L);
+        HttpSession session = mockMvc.perform((post("/personform"))
+                .param("delete", "").param("id", "2"))
+                .andExpect(status().is3xxRedirection())
+                .andReturn().getRequest().getSession();
 
-        BindingResult errors = new DataBinder(person).getBindingResult();
-        form.onSubmit(person, errors, request, new MockHttpServletResponse());
-
-        assertNotNull(request.getSession().getAttribute("successMessages"));
+        assertNotNull(session.getAttribute("successMessages"));
     }
 }

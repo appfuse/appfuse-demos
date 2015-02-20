@@ -3,7 +3,6 @@ package org.appfuse.tutorial.webapp.controller;
 import org.apache.commons.lang.StringUtils;
 import org.appfuse.service.GenericManager;
 import org.appfuse.tutorial.model.Person;
-import org.appfuse.tutorial.webapp.controller.BaseFormController;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -46,8 +45,7 @@ public class PersonFormController extends BaseFormController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String onSubmit(Person person, BindingResult errors, HttpServletRequest request,
-                           HttpServletResponse response)
+    public String onSubmit(Person person, BindingResult errors, HttpServletRequest request)
     throws Exception {
         if (request.getParameter("cancel") != null) {
             return getCancelView();

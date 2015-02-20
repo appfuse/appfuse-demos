@@ -1,16 +1,17 @@
 package org.appfuse.tutorial.webapp.services;
 
-import org.apache.tapestry5.MarkupWriter;
 import org.apache.tapestry5.SymbolConstants;
-import org.apache.tapestry5.ValidationDecorator;
 import org.apache.tapestry5.ValueEncoder;
+import org.apache.tapestry5.annotations.Path;
 import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.ioc.OrderedConfiguration;
+import org.apache.tapestry5.ioc.Resource;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
+import org.apache.tapestry5.ioc.annotations.ImportModule;
 import org.apache.tapestry5.ioc.annotations.Symbol;
 import org.apache.tapestry5.services.*;
-import org.apache.tapestry5.services.javascript.JavaScriptStack;
+import org.apache.tapestry5.services.javascript.JavaScriptModuleConfiguration;
+import org.apache.tapestry5.services.javascript.ModuleManager;
 import org.apache.tapestry5.upload.services.UploadSymbols;
 import org.appfuse.model.Role;
 import org.appfuse.model.User;
@@ -18,8 +19,8 @@ import org.appfuse.service.RoleManager;
 import org.appfuse.service.UserManager;
 import org.appfuse.tutorial.webapp.AppFuseSymbolConstants;
 import org.appfuse.tutorial.webapp.data.FileData;
+import org.appfuse.tutorial.webapp.modules.EnableJQueryModule;
 import org.appfuse.tutorial.webapp.services.impl.*;
-import org.appfuse.tutorial.webapp.services.javascript.BootstrapJavaScriptStack;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -31,6 +32,7 @@ import java.io.IOException;
  * @author Serge Eby
  * @version $Id: AppModule.java 5 2008-08-30 09:59:21Z serge.eby $
  */
+@ImportModule({EnableJQueryModule.class})
 public class AppModule {
 
     public static void bind(ServiceBinder binder) {
@@ -41,7 +43,7 @@ public class AppModule {
 
     public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration) {
         configuration.add(SymbolConstants.SUPPORTED_LOCALES,
-                "de,en,es,fr,it,ko,nl,no,pt_BR,pt,tr,zh_CN,zh_TW,en_US");
+            "de,en,es,fr,it,ko,nl,no,pt_BR,pt,tr,zh_CN,zh_TW,en_US");
 
         // Turn off GZip Compression since it causes issues with SiteMesh
         configuration.add(SymbolConstants.GZIP_COMPRESSION_ENABLED, "false");
@@ -65,28 +67,20 @@ public class AppModule {
         // Spring Security
         configuration.add(AppFuseSymbolConstants.SECURITY_URL, "/j_security_check");
 
-    }
+        // Combine JS
+        configuration.add(SymbolConstants.COMBINE_SCRIPTS, "true");
 
-    @Contribute(ClasspathAssetAliasManager.class)
-    public static void provideClasspathAssetAliases(MappedConfiguration<String, String> configuration) {
-        configuration.add("webjars", "META-INF/resources/webjars");
     }
 
     @Contribute(ValueEncoderSource.class)
     public static void provideEncoders(
-            MappedConfiguration<Class, ValueEncoderFactory> configuration,
-            UserManager userManager,
-            RoleManager roleManager) {
+        MappedConfiguration<Class, ValueEncoderFactory> configuration,
+        UserManager userManager,
+        RoleManager roleManager) {
 
         contributeEncoder(configuration, User.class, new UserEncoder(userManager));
         contributeEncoder(configuration, Role.class, new RoleEncoder(roleManager));
         contributeEncoder(configuration, FileData.class, new FileDataEncoder());
-
-
-    }
-
-    public static void contributeJavaScriptStackSource(MappedConfiguration<String, JavaScriptStack> configuration) {
-        configuration.addInstance(AppFuseSymbolConstants.BOOTSTRAP_STACK, BootstrapJavaScriptStack.class);
     }
 
     private static <T> void contributeEncoder(MappedConfiguration<Class, ValueEncoderFactory> configuration,
@@ -102,21 +96,6 @@ public class AppModule {
         configuration.add(clazz, factory);
     }
 
-    public void contributeMarkupRenderer(OrderedConfiguration<MarkupRendererFilter> configuration,
-                                         final Environment environment) {
-        MarkupRendererFilter bootstrapValidationDecorator = new MarkupRendererFilter() {
-
-            public void renderMarkup(MarkupWriter writer, MarkupRenderer renderer) {
-                environment.push(ValidationDecorator.class, new BootstrapValidationDecorator(environment, writer));
-                renderer.renderMarkup(writer);
-                environment.pop(ValidationDecorator.class);
-            }
-        };
-
-        configuration.override("ValidationDecorator", bootstrapValidationDecorator);
-
-    }
-
 
     /**
      * Decorate Error page
@@ -129,12 +108,12 @@ public class AppModule {
      * @return
      */
     public RequestExceptionHandler decorateRequestExceptionHandler(
-            final Logger logger,
-            final ResponseRenderer renderer,
-            final ComponentSource componentSource,
-            @Symbol(SymbolConstants.PRODUCTION_MODE)
-            boolean productionMode,
-            Object service) {
+        final Logger logger, final ResponseRenderer renderer,
+        final ComponentSource componentSource,
+        @Symbol(SymbolConstants.PRODUCTION_MODE)
+        boolean productionMode,
+        Object service) {
+
         if (!productionMode) {
             return null;
         }
@@ -149,7 +128,15 @@ public class AppModule {
         };
     }
 
+    public static void contributeClasspathAssetAliasManager(MappedConfiguration<String, String> configuration) {
+        configuration.add("webjars", "META-INF/resources/webjars");
+        configuration.add("modules", "META-INF/modules");
+    }
 
-
-
+    @Contribute(ModuleManager.class)
+    public static void setupModule(MappedConfiguration<String, Object> configuration,
+                                   @Path("META-INF/modules/app/login.js") Resource appLogin) {
+        configuration.add("app/login", new JavaScriptModuleConfiguration(appLogin)
+            .dependsOn("jquery").dependsOn("t5/core/console"));
+    }
 }

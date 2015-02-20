@@ -3,47 +3,60 @@ package org.appfuse.tutorial.webapp.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Before;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.subethamail.wiser.Wiser;
 
-@ContextConfiguration(
-        locations = {"classpath:/applicationContext-resources.xml",
-                "classpath:/applicationContext-dao.xml",
-                "classpath:/applicationContext-service.xml",
-                "classpath*:/applicationContext.xml", // for modular archetypes
-                "/WEB-INF/applicationContext*.xml",
-                "/WEB-INF/dispatcher-servlet.xml"})
-public abstract class BaseControllerTestCase extends AbstractTransactionalJUnit4SpringContextTests {
+import java.net.BindException;
+import java.util.Random;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {
+    "classpath:/applicationContext-resources.xml",
+    "classpath:/applicationContext-dao.xml",
+    "classpath:/applicationContext-service.xml",
+    "classpath*:/applicationContext.xml", // for modular archetypes
+    "/WEB-INF/applicationContext*.xml",
+    "/WEB-INF/dispatcher-servlet.xml"
+})
+public abstract class BaseControllerTestCase {
     protected transient final Log log = LogFactory.getLog(getClass());
-    private int smtpPort = 25250;
+    private int smtpPort;
+
+    @Autowired
+    private JavaMailSenderImpl mailSender;
 
     @Before
     public void onSetUp() {
-        smtpPort = smtpPort + (int) (Math.random() * 100);
-        // change the port on the mailSender so it doesn't conflict with an
-        // existing SMTP server on localhost
-        JavaMailSenderImpl mailSender = (JavaMailSenderImpl) applicationContext.getBean("mailSender");
-        mailSender.setPort(getSmtpPort());
-        mailSender.setHost("localhost");
+        smtpPort = (new Random().nextInt(9999 - 1000) + 1000);
+        log.debug("SMTP Port set to: " + smtpPort);
     }
 
     protected int getSmtpPort() {
         return smtpPort;
     }
 
-    /**
-     * Convenience methods to make tests simpler
-     *
-     * @param url the URL to post to
-     * @return a MockHttpServletRequest with a POST to the specified URL
-     */
-    public MockHttpServletRequest newPost(String url) {
-        return new MockHttpServletRequest("POST", url);
-    }
-
-    public MockHttpServletRequest newGet(String url) {
-        return new MockHttpServletRequest("GET", url);
+    protected Wiser startWiser(int smtpPort) {
+        Wiser wiser = new Wiser();
+        wiser.setPort(smtpPort);
+        try {
+            wiser.start();
+        } catch (RuntimeException re) {
+            if (re.getCause() instanceof BindException) {
+                int nextPort = smtpPort + 1;
+                if (nextPort - smtpPort > 10) {
+                    log.error("Exceeded 10 attempts to start SMTP server, aborting...");
+                    throw re;
+                }
+                log.error("SMTP port " + smtpPort + " already in use, trying " + nextPort);
+                return startWiser(nextPort);
+            }
+        }
+        mailSender.setPort(smtpPort);
+        return wiser;
     }
 }

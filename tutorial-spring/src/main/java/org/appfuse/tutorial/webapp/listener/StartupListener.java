@@ -53,7 +53,7 @@ public class StartupListener implements ServletContextListener {
         Map<String, Object> config = (HashMap<String, Object>) context.getAttribute(Constants.CONFIG);
 
         if (config == null) {
-            config = new HashMap<String, Object>();
+            config = new HashMap<>();
         }
 
         ApplicationContext ctx =

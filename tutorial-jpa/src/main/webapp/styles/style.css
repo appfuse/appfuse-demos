@@ -24,9 +24,14 @@ body#login {
     color: #0099ff;
 }
 
-/* added to fix non clickable dropdown nested menus on mobile browsers APF-1384 */
+/* Fix for non-clickable dropdown nested menus on mobile browsers: APF-1384 */
 .navbar .dropdown-backdrop {
 	position: static;
+}
+
+/* Fix for dropdowns not working in IE: APF-1448 */
+.navbar {
+    filter:none !important;
 }
 
 #switchLocale {
@@ -48,11 +53,16 @@ h1, h2 {
 
 /* FORMS */
 
+ul.feedbackPanel {
+    list-style: none;
+    padding-left: 10px;
+}
+
 .controls.readonly {
     padding-top: 5px;
 }
 
-.well.form-horizontal .form-actions {
+.well.form-horizontal .form-group {
     margin-bottom: 0;
 }
 
@@ -60,7 +70,7 @@ h1, h2 {
     margin-bottom: 10px;
 }
 
-.btn-group .btn, .form-actions .btn {
+.btn-group .btn, .form-group .btn {
     margin-left: 5px;
 }
 
@@ -87,6 +97,7 @@ h1, h2 {
 
 .form-signin .checkbox {
     font-weight: normal;
+    margin-left: 20px;
 }
 
 .form-signin .form-control {

@@ -170,7 +170,7 @@
         </div>
     </c:when>
 </c:choose>
-        <div class="form-group form-actions">
+        <div class="form-group">
             <button type="submit" class="btn btn-primary" name="save" onclick="bCancel=false">
                 <i class="icon-ok icon-white"></i> <fmt:message key="button.save"/>
             </button>

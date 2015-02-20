@@ -14,7 +14,6 @@ import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.Environment;
 import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.apache.tapestry5.services.javascript.JavaScriptSupport;
-import org.appfuse.tutorial.webapp.AppFuseSymbolConstants;
 import org.appfuse.tutorial.webapp.services.SecurityContext;
 
 
@@ -25,13 +24,15 @@ import org.appfuse.tutorial.webapp.services.SecurityContext;
  * @version $Id: Layout.java 5 2008-08-30 09:59:21Z serge.eby $
  */
 
-@Import(stack = AppFuseSymbolConstants.BOOTSTRAP_STACK)
+@Import(stack = {"core"}, module = {"bootstrap/collapse", "bootstrap/dropdown", "bootstrap/modal"},
+    stylesheet = {"classpath:/META-INF/resources/webjars/bootswatch-spacelab/3.3.1+2/css/bootstrap.min.css",
+        "app/layout.css", "app/t5-override.css",
+    })
 public class Layout {
 
     @Property
     @Parameter(required = true, defaultPrefix = BindingConstants.MESSAGE)
     private String title;
-
 
     @Property
     @Parameter(defaultPrefix = BindingConstants.MESSAGE)
@@ -45,11 +46,9 @@ public class Layout {
     @Parameter(defaultPrefix = BindingConstants.LITERAL)
     private String bodyId;
 
-
     @Property
     @Parameter(defaultPrefix = BindingConstants.LITERAL)
     private String bodyClass;
-
 
     @Parameter(defaultPrefix = BindingConstants.LITERAL)
     private Block sidebar;
@@ -84,7 +83,6 @@ public class Layout {
     @Inject
     private Block adminMenuBlock;
 
-
     public boolean isLoggedIn() {
         return securityContext.isLoggedIn();
     }
@@ -96,22 +94,11 @@ public class Layout {
         return null;
     }
 
-
     public boolean isAdminMenu() {
         return "AdminMenu".equals(menu);
     }
 
-
     public String getCurrentPage() {
         return resources.getPageName().toLowerCase();
     }
-
-//    public String getSidebarClass() {
-//        resources.getPageName().equalsIgnoreCase(pageName);
-//    }
-
-    void afterRender() {
-        jsSupport.addScript("$j('.dropdown-menu li').click(function(){ $j(this).addClass('active');});");
-    }
-
 }

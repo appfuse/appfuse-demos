@@ -12,16 +12,16 @@
     <property file="../../../target/classes/displaytag.properties"/>
 
     <!-- runs all targets -->
-    <target name="run-all-tests" 
+    <target name="run-all-tests"
         depends="Login,Logout,PasswordHint,Signup,UserTests,StaticPages,WebServices,DWR,FileUpload,PersonTests"
         description="Call and executes all test cases (targets)"/>
-    
+
     <!-- runs user-related tests -->
     <target name="UserTests" depends="EditUser,SearchUser,SaveUser,AddUser,ActiveUsers"
         description="Call and executes all user test cases (targets)">
         <echo>Successfully ran all User UI tests!</echo>
     </target>
-    
+
     <!-- Login to the application -->
     <target name="Login" description="Runs login test and verifies Home's Title">
         <webtest name="login">
@@ -58,7 +58,7 @@
             </steps>
         </webtest>
     </target>
-    
+
     <target name="StaticPages" description="Ensures that StaticFilter is working">
         <webtest name="staticPages">
             &config;
@@ -78,12 +78,12 @@
             <steps>
                 &login;
                 <clicklink description="click Edit Profile link" label="${menu.user}"/>
-                <verifytitle description="we should see the user profile title" 
+                <verifytitle description="we should see the user profile title"
                     text=".*${userProfile.title}.*" regex="true"/>
             </steps>
         </webtest>
     </target>
-    
+
     <!-- Verify the user list screen displays without errors -->
     <target name="SearchUser" description="Tests search for and displaying all users">
         <webtest name="searchUser">
@@ -102,7 +102,7 @@
             </steps>
         </webtest>
     </target>
-    
+
     <!-- Edit a user and then save -->
     <target name="SaveUser" description="Tests editing and saving a user">
         <webtest name="saveUser">
@@ -110,7 +110,7 @@
             <steps>
                 &login;
                 <clicklink description="click Edit Profile link" label="${menu.user}"/>
-                <verifytitle description="we should see the user profile title" 
+                <verifytitle description="we should see the user profile title"
                     text=".*${userProfile.title}.*" regex="true"/>
                 <setinputfield name="address" value="2255 Lane Avenue"/>
                 <setinputfield name="postalCode"  value="59826"/>
@@ -120,7 +120,7 @@
             </steps>
         </webtest>
     </target>
-    
+
     <!-- Add a new user after logging in -->
     <target name="AddUser" description="Adds a new user profile">
         <webtest name="addUser">
@@ -161,7 +161,7 @@
             </steps>
         </webtest>
     </target>
-    
+
     <!-- Sign up a new user (no login) -->
     <target name="Signup" description="Signup a new user">
         <webtest name="signup">
@@ -169,7 +169,7 @@
             <steps>
                 <invoke description="click signup link" url="/signup"/>
                 <verifytitle description="view signup title" text=".*${signup.title}.*" regex="true"/>
-                
+
                 <setinputfield name="username" value="signup-user"/>
                 <setinputfield name="password" value="test"/>
                 <setinputfield name="confirmPassword" value="test"/>
@@ -197,12 +197,12 @@
             <steps>
                 &login;
                 <invoke description="get activeUsers URL" url="/admin/activeusers"/>
-                <verifytitle description="we should see the activeUsers title" 
+                <verifytitle description="we should see the activeUsers title"
                     text=".*${activeUsers.title}.*" regex="true"/>
             </steps>
         </webtest>
     </target>
-    
+
     <!-- File Upload -->
     <target name="FileUpload" description="Tests uploading a file">
         <webtest name="fileUpload">
@@ -332,9 +332,7 @@
                 &login;
                 <invoke description="View Person List" url="/personlist"/>
                 <clicklink description="click on first record in list" label="2"/>
-                <prepareDialogResponse description="Confirm delete" dialogType="confirm" response="true"/>
                 <clicklink label="${button.delete}" description="Click button 'Delete'"/>
-                <verifyNoDialogResponses/>
                 <verifytitle description="display Person List" text=".*${personList.title}.*" regex="true"/>
                 <verifytext description="verify success message" text="${person.deleted}"/>
             </steps>

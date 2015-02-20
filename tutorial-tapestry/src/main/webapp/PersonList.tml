@@ -1,8 +1,7 @@
 <html t:type="layout" title="message:personList.title"
           heading="message:personList.heading" menu="PersonMenu"
-          xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+          xmlns:t="http://tapestry.apache.org/schema/tapestry_5_4.xsd" xmlns:p="tapestry:parameter">
 
-<div class="col-sm-10">
     <h2>${message:personList.heading}</h2>
 
     <div id="actions" class="btn-group">
@@ -17,5 +16,4 @@
             </a>
         </p:idcell>
     </t:grid>
-</div>
 </html>

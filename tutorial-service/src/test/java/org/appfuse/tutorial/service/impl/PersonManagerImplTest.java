@@ -1,18 +1,16 @@
 package org.appfuse.tutorial.service.impl;
 
+import org.appfuse.service.impl.BaseManagerMockTestCase;
+import org.appfuse.tutorial.dao.PersonDao;
+import org.appfuse.tutorial.model.Person;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import org.appfuse.tutorial.dao.PersonDao;
-import org.appfuse.tutorial.model.Person;
-import org.appfuse.service.impl.BaseManagerMockTestCase;
-
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.junit.Before;
-import org.junit.After;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
 import static org.mockito.BDDMockito.*;
 
 public class PersonManagerImplTest extends BaseManagerMockTestCase {
@@ -22,7 +20,6 @@ public class PersonManagerImplTest extends BaseManagerMockTestCase {
 
     @Mock
     private PersonDao dao;
-
 
     @Test
     public void testGetPerson() {

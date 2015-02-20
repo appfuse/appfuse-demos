@@ -1,0 +1,34 @@
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title><wicket:message key="personList.title"/></title>
+</head>
+<body>
+    <div wicket:id="feedback" class="alert alert-success alert-dismissable"></div>
+
+    <h2><wicket:message key="personList.title"/></h2>
+
+    <form wicket:id="form">
+        <button wicket:id="add-person" type="submit" class="btn btn-primary" style="float: right; margin-top: -10px">
+            <wicket:message key="button.add"/></button>
+    </form>
+
+    <span wicket:id="navigator"/>
+
+    <table class="table table-condensed table-striped table-hover" id="personList">
+        <thead>
+        <tr>
+            <th wicket:id="orderById"><wicket:message key="person.id"/></th>
+            <th wicket:id="orderByFirstName"><wicket:message key="person.firstName"/></th>
+            <th wicket:id="orderByLastName"><wicket:message key="person.lastName"/></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr wicket:id="persons">
+            <td><a href="#" wicket:id="edit-link"><span wicket:id="person.id"></span></a></td>
+            <td><span wicket:id="person.firstName"></span></td>
+            <td><span wicket:id="person.lastName"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

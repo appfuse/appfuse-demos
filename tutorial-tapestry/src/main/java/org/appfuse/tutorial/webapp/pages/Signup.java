@@ -4,10 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.alerts.Duration;
 import org.apache.tapestry5.alerts.Severity;
-import org.apache.tapestry5.annotations.Component;
-import org.apache.tapestry5.annotations.Log;
-import org.apache.tapestry5.annotations.PageActivationContext;
-import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.annotations.*;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.HttpError;
@@ -152,12 +149,8 @@ public class Signup {
                     me.getMostSpecificCause().getMessage());
         }
 
-        alertManager.alert(Duration.TRANSIENT, Severity.INFO,  messages.get("user.registered"));
+        alertManager.alert(Duration.TRANSIENT, Severity.SUCCESS,  messages.get("user.registered"));
         return Home.class;
     }
 
-    @Log
-    void onFailure() throws IOException {
-        response.sendRedirect("signup");
-    }
 }

@@ -1,5 +1,6 @@
 package org.appfuse.tutorial.webapp.pages;
 
+import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.annotations.Environmental;
 import org.apache.tapestry5.annotations.Import;
@@ -16,7 +17,7 @@ import org.apache.tapestry5.services.javascript.JavaScriptSupport;
 import org.appfuse.Constants;
 import org.appfuse.tutorial.webapp.AppFuseSymbolConstants;
 import org.slf4j.Logger;
-import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
+import org.springframework.security.web.WebAttributes;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,8 +29,7 @@ import java.util.Map;
  * @version $Id: Login.java 5 2008-08-30 09:59:21Z serge.eby $
  */
 
-
-@Import(library = {"context:scripts/login.js"})
+@Import(library = {"plugins/jquery.cookie.js"}, module = "app/login")
 public class Login {
 
     @Inject
@@ -38,6 +38,10 @@ public class Login {
     @Inject
     @Symbol(AppFuseSymbolConstants.SECURITY_URL)
     private String securityUrl;
+
+    @Inject
+    @Symbol(SymbolConstants.CONTEXT_PATH)
+    private String contextPath;
 
     @Inject
     private Request request;
@@ -51,29 +55,25 @@ public class Login {
     @Inject
     private PageRenderLinkSource pageRendererLinkSource;
 
-
     @Environmental
     private JavaScriptSupport javascriptSupport;
 
     @Property
     private String errorMessage;
 
-
     @Inject
     private Context context;
-
 
     @Log
     void onActivate(String loginError) {
         if ("error".equals(loginError)) {
             this.errorMessage = ((Exception) request
-                    .getSession(true)
-                    .getAttribute(AbstractAuthenticationProcessingFilter.SPRING_SECURITY_LAST_EXCEPTION_KEY))
-                    .getMessage();
+                .getSession(true)
+                .getAttribute(WebAttributes.AUTHENTICATION_EXCEPTION))
+                .getMessage();
             logger.error(String.format("Error while attempting to login: %s",
-                    errorMessage));
+                errorMessage));
         }
-
     }
 
     String onPassivate() {
@@ -84,23 +84,21 @@ public class Login {
         JSONObject spec = new JSONObject();
 
         String requiredUsernameError = messages.format("errors.required",
-                messages.get("label.username"));
+            messages.get("label.username"));
         String requiredPasswordError = messages.format("errors.required",
-                messages.get("label.password"));
+            messages.get("label.password"));
 
-        spec.put("url", createLink(this.getClass()))
-                .put("passwordHintLink", createLink(PasswordHint.class))
-                .put("requiredUsername", requiredUsernameError)
-                .put("requiredPassword", requiredPasswordError);
+        spec.put("passwordHintUrl", createLink(PasswordHint.class))
+            .put("passwordResetUrl", createLink(PasswordRecoveryToken.class))
+            .put("requiredUsername", requiredUsernameError)
+            .put("requiredPassword", requiredPasswordError);
 
-        // javascriptSupport.addScript("initialize(%s);", spec);
-      //  javascriptSupport.addInitializerCall("loginHint", spec);
-
+        // For some reason, the line below causes JavaScript to fail to load (loading screen)
+        //javascriptSupport.require("app/login").invoke("init").with(spec);
     }
 
-
     public String getSpringSecurityUrl() {
-        return request.getContextPath() + securityUrl;
+        return contextPath + securityUrl;
     }
 
     void cleanupRender() {
@@ -127,9 +125,7 @@ public class Login {
         return messages.format("login.signup", link);
     }
 
-
     private String createLink(Class clazz) {
         return pageRendererLinkSource.createPageRenderLink(clazz).toAbsoluteURI();
     }
-
 }
