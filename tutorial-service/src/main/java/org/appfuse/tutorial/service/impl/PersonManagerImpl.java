@@ -11,7 +11,7 @@ import javax.jws.WebService;
 import java.util.List;
 
 @Service("personManager")
-@WebService(serviceName = "PersonService", endpointInterface = "org.appfuse.tutorial.service.PersonManager")
+@WebService(serviceName = "PersonService", endpointInterface = "org.appfuse.tutorial.service.PersonService")
 public class PersonManagerImpl extends GenericManagerImpl<Person, Long> implements PersonManager {
     PersonDao personDao;
 
