@@ -14,6 +14,8 @@
     <bean id="jsonProvider" class="com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider"/>
 
     <jaxws:endpoint id="userService" implementor="#userManager" address="/UserService"/>
+    <jaxws:endpoint id="personService" implementor="#personManager" address="/PersonService"/>
+
     <!-- Add new endpoints for additional services you'd like to expose -->
     
     <jaxrs:server address="/api">
